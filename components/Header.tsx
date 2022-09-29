@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-
+import logo from './../assets/images/logo.svg'
+import Image from 'next/image'
+import { ArrowLeftIcon, Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+    const handleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
     return (
         <header className='absolute top-0 w-full h-20 bg-white p-5 flex'>
           {/* mobile nav */}
-            <nav className='flex justify-center md:hidden items-center' >
-                <div className="space-y-2 md:hidden cursor-pointer" onClick={() => {setIsMenuOpen(!isMenuOpen)}}>
-                    <span className="block w-8 h-0.5 bg-gray-600"></span>
-                    <span className="block w-5 h-0.5 bg-gray-600"></span>
-                </div>
-                <div className={'top-0 left-0 w-screen h-screen bg-white z-10 p-5 ' + (isMenuOpen ? 'absolute' : 'hidden')}>
-                    <div className="space-y-2 md:hidden cursor-pointer" onClick={() => {setIsMenuOpen(!isMenuOpen)}}>
-                        <span className="block w-8 h-0.5 bg-gray-600"></span>
-                        <span className="block w-5 h-0.5 bg-gray-600"></span>
+            <nav className='flex justify-between w-full md:hidden items-center'>
+                <Bars3BottomLeftIcon className='w-10' onClick={handleMenu} />
+                <Image src={logo}  />
+                <div className={'top-0 left-0 w-screen h-screen bg-white z-10 p-5  ' + (isMenuOpen ? 'absolute' : 'hidden')}>
+                    <div className='flex justify-between'>
+                        <ArrowLeftIcon className='w-10' onClick={handleMenu}/>
+                        <Image src={logo} />
                     </div>
+
                     <ul className='h-full flex flex-col items-center justify-center gap-5 ' >
                         <li className='text-center font-bold text-6xl'>
                             <Link href='/'>home</Link>
@@ -33,8 +37,9 @@ function Header() {
                 </div>
 
             </nav>
-            <nav className={'hidden md:flex fixed top-0 h-24 w-full'}>
-                <ul className={'hidden md:flex fixed top-0 h-24 w-full flex flex-row p-4 justify-center items-center gap-5'}>
+            <nav className={'hidden md:flex fixed p-4 top-0 h-24 w-full justify-between'}>
+                <Image src={logo} />
+                <ul className={'flex flex-row justify-center items-center gap-5'}>
                     <li>
                         <Link href='/'>home</Link>
                     </li>
@@ -47,6 +52,10 @@ function Header() {
                     <li>
                         <Link href='/contact'>contact</Link>
                     </li>
+                </ul>
+                <ul className='flex flex-col gap-1 justify-center'>
+                    <li>Français</li>
+                    <li>Anglais</li>
                 </ul>
             </nav>
         </header>
