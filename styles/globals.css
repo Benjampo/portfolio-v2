@@ -10,3 +10,6 @@ html, body {
     height: 100vh;
     background-color: var(--color-blue-sky);
 }
+.my-shadow {
+    box-shadow: 5px 5px 10px 10px rgba(39, 149, 251, 0.03);
+}
