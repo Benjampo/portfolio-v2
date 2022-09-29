@@ -36,6 +36,13 @@ const Home: NextPage = () => {
                           <span className='text-gray-400 text-base'>Brand website</span>
                       </article>
                   </li>
+                  <li className='mt-4 w-full h-48 bg-white rounded-xl rounded border-blue-200 border-2 p-4'>
+                      <article className='h-full flex flex-col'>
+                          <Image src={benjampo}/>
+                          <h1 className='font-medium text-base'>Greubel Forsey</h1>
+                          <span className='text-gray-400 text-base'>Brand website</span>
+                      </article>
+                  </li>
               </ul>
           </section>
     </div>
