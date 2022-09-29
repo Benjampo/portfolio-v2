@@ -14,25 +14,28 @@ function Header() {
             <nav className='flex justify-between w-full md:hidden items-center'>
                 <Bars3BottomLeftIcon className='w-10' onClick={handleMenu} />
                 <Image src={logo}  />
-                <div className={'top-0 left-0 w-screen h-screen bg-white z-10 p-5  ' + (isMenuOpen ? 'absolute' : 'hidden')}>
+                <div className={'top-0 left-0 w-screen h-screen bg-white z-10 p-5  ' + (isMenuOpen ? 'fixed' : 'hidden')}>
                     <div className='flex justify-between'>
                         <ArrowLeftIcon className='w-10' onClick={handleMenu}/>
                         <Image src={logo} />
                     </div>
-
                     <ul className='h-full flex flex-col items-center justify-center gap-5 ' >
                         <li className='text-center font-bold text-6xl'>
-                            <Link href='/'>home</Link>
+                            <Link href='/'>Home</Link>
                         </li>
                         <li className='text-center font-bold text-6xl'>
-                            <Link href='/work'>work</Link>
+                            <Link href='/work'>Work</Link>
                         </li>
                         <li className='text-center font-bold text-6xl'>
-                            <Link href='/about'>about</Link>
+                            <Link href='/about'>About</Link>
                         </li>
                         <li className='text-center font-bold text-6xl'>
-                            <Link href='/contact'>contact</Link>
+                            <Link href='/contact'>Contact</Link>
                         </li>
+                    </ul>
+                    <ul className='flex flex-col gap-1 justify-center'>
+                        <li>Français</li>
+                        <li>Anglais</li>
                     </ul>
                 </div>
 
