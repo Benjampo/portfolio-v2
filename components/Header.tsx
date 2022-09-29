@@ -34,7 +34,7 @@ function Header() {
     ];
 
     return (
-        <header className="absolute top-0 w-full h-20 bg-white p-5 md:px-52 flex">
+        <header className=" absolute top-0 w-full h-20 bg-white p-5 px-5 md:px-64  md:max-w-screen-2xl md:left-1/2 -translate-x-1/2">
             {/* mobile nav */}
             <nav className="flex justify-between w-full md:hidden items-center">
                 <Bars3BottomLeftIcon className="w-10" onClick={handleMenu} />
@@ -66,7 +66,10 @@ function Header() {
             </nav>
 
             {/* desktop nav */}
-            <nav className={'hidden md:flex relative top-0 w-full justify-between'}>
+            <nav
+                className={
+                    'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-between  md:mx-auto'
+                }>
                 <Link href="/">
                     <Image className="cursor-pointer" src={logo} />
                 </Link>

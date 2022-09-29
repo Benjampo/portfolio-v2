@@ -29,12 +29,12 @@ const Home: NextPage = () => {
                         return index < 4;
                     }).map((project: any, index) => (
                         <li className=" ">
-                            <article className="flex flex-col">
-                                <div className="">
+                            <article className="flex flex-col md:flex-row">
+                                <div className="md:w-1/3">
                                     <h1>{project.title}</h1>
                                     <h2>{project.subtitle}</h2>
                                 </div>
-                                <div className="w-full h-96  rounded-xl border-blue-200 border-2 p-4 my-shadow">
+                                <div className="w-full md:w-2/3 h-96  rounded-xl border-blue-200 border-2 p-4 my-shadow">
                                     <Image />
                                 </div>
                             </article>
