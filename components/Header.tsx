@@ -78,7 +78,7 @@ function Header() {
                         return item.label !== 'Home';
                     }).map((filtered) => (
                         <li
-                            className={`py-2 px-4 rounded rounded-full ${
+                            className={`py-2 px-4  rounded-full ${
                                 router.asPath === filtered.url
                                     ? 'bg-black text-white'
                                     : 'text-black'

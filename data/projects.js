@@ -5,71 +5,121 @@ const Projects = [
         id: 'greubel-forsey',
         title: 'Greubel Forsey',
         coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Brand Website'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'olla-botanicals',
         title: 'Olla Botanicals',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Brand Website'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'weebox',
         title: 'Weebox',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'weebox-landing',
         title: 'Weebox landing',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Brand Website'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'submit-project',
         title: 'Submit Project',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'data-visu',
         title: 'Data Visualisation',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'kodomo',
         title: 'Kodomo',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'latent',
         title: 'latent-app',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'yoga-center',
         title: 'YogaCenter',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     },
     {
         id: 'yantra-connection',
         title: 'YantraConnection',
-        coverSrc: '',
+        coverSrc: greubel,
+        secSrc: '',
+        thirdSr: '',
         url: '/',
-        subtitle: 'Web app'
+        subtitle: 'Brand Website',
+        context: '',
+        tasks: '',
+        tech: ''
     }
 ];
 

@@ -18,9 +18,9 @@ const Home: NextPage = () => {
             </Head>
             <section className="w-full h-[64vh] md:h-[64vh] flex flex-col justify-center items-center">
                 <Image src={benjampo} />
-                <span className="block font-bold text-5xl text-center">Hello World</span>
-                <h1 className="font-semibold text-2xl text-center text-gray-400">
-                    I’m Benjamin Front-End developper
+                <span className="block font-bold text-5xl text-center">Hello</span>
+                <h1 className=" mt-2 font-semibold text-2xl text-center text-gray-400">
+                    I’m Benjamin, Front-End developper
                 </h1>
             </section>
             <section>
@@ -31,12 +31,12 @@ const Home: NextPage = () => {
                         <li className=" ">
                             <Link href={`/work/${project.id}`}>
                                 <article className="flex flex-col md:flex-row gap-2">
-                                    <div className="md:w-1/3">
+                                    <div className="md:w-1/6">
                                         <h1 className="text-gray-400 text-base font-normal">
                                             {project.title}
                                         </h1>
                                     </div>
-                                    <div className="w-full md:w-2/3 h-72 rounded-xl  p-4 my-shadow">
+                                    <div className="w-full md:w-5/6 h-96 rounded-xl  p-4 my-shadow">
                                         <Image />
                                     </div>
                                 </article>

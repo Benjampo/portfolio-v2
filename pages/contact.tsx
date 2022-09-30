@@ -156,7 +156,7 @@ function Contact() {
                 <div className="group text-center w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">
                     <a
                         className="text-center text-3xl text-gray-400 group-hover:text-blue-400"
-                        href=" linkto:contact@benjampo.ch">
+                        href=" mailto:contact@benjampo.ch">
                         contact@benjampo.ch
                     </a>
                 </div>
