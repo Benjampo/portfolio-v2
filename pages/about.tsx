@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Mail from './../assets/images/mail.png';
 import Resume from './../assets/images/resume.png';
 import Techs from './../data/Techs';
+import Studies from './../data/Studies';
+import Works from './../data/Works';
 function About() {
     return (
         <section>
@@ -21,15 +23,28 @@ function About() {
                     </p>
                 </Card>
                 <Card>
-                    <h2>Currently working</h2>
-                    <a href="https://maven.ch/fr" target="_blank">
+                    <h2 className="text-black font-medium">Currently working</h2>
+                    <a
+                        className="text-gray-300 font-bold hover:text-blue-400 text-6xl"
+                        href="https://maven.ch/fr"
+                        target="_blank">
                         @maven
                     </a>
                 </Card>
-                <Card id="my-resume">
-                    <Image src={Resume} />
-                    <h2>Get my resume</h2>
-                </Card>
+                <div className="flex gap-5">
+                    <Card
+                        className="flex flex-col items-center gap-1 justify-between"
+                        id="my-resume">
+                        <Image className="mt-1" src={Resume} width={100} height={100} />
+                        <h2>Get my resume</h2>
+                    </Card>
+                    <Card
+                        className="flex flex-col items-center gap-1 justify-between"
+                        id="contact-card">
+                        <Image src={Mail} width={128} height={128} />
+                        <h2>Drop me a line</h2>
+                    </Card>
+                </div>
                 <Card id="my-socials">
                     <ul className="flex flex-row justify-center gap-5">
                         {Socials.map((social) => (
@@ -40,20 +55,37 @@ function About() {
                     </ul>
                     <h2>Follow me</h2>
                 </Card>
-                <Card id="contact-card">
-                    <Image src={Mail} />
-                    <h2>Drop me a line</h2>
-                </Card>
                 <Card id="my-stack">
                     <h2>Tech stack</h2>
-                    <ul>
+                    <ul className="flex flex-wrap gap-2">
                         {Techs.map((tech) => (
-                            <li>{tech.label}</li>
+                            <li className="border rounded-full px-4 py-1 w-fit hover:bg-black hover:text-white">
+                                {tech.label}
+                            </li>
                         ))}
                     </ul>
                 </Card>
                 <Card id="work">
-                    <h2>Tech stac</h2>
+                    <h2>Work</h2>
+                    <ul>
+                        {Works.map((work) => (
+                            <li key={work.id}>
+                                <h3>{work.title}</h3>
+                                <h4>{work.year}</h4>
+                                <p>{work.description}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    <h2>Studies</h2>
+                    <ul>
+                        {Studies.map((study) => (
+                            <li key={study.id}>
+                                <h3>{study.title}</h3>
+                                <h4>{study.year}</h4>
+                                <p>{study.description}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </Card>
             </div>
         </section>

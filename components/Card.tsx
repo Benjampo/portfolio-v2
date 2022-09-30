@@ -1,8 +1,9 @@
 import React from 'react';
 
-function Card(props) {
+function Card(props: any) {
     return (
-        <div className="w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">
+        <div
+            className={`w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow ${props.className}`}>
             {props.children}
         </div>
     );
