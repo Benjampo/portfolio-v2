@@ -8,6 +8,7 @@ import Resume from './../assets/images/resume.png';
 import Techs from './../data/Techs';
 import Studies from './../data/Studies';
 import Works from './../data/Works';
+import Link from 'next/link';
 function About() {
     return (
         <section>
@@ -38,12 +39,14 @@ function About() {
                         <Image className="mt-1" src={Resume} width={100} height={100} />
                         <h2>Get my resume</h2>
                     </Card>
-                    <Card
-                        className="flex flex-col items-center gap-1 justify-between"
-                        id="contact-card">
-                        <Image src={Mail} width={128} height={128} />
-                        <h2>Drop me a line</h2>
-                    </Card>
+                    <Link href="/contact">
+                        <Card
+                            className="flex flex-col items-center gap-1 justify-between"
+                            id="contact-card">
+                            <Image src={Mail} width={128} height={128} />
+                            <h2>Drop me a line</h2>
+                        </Card>
+                    </Link>
                 </div>
                 <Card id="my-socials">
                     <ul className="flex flex-row justify-center gap-5">
@@ -60,29 +63,36 @@ function About() {
                     <ul className="flex flex-wrap gap-2">
                         {Techs.map((tech) => (
                             <li className="border rounded-full px-4 py-1 w-fit hover:bg-black hover:text-white">
-                                {tech.label}
+                                <a href={tech.url} target="_blank">
+                                    {tech.label}
+                                </a>
                             </li>
                         ))}
                     </ul>
                 </Card>
                 <Card id="work">
-                    <h2>Work</h2>
-                    <ul>
+                    <h2 className="font-medium text-2xl mb-2">Work</h2>
+                    <ul className="flex flex-col gap-3">
                         {Works.map((work) => (
                             <li key={work.id}>
-                                <h3>{work.title}</h3>
-                                <h4>{work.year}</h4>
-                                <p>{work.description}</p>
+                                <h4 className="inline font-medium text-xl text-gray-400 mr-2">
+                                    {work.year}
+                                </h4>
+
+                                <h3 className=" inline text-xl font-medium">{work.title}</h3>
+                                <p className="">{work.description}</p>
                             </li>
                         ))}
                     </ul>
-                    <h2>Studies</h2>
-                    <ul>
+                    <h2 className="font-medium text-2xl mb-2 mt-6">Studies</h2>
+                    <ul className="flex flex-col gap-1">
                         {Studies.map((study) => (
                             <li key={study.id}>
-                                <h3>{study.title}</h3>
-                                <h4>{study.year}</h4>
-                                <p>{study.description}</p>
+                                <h4 className="inline text-xl font-medium  text-gray-400 mr-2">
+                                    {study.year}
+                                </h4>
+                                <h3 className=" inline text-xl font-medium">{study.title}</h3>
+                                <p className="mt-1">{study.description}</p>
                             </li>
                         ))}
                     </ul>

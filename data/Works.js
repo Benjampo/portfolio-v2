@@ -3,7 +3,7 @@ const Works = [
         id: '1',
         title: 'Maven Sarl',
         description: 'Building websites and web apps at maven',
-        year: '2021 - Today'
+        year: '2022'
     },
     {
         id: '1',
