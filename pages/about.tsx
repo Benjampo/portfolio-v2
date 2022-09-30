@@ -9,12 +9,37 @@ import Techs from './../data/Techs';
 import Studies from './../data/Studies';
 import Works from './../data/Works';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 function About() {
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+
+            transition: {
+                delay: 0.25,
+                staggerChildren: 0.05
+            }
+        }
+    };
+    const item = {
+        hidden: { opacity: 0, y: 25 },
+        show: { opacity: 1, y: 0 }
+    };
+
     return (
-        <section className="grid overflow-hidden grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 gap-5">
-            <h1 className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl">
+        <motion.section
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid overflow-hidden grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 gap-5">
+            <motion.h1
+                initial={{ opacity: 0, y: 50 }}
+                transition={{ delay: 0.1 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl">
                 About
-            </h1>
+            </motion.h1>
             <Card className=" col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3">
                 <h2 className="font-medium text-xl">My name is Benjamin</h2>
                 <h3 className="font-medium text-gray-400">I’m a front-end developper</h3>
@@ -106,7 +131,7 @@ function About() {
                 </ul>
                 <h2 className="text-xl font-medium xl:text-2xl">Follow me</h2>
             </Card>
-        </section>
+        </motion.section>
     );
 }
 

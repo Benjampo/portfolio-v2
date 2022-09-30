@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/20/solid';
 import Socials from './../data/Socials';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 function Contact() {
     // States for contact form fields
     const [fullname, setFullname] = useState('');
@@ -82,8 +83,17 @@ function Contact() {
 
     return (
         <section>
-            <h1 className="font-bold text-6xl text-center my-6 ">Contact</h1>
-            <form
+            <motion.h1
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.1 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="font-bold text-6xl text-center my-6 ">
+                Contact
+            </motion.h1>
+            <motion.form
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.2 }}
+                animate={{ opacity: 1, y: 0 }}
                 onSubmit={handleSubmit}
                 className="rounded-2xl my-shadow flex flex-col px-8 py-8 bg-white dark:bg-blue-500">
                 <h2 className="text-2xl font-normal dark:text-gray-50">Drop a line</h2>
@@ -145,14 +155,19 @@ function Contact() {
                     className="bg-gray-50 py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"></textarea>
 
                 <div className="flex flex-row items-center justify-end">
-                    <button
+                    <motion.button
+                        whileTap={{ scale: 1.15 }}
                         type="submit"
-                        className="px-4 mt-8 py-4 bg-black text-gray-50 font-bold rounded-full  flex flex-row items-center">
-                        <PaperAirplaneIcon className="h-6" />
-                    </button>
+                        className="group px-4 mt-8 py-4 bg-black text-gray-50 font-bold rounded-full  flex flex-row items-center">
+                        <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 ease-out transition duration-500 ease-in-out" />
+                    </motion.button>
                 </div>
-            </form>
-            <div className="flex mt-5 flex-col md:flex-row gap-5">
+            </motion.form>
+            <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.3 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex mt-5 flex-col md:flex-row gap-5">
                 <div className="group text-center w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">
                     <a
                         className="text-center text-3xl text-gray-400 group-hover:text-blue-400"
@@ -160,7 +175,11 @@ function Contact() {
                         contact@benjampo.ch
                     </a>
                 </div>
-                <div className="group w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">
+                <motion.div
+                    initial={{ opacity: 0, y: 25 }}
+                    transition={{ delay: 0.4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="group w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">
                     <ul className="flex justify-center gap-5">
                         {Socials.map((social) => (
                             <li key={social.label}>
@@ -168,8 +187,8 @@ function Contact() {
                             </li>
                         ))}
                     </ul>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }

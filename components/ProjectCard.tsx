@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import benjampo from '../assets/images/benjampo.png';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 type CardProps = {
     span: string;
     row: string;
@@ -14,8 +15,13 @@ type CardProps = {
 };
 
 function ProjectCard({ project, span, row }: CardProps) {
+    const item = {
+        hidden: { opacity: 0, y: 25 },
+        show: { opacity: 1, y: 0 }
+    };
     return (
-        <li
+        <motion.li
+            variants={item}
             className={` w-full h-48 bg-white rounded-xl  p-4 cursor-pointer my-shadow ${span} ${row} `}>
             <Link key={project.id} href={`/projects/${project.id}`}>
                 <article className="h-full flex flex-col">
@@ -24,7 +30,7 @@ function ProjectCard({ project, span, row }: CardProps) {
                     <span className="text-gray-400 text-base">{project.subtitle}</span>
                 </article>
             </Link>
-        </li>
+        </motion.li>
     );
 }
 

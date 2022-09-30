@@ -68,17 +68,17 @@ function Header() {
             {/* desktop nav */}
             <nav
                 className={
-                    'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-between  md:mx-auto'
+                    'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-center  md:mx-auto'
                 }>
                 <Link href="/">
                     <Image className="cursor-pointer" src={logo} />
                 </Link>
-                <ul className={'flex flex-row justify-evenly items-center gap-5'}>
+                <ul className={'flex flex-row justify-evenly items-center gap-5 ml-auto mr-auto'}>
                     {MenuItems.filter((item) => {
                         return item.label !== 'Home';
                     }).map((filtered) => (
                         <li
-                            className={`py-2 px-4  rounded-full ${
+                            className={`py-2 px-4  rounded-full hover:bg-gray-200 hover:text-black ${
                                 router.asPath === filtered.url
                                     ? 'bg-black text-white'
                                     : 'text-black'
@@ -88,10 +88,10 @@ function Header() {
                         </li>
                     ))}
                 </ul>
-                <ul className="flex flex-col gap-1 justify-center">
+                {/*<ul className='flex flex-col gap-1 justify-center'>
                     <li>Français</li>
                     <li>Anglais</li>
-                </ul>
+                </ul>*/}
             </nav>
         </header>
     );
