@@ -34,7 +34,7 @@ function Header() {
     ];
 
     return (
-        <header className=" absolute top-0 w-full h-20 bg-white p-5 px-5 md:px-64  md:max-w-screen-2xl md:left-1/2 -translate-x-1/2">
+        <header className=" absolute top-0 w-full h-20 bg-white p-5 px-5 md:px-64  md:max-w-screen-2xl md:left-1/2 md:-translate-x-1/2">
             {/* mobile nav */}
             <nav className="flex justify-between w-full md:hidden items-center">
                 <Bars3BottomLeftIcon className="w-10" onClick={handleMenu} />

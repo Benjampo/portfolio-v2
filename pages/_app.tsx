@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Header />
-            <main className="relative top-20 min-h-screen px-5 md:px-64 md:max-w-screen-2xl  md:mx-auto">
+            <main className="relative pt-12 mt-12 md:mt-24 mb-16 min-h-screen px-5 md:px-64 md:max-w-screen-2xl  md:mx-auto">
                 <Component {...pageProps} />
             </main>
             <Footer />

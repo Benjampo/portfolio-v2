@@ -4,8 +4,8 @@ import ProjectCard from '../../components/ProjectCard';
 
 function Index() {
     return (
-        <section className="px-6">
-            <h1>Work</h1>
+        <section>
+            <h1 className="font-bold text-6xl text-center my-6 ">Work</h1>
             <ul className="grid md:grid-flow-col md:grid-cols-4  md:grid-rows-4 gap-4 md:grid-flow-row ">
                 {Projects.map((project: any, index) =>
                     [1, 2, 6, 4].includes(index) ? (

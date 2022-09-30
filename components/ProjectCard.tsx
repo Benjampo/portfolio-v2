@@ -16,7 +16,7 @@ type CardProps = {
 function ProjectCard({ project, span, row }: CardProps) {
     return (
         <li
-            className={` w-full h-48 bg-white rounded-xl border-blue-200 border-2 p-4 cursor-pointer my-shadow ${span} ${row} `}>
+            className={` w-full h-48 bg-white rounded-xl  p-4 cursor-pointer my-shadow ${span} ${row} `}>
             <Link key={project.id} href={`/projects/${project.id}`}>
                 <article className="h-full flex flex-col">
                     <Image src={project.coverSrc} />
