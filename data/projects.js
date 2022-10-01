@@ -16,112 +16,121 @@ const Projects = [
         tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'olla-botanicals',
-        title: 'Olla Botanicals',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'weebox',
-        title: 'Weebox',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'weebox-landing',
-        title: 'Weebox landing',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'submit-project',
-        title: 'Submit Project',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'data-visu',
-        title: 'Data Visualisation',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'kodomo',
-        title: 'Kodomo',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'latent',
-        title: 'latent-app',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'yoga-center',
-        title: 'YogaCenter',
+        id: 'test',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
     {
-        id: 'yantra-connection',
-        title: 'YantraConnection',
+        id: 'greubel-forsey',
+        title: 'Greubel Forsey',
         coverSrc: greubel,
-        secSrc: '',
-        thirdSrc: '',
-        url: '/',
+        secSrc: greubel2,
+        thirdSrc: greubel3,
+        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
-        context: '',
-        tasks: '',
-        tech: ''
+        context:
+            'Website made while working at maven. Most of the website was already mounted, i mainly did all the js animations and helped on the SCSS on a few pages',
+        tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     }
 ];
 

@@ -4,6 +4,7 @@ import { PaperAirplaneIcon } from '@heroicons/react/20/solid';
 import Socials from './../data/Socials';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+
 function Contact() {
     // States for contact form fields
     const [fullname, setFullname] = useState('');
@@ -46,7 +47,7 @@ function Contact() {
 
     //   Handling form submit
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         let isValidForm = handleValidation();

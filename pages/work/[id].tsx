@@ -22,7 +22,7 @@ export function Project({ data }: any) {
                 <h2 className="text-gray-400 text-xl font-medium">{data[0].subtitle}</h2>
                 <h1 className="font-bold mb-2 text-4xl">{data[0].title}</h1>
                 <ul className="flex flex-wrap gap-1">
-                    {data[0].tech.map((tech, index): any => (
+                    {data[0].tech.map((tech: string, index: number) => (
                         <li
                             className="border rounded-full text-gray-300 px-3 w-fit pointer-events-none "
                             key={index}>
@@ -69,7 +69,7 @@ export function Project({ data }: any) {
                 <div className="my-4 md:w-1/2">
                     <h3 className="font-medium text-gray-400 text-xl mb-3">What I did</h3>
                     <ul className="list-disc">
-                        {data[0].tasks.map((task, index) => (
+                        {data[0].tasks.map((task: string, index: number) => (
                             <li className="ml-6 font-normal text-xl" key={index}>
                                 {task}
                             </li>

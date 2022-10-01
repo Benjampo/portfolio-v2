@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
             <main className="relative pt-12 mt-12 md:mt-24 mb-16 min-h-screen px-5 lg:px-64 md:max-w-screen-2xl  lg:mx-auto">
                 <AnimatePresence
-                    exitBeforeEnter
+                    mode={'wait'}
                     initial={false}
                     onExitComplete={() => window.scrollTo(0, 0)}>
                     <Component {...pageProps} />
