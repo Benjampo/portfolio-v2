@@ -29,6 +29,7 @@ function About() {
 
     return (
         <motion.section
+            exit={{ opacity: 0 }}
             variants={container}
             initial="hidden"
             animate="show"

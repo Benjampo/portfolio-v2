@@ -4,6 +4,7 @@ import logo from './../assets/images/logo.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ArrowLeftIcon, Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
+import { motion } from 'framer-motion';
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const router = useRouter();

@@ -19,7 +19,7 @@ function Index() {
         show: { opacity: 1, y: 0 }
     };
     return (
-        <section>
+        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.1 }}
@@ -45,7 +45,7 @@ function Index() {
                     )
                 )}
             </motion.ul>
-        </section>
+        </motion.section>
     );
 }
 
