@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                     {Projects.filter((project, index) => {
                         return index < 4;
                     }).map((project: any, index) => (
-                        <li className=" ">
+                        <li key={index}>
                             <Link href={`/work/${project.id}`}>
                                 <article className="group flex flex-col md:flex-row gap-2">
                                     <div className="md:w-1/6">

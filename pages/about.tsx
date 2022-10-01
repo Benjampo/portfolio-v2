@@ -46,7 +46,7 @@ function About() {
                 <h3 className="font-medium text-gray-400">I’m a front-end developper</h3>
                 <p className="font-normal  mt-2">
                     Front-end web developer applications oriented . 23 years old, I am passionate
-                    about creating and implementing solutions that make users' lives easier.
+                    about creating and implementing solutions that make users lives easier.
                 </p>
             </Card>
             <Card className="col-start-1 col-end-3 xl:box xl:col-start-1 xl:col-end-3 ">
@@ -54,7 +54,8 @@ function About() {
                 <a
                     className="text-gray-300 font-bold hover:text-blue-400 text-6xl xl:text-8xl"
                     href="https://maven.ch/fr"
-                    target="_blank">
+                    target="_blank"
+                    rel="noreferrer">
                     @maven
                 </a>
             </Card>
@@ -64,9 +65,11 @@ function About() {
                 className="col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5">
                 <h2 className="text-xl font-medium mb-3 xl:text-3xl">Tech stack</h2>
                 <ul className="flex flex-wrap gap-2">
-                    {Techs.map((tech) => (
-                        <li className="border rounded-full px-4 py-1 w-fit hover:bg-black hover:text-white">
-                            <a href={tech.url} target="_blank">
+                    {Techs.map((tech, index) => (
+                        <li
+                            key={index}
+                            className="border rounded-full px-4 py-1 w-fit hover:bg-black hover:text-white">
+                            <a href={tech.url} rel="noreferrer" target="_blank">
                                 {tech.label}
                             </a>
                         </li>
@@ -106,7 +109,7 @@ function About() {
             <Card
                 className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-3 xl:justify-center"
                 id="my-resume">
-                <Image src={Resume} width={60} height={60} />
+                <Image src={Resume} alt="Resume button" width={60} height={60} />
                 <h2 className="text-xl font-medium whitespace-nowrap xl:text-2xl xl:mt-1">
                     Get my resume
                 </h2>
@@ -115,7 +118,7 @@ function About() {
                 <Card
                     className="flex flex-col items-center gap-1 justify-between xl:justify-center"
                     id="contact-card">
-                    <Image src={Mail} width={60} height={60} />
+                    <Image src={Mail} alt="Mail button" width={60} height={60} />
                     <h2 className="text-xl font-medium xl:text-2xl xl:mt-1">Drop me a line</h2>
                 </Card>
             </Link>
@@ -126,7 +129,7 @@ function About() {
                 <ul className="flex flex-row justify-center gap-5 ">
                     {Socials.map((social, index) => (
                         <li key={index}>
-                            <Image src={social.icon} width={48} />
+                            <Image alt={social.label} src={social.icon} width={48} />
                         </li>
                     ))}
                 </ul>

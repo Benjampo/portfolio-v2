@@ -8,13 +8,13 @@ function Footer() {
             <a
                 className="absolute ml-auto mr-auto top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 top-0 bg-black h-16 w-16 flex items-center justify-center rounded rounded-3xl hover:rounded-full hove:ease-in"
                 href="mailto:contact@benjampo.ch">
-                <Image width={'24px'} height={'24px'} src={mail} />
+                <Image width={'24px'} height={'24px'} alt="Mail icon" src={mail} />
             </a>
             <div>
                 <ul className="flex flex-row gap-5 w-full justify-center">
                     {Socials.map((social) => (
                         <li key={social.label}>
-                            <a target="_blank " href={social.url}>
+                            <a target="_blank " rel="noreferrer" href={social.url}>
                                 {social.label}
                             </a>
                         </li>

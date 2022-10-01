@@ -183,7 +183,12 @@ function Contact() {
                     <ul className="flex justify-center gap-5">
                         {Socials.map((social) => (
                             <li key={social.label}>
-                                <Image src={social.icon} height={30} width={30} />
+                                <Image
+                                    src={social.icon}
+                                    alt={`Icon of ${social.label}`}
+                                    height={30}
+                                    width={30}
+                                />
                             </li>
                         ))}
                     </ul>

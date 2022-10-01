@@ -6,11 +6,7 @@ import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import Router from 'next/router';
 import { motion } from 'framer-motion';
 
-export function Project({ data }) {
-    useEffect(() => {
-        console.log(data);
-    }, []);
-
+export function Project({ data }: any) {
     return (
         <motion.section
             initial={{ opacity: 0 }}
@@ -26,7 +22,7 @@ export function Project({ data }) {
                 <h2 className="text-gray-400 text-xl font-medium">{data[0].subtitle}</h2>
                 <h1 className="font-bold mb-2 text-4xl">{data[0].title}</h1>
                 <ul className="flex flex-wrap gap-1">
-                    {data[0].tech.map((tech, index) => (
+                    {data[0].tech.map((tech, index): any => (
                         <li
                             className="border rounded-full text-gray-300 px-3 w-fit pointer-events-none "
                             key={index}>
@@ -38,17 +34,29 @@ export function Project({ data }) {
             <div className="grid grid-cols-4 gap-4">
                 <div className=" col-span-4 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
-                        <Image src={data[0].coverSrc} alt={data[0].title} layout={'fill'} />
+                        <Image
+                            src={data[0].coverSrc}
+                            alt={`Main image of ${data[0].title}`}
+                            layout={'fill'}
+                        />
                     </figure>
                 </div>
                 <div className="col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
-                        <Image layout={'fill'} src={data[0].secSrc} />
+                        <Image
+                            layout={'fill'}
+                            src={data[0].secSrc}
+                            alt={`Second media of ${data[0].title}`}
+                        />
                     </figure>
                 </div>
                 <div className=" col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
-                        <Image layout={'fill'} src={data[0].thirdSrc} />
+                        <Image
+                            layout={'fill'}
+                            src={data[0].thirdSrc}
+                            alt={`Third media of ${data[0].title}`}
+                        />
                     </figure>
                 </div>
             </div>
@@ -73,7 +81,8 @@ export function Project({ data }) {
                 <a
                     className="text-gray-400 text-xl underline underline-offset-4"
                     href={data[0].url}
-                    target="_blank">
+                    target="_blank"
+                    rel="noreferrer">
                     Access website
                 </a>
             </div>
@@ -88,7 +97,7 @@ export async function getStaticPaths() {
     return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: any) {
     const id = params.id;
     const data = Projects.filter((item) => {
         if (item.id === id) {

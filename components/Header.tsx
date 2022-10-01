@@ -40,7 +40,7 @@ function Header() {
             <nav className="flex justify-between w-full md:hidden items-center">
                 <Bars3BottomLeftIcon className="w-10" onClick={handleMenu} />
                 <Link href="/">
-                    <Image src={logo} />
+                    <Image src={logo} alt="Benjampo Logo" />
                 </Link>
 
                 <div
@@ -50,7 +50,7 @@ function Header() {
                     }>
                     <div className="flex justify-between">
                         <ArrowLeftIcon className="w-10" onClick={handleMenu} />
-                        <Image src={logo} />
+                        <Image src={logo} alt="Benjampo Logo" />
                     </div>
                     <ul className="h-full flex flex-col items-center justify-center gap-5 ">
                         {MenuItems.map((item) => (
@@ -72,7 +72,7 @@ function Header() {
                     'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-center  md:mx-auto'
                 }>
                 <Link href="/">
-                    <Image className="cursor-pointer" src={logo} />
+                    <Image className="cursor-pointer" alt="Benjampo Logo" src={logo} />
                 </Link>
                 <ul className={'flex flex-row justify-evenly items-center gap-5 ml-auto mr-auto'}>
                     {MenuItems.filter((item) => {
