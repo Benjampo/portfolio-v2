@@ -1,47 +1,55 @@
 const Techs = [
     {
         label: 'HTML',
-        url: 'https://github.com/Benjampo'
+        url: 'https://developer.mozilla.org/fr/docs/Web/HTML'
     },
     {
         label: 'Twig',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://twig.symfony.com/'
     },
     {
         label: 'CSS',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://developer.mozilla.org/fr/docs/Web/CSS'
     },
     {
         label: 'SCSS',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://sass-lang.com/'
     },
     {
         label: 'TailWind',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://tailwindcss.com/'
     },
     {
         label: 'Js',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://developer.mozilla.org/fr/docs/Web/JavaScript'
     },
     {
         label: 'TypeScript',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://www.typescriptlang.org/'
     },
     {
         label: 'Vue',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://vuejs.org/'
     },
     {
         label: 'React',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://reactjs.org/'
+    },
+    {
+        label: 'NextJs',
+        url: 'https://nextjs.org/'
+    },
+    {
+        label: 'NuxtJS',
+        url: 'https://nuxtjs.org/fr/'
     },
     {
         label: 'PHP',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://www.php.net/'
     },
     {
         label: 'Laravel',
-        url: 'https://www.linkedin.com/in/benjamin-porchet-701ba1148/'
+        url: 'https://laravel.com/'
     }
 ];
 export default Techs;

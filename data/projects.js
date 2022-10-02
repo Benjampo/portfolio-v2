@@ -17,9 +17,14 @@ import wb3 from '../assets/images/projects/wb/wb3.png';
 import kodo from '../assets/images/projects/kodo/kodo1.png';
 import kodo2 from '../assets/images/projects/kodo/kodo2.png';
 import kodo3 from '../assets/images/projects/kodo/kodo3.png';
+
 import latent from '../assets/images/projects/latent/latent.png';
 import latent2 from '../assets/images/projects/latent/latent2.png';
 import latent3 from '../assets/images/projects/latent/latent3.png';
+
+import port from '../assets/images/projects/portfolio/port.png';
+import port2 from '../assets/images/projects/portfolio/port2.png';
+import port3 from '../assets/images/projects/portfolio/port3.png';
 
 const Projects = [
     {
@@ -133,9 +138,9 @@ const Projects = [
     {
         id: 'personnal-portfolio',
         title: 'Personnal Portfolio',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: port,
+        secSrc: port2,
+        thirdSrc: port3,
         url: 'https://www.benjampo.ch',
         subtitle: 'Personnal Website',
         context: 'Reealisation of my personnal website to showcase my work and skills',

@@ -16,3 +16,7 @@ html, body {
 .my-shadow:hover {
     box-shadow: 6px 15px 24px 10px rgba(39, 149, 251, 0.03);
 }
+#__next {
+   height: 100%;
+
+}

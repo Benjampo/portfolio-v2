@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
             <Header />
             <Toaster />
-            <main className="relative  mt-12 md:mt-24  min-h-screen px-5 pt-8 pb-16 lg:px-64 md:max-w-screen-2xl lg:mx-auto">
+            <main className="relative  mt-12 md:mt-24   px-5 pt-8 pb-16 lg:px-64 md:max-w-screen-2xl lg:mx-auto">
                 <AnimatePresence
                     mode={'wait'}
                     initial={false}

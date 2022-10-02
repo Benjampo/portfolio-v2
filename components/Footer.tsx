@@ -7,7 +7,7 @@ import MenuItems from '../data/Menu';
 import Link from 'next/link';
 function Footer() {
     return (
-        <footer className="bg-white h-100 relative bottom-0 pt-12 pb-12 ">
+        <footer className="bg-white h-100 relative bottom-0 pt-12 pb-24 ">
             <div className="md:max-w-screen-2xl md:mx-auto">
                 <motion.a
                     whileHover={{ borderRadius: '50%' }}

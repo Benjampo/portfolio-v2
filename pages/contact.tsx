@@ -84,14 +84,19 @@ function Contact() {
     };
 
     return (
-        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.section
+            className="mt-24"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.1 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-bold text-6xl text-center my-6 ">
+                className="font-bold text-6xl text-center my-6 pb-2 ">
                 Contact
             </motion.h1>
+
             {showSuccessMessage ? (
                 <motion.div className="flex justify-center items-center min-w-full 6 h-96 rounded-2xl my-shadow flex-col px-8 py-8 bg-white ">
                     <motion.figure>
@@ -169,7 +174,7 @@ function Contact() {
                         <motion.button
                             whileTap={{ scale: 1.15 }}
                             type="submit"
-                            className="group px-4 mt-8 py-4 bg-black text-gray-400font-bold rounded-full  flex flex-row items-center">
+                            className="group px-4 mt-8 py-4 bg-black text-white font-bold rounded-full  flex flex-row items-center">
                             <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 ease-out transition duration-500 ease-in-out" />
                         </motion.button>
                     </div>
