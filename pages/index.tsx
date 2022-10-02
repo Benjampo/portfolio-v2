@@ -38,7 +38,7 @@ const Home: NextPage = () => {
                     initial={{ opacity: 0, y: 50 }}
                     transition={{ delay: 0.1 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className=" mt-2 font-semibold text-2xl text-center text-gray-400">
+                    className=" mt-2 font-medium text-2xl text-center text-gray-400">
                     I’m Benjamin, Front-End developper
                 </motion.h1>
             </section>

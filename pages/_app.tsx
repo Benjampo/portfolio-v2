@@ -3,16 +3,8 @@ import type { AppProps } from 'next/app';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    useEffect(() => {
-        var password = 'please';
-        var x = prompt('Enter in the password ', ' ');
-        if (x?.toLowerCase() == password) {
-            alert("Come right in \n \n You've entered in the right password");
-        }
-    }, []);
     return (
         <>
             <Header />

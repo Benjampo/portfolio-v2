@@ -96,13 +96,11 @@ function Contact() {
                 transition={{ delay: 0.2 }}
                 animate={{ opacity: 1, y: 0 }}
                 onSubmit={handleSubmit}
-                className="rounded-2xl my-shadow flex flex-col px-8 py-8 bg-white dark:bg-blue-500">
-                <h2 className="text-2xl font-normal dark:text-gray-50">Drop a line</h2>
+                className="rounded-2xl my-shadow flex flex-col px-8 py-8 bg-white ">
+                <h2 className="text-2xl font-normal text-gray-50">Drop a line</h2>
 
-                <label
-                    htmlFor="fullname"
-                    className="text-gray-500 font-normal mt-8 dark:text-gray-50 ">
-                    Full name<span className="text-blue-300 dark:text-gray-50">*</span>
+                <label htmlFor="fullname" className="text-gray-500 font-normal mt-8 text-gray-50 ">
+                    Full name<span className="text-blue-300 text-gray-50">*</span>
                 </label>
                 <input
                     type="text"
