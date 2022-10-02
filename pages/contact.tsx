@@ -5,6 +5,7 @@ import Socials from './../data/Socials';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+import success from './../assets/icons/success.png';
 function Contact() {
     // States for contact form fields
     const [fullname, setFullname] = useState('');
@@ -91,77 +92,92 @@ function Contact() {
                 className="font-bold text-6xl text-center my-6 ">
                 Contact
             </motion.h1>
-            <motion.form
-                initial={{ opacity: 0, y: 25 }}
-                transition={{ delay: 0.2 }}
-                animate={{ opacity: 1, y: 0 }}
-                onSubmit={handleSubmit}
-                className="rounded-2xl my-shadow flex flex-col px-8 py-8 bg-white ">
-                <h2 className="text-2xl font-normal text-gray-50">Drop a line</h2>
+            {showSuccessMessage ? (
+                <motion.div className="flex justify-center items-center min-w-full min-h-96 h-96 rounded-2xl my-shadow flex-col px-8 py-8 bg-white ">
+                    <motion.figure>
+                        <Image src={success} width={200} height={200} />
+                    </motion.figure>
+                    <h2 className="font-bold text-xl text-center mt-2 ">Thanks for you message!</h2>
+                    <h3 className="text-gray-400">I will answer you as soon as I can</h3>
+                </motion.div>
+            ) : (
+                <motion.form
+                    initial={{ opacity: 0, y: 25 }}
+                    transition={{ delay: 0.2 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    onSubmit={handleSubmit}
+                    className="rounded-2xl my-shadow  flex flex-col px-8 py-8 bg-white ">
+                    <h2 className="text-2xl font-normal text-gray-50">Drop a line</h2>
 
-                <label htmlFor="fullname" className="text-gray-500 font-normal mt-8 text-gray-50 ">
-                    Full name<span className="text-blue-300 text-gray-50">*</span>
-                </label>
-                <input
-                    type="text"
-                    value={fullname}
-                    onChange={(e) => {
-                        setFullname(e.target.value);
-                    }}
-                    name="fullname"
-                    className="bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
-                />
+                    <label
+                        htmlFor="fullname"
+                        className="text-gray-500 font-normal mt-8 text-gray-50 ">
+                        Full name<span className="text-blue-300 text-gray-50">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        value={fullname}
+                        onChange={(e) => {
+                            setFullname(e.target.value);
+                        }}
+                        name="fullname"
+                        className="bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
+                    />
 
-                <label htmlFor="email" className="text-gray-500 font-normal mt-4 dark:text-gray-50">
-                    E-mail<span className="text-blue-300">*</span>
-                </label>
-                <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-                    }}
-                    className="bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
-                />
+                    <label
+                        htmlFor="email"
+                        className="text-gray-500 font-normal mt-4 dark:text-gray-50">
+                        E-mail<span className="text-blue-300">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
+                        className="bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
+                    />
 
-                <label
-                    htmlFor="subject"
-                    className="text-gray-500 font-normal mt-4 dark:text-gray-50">
-                    Subject<span className="text-blue-300">*</span>
-                </label>
-                <input
-                    type="text"
-                    name="subject"
-                    value={subject}
-                    onChange={(e) => {
-                        setSubject(e.target.value);
-                    }}
-                    className="bg-gray-50 py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
-                />
+                    <label
+                        htmlFor="subject"
+                        className="text-gray-500 font-normal mt-4 dark:text-gray-50">
+                        Subject<span className="text-blue-300">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="subject"
+                        value={subject}
+                        onChange={(e) => {
+                            setSubject(e.target.value);
+                        }}
+                        className="bg-gray-50 py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
+                    />
 
-                <label
-                    htmlFor="message"
-                    className="text-gray-500 font-normal mt-4 dark:text-gray-50">
-                    Message<span className="text-blue-300">*</span>
-                </label>
-                <textarea
-                    name="message"
-                    value={message}
-                    onChange={(e) => {
-                        setMessage(e.target.value);
-                    }}
-                    className="bg-gray-50 py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"></textarea>
+                    <label
+                        htmlFor="message"
+                        className="text-gray-500 font-normal mt-4 dark:text-gray-50">
+                        Message<span className="text-blue-300">*</span>
+                    </label>
+                    <textarea
+                        name="message"
+                        value={message}
+                        onChange={(e) => {
+                            setMessage(e.target.value);
+                        }}
+                        className="bg-gray-50 py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"></textarea>
 
-                <div className="flex flex-row items-center justify-end">
-                    <motion.button
-                        whileTap={{ scale: 1.15 }}
-                        type="submit"
-                        className="group px-4 mt-8 py-4 bg-black text-gray-50 font-bold rounded-full  flex flex-row items-center">
-                        <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 ease-out transition duration-500 ease-in-out" />
-                    </motion.button>
-                </div>
-            </motion.form>
+                    <div className="flex flex-row items-center justify-end">
+                        <motion.button
+                            whileTap={{ scale: 1.15 }}
+                            type="submit"
+                            className="group px-4 mt-8 py-4 bg-black text-gray-50 font-bold rounded-full  flex flex-row items-center">
+                            <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 ease-out transition duration-500 ease-in-out" />
+                        </motion.button>
+                    </div>
+                </motion.form>
+            )}
+
             <motion.div
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.3 }}
