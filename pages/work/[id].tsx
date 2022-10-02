@@ -32,7 +32,7 @@ export function Project({ data }: any) {
                 </ul>
             </div>
             <div className="grid grid-cols-4 gap-4">
-                <div className=" col-span-4 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                <div className=" col-span-4 relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             src={data[0].coverSrc}
@@ -81,13 +81,19 @@ export function Project({ data }: any) {
                 </div>
             </div>
             <div className="flex w-full  items-center justify-center">
-                <a
-                    className="text-gray-400 text-xl underline underline-offset-4"
-                    href={data[0].url}
-                    target="_blank"
-                    rel="noreferrer">
-                    Access website
-                </a>
+                {data[0].url ? (
+                    <a
+                        className="text-gray-400 my-12 md:mx-24  text-2xl underline underline-offset-4"
+                        href={data[0].url}
+                        target="_blank"
+                        rel="noreferrer">
+                        Access website
+                    </a>
+                ) : (
+                    <span className="text-gray-300 mt-24 mb-24 text-2xl ">
+                        This project is private, there is no public link
+                    </span>
+                )}
             </div>
         </motion.section>
     );

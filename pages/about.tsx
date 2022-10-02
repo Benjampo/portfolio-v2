@@ -45,7 +45,7 @@ function About() {
                 className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl">
                 About
             </motion.h1>
-            <Card className=" col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 block flex flex-col-reverse md:flex-row">
+            <Card className=" pb-12 col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 block flex flex-col-reverse md:flex-row">
                 <div className="px-5">
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-between ">
                         <div className="self-start lg:self-auto">
@@ -56,8 +56,8 @@ function About() {
                                 I’m a front-end developper
                             </h3>
                         </div>
-                        <div className="h-full lg:w-1/3 ">
-                            <figure className="rounded-full   ">
+                        <div className="h-full    ">
+                            <figure className="rounded-full m-12  bg-blue-400  ">
                                 <Image src={Profile} />
                             </figure>
                         </div>
@@ -74,15 +74,17 @@ function About() {
                     </p>
                 </div>
             </Card>
-            <Card className="col-start-1 col-end-3 xl:box xl:col-start-1 xl:col-end-3 ">
-                <h2 className="text-xl font-medium xl:text-3xl">Currently working</h2>
-                <a
-                    className="text-gray-300 font-bold hover:text-blue-400 text-6xl xl:text-8xl transition-all hover:font-black"
-                    href="https://maven.ch/fr"
-                    target="_blank"
-                    rel="noreferrer">
-                    @maven
-                </a>
+            <Card className="col-start-1  col-end-3 xl:box xl:col-start-1 xl:col-end-3 ">
+                <div className="h-full md:flex md:flex-col md:justify-center md:item-center">
+                    <h2 className="text-xl font-medium xl:text-3xl">Currently working</h2>
+                    <a
+                        className="text-gray-300 font-bold hover:text-blue-400 text-6xl xl:text-8xl transition-all hover:font-black"
+                        href="https://maven.ch/fr"
+                        target="_blank"
+                        rel="noreferrer">
+                        @maven
+                    </a>
+                </div>
             </Card>
 
             <Card

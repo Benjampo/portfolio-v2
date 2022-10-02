@@ -22,7 +22,7 @@ function ProjectCard({ project, span, row }: CardProps) {
     return (
         <motion.div whileHover={{ scale: 1.02 }} variants={item}>
             <Link key={project.id} href={`/work/${project.id}`}>
-                <article className=" relative w-full  h-[20rem] rounded-xl my-shadow overflow-hidden my-shadow">
+                <article className=" relative w-full  h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow">
                     <figure className=" h-96">
                         <Image
                             layout={'fill'}

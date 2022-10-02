@@ -19,7 +19,7 @@ function Header() {
                 <nav className="flex relative justify-between w-full md:hidden items-center">
                     <Bars3BottomLeftIcon className="w-10" onClick={handleMenu} />
                     <Link href="/">
-                        <figure className="absolute right-0">
+                        <figure className="absolute right-0 cursor-pointer">
                             <Image src={logo} alt="Benjampo Logo" />
                         </figure>
                     </Link>
@@ -55,7 +55,7 @@ function Header() {
                         'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-center  md:mx-auto'
                     }>
                     <Link href="/">
-                        <figure>
+                        <figure className="cursor-pointer">
                             <Image src={logo} alt="Benjampo Logo" />
                         </figure>
                     </Link>

@@ -37,7 +37,7 @@ function Footer() {
                             </motion.li>
                         ))}
                     </ul>
-                    <div className="w-full text-center text-gray-300 md:flex md:flex-row md:justify-around">
+                    <div className="w-full text-center text-gray-300 md:flex md:flex-row md:justify-between">
                         <span className="block">designed and coded with ❤️ by me</span>
                         <span className="block">© 2022 Benjamin Porchet</span>
                     </div>

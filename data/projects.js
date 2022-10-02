@@ -77,7 +77,6 @@ const Projects = [
         coverSrc: greubel,
         secSrc: greubel2,
         thirdSrc: greubel3,
-        url: '',
         subtitle: 'Web App',
         context: 'Web app used to manage e-commerce products, orders, clients',
         tasks: [
@@ -93,7 +92,6 @@ const Projects = [
         coverSrc: greubel,
         secSrc: greubel2,
         thirdSrc: greubel3,
-        url: '',
         subtitle: 'Web app',
         context:
             'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
@@ -110,7 +108,6 @@ const Projects = [
         coverSrc: greubel,
         secSrc: greubel2,
         thirdSrc: greubel3,
-        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Web app',
         context:
             'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
@@ -153,7 +150,6 @@ const Projects = [
         coverSrc: latent,
         secSrc: latent2,
         thirdSrc: latent3,
-        url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
         context: 'Chat app made by a ECAL student',
         tasks: ['Helping on VueJs Integration', 'Imporving styling', 'Adding features'],
