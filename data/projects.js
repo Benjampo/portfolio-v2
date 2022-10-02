@@ -17,6 +17,9 @@ import wb3 from '../assets/images/projects/wb/wb3.png';
 import kodo from '../assets/images/projects/kodo/kodo1.png';
 import kodo2 from '../assets/images/projects/kodo/kodo2.png';
 import kodo3 from '../assets/images/projects/kodo/kodo3.png';
+import latent from '../assets/images/projects/latent/latent.png';
+import latent2 from '../assets/images/projects/latent/latent2.png';
+import latent3 from '../assets/images/projects/latent/latent3.png';
 
 const Projects = [
     {
@@ -142,9 +145,9 @@ const Projects = [
     {
         id: 'latent',
         title: 'Latent',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: latent,
+        secSrc: latent2,
+        thirdSrc: latent3,
         url: 'https://www.greubelforsey.com/en',
         subtitle: 'Brand Website',
         context: 'Chat app made by a ECAL student',
