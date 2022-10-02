@@ -4,20 +4,34 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
-
-function MyApp({ Component, pageProps }: AppProps) {
+import { motion } from 'framer-motion';
+function MyApp({ Component, pageProps, router }: AppProps) {
     return (
         <>
             <Header />
             <Toaster />
-            <main className="relative md:px-48 xl:px-24  mt-12 md:mt-24   px-5 pt-8 pb-16  md:max-w-screen-2xl lg:mx-auto">
-                <AnimatePresence
-                    mode={'wait'}
-                    initial={false}
-                    onExitComplete={() => window.scrollTo(0, 0)}>
+
+            <AnimatePresence
+                mode={'wait'}
+                initial={false}
+                onExitComplete={() => window.scrollTo(0, 0)}>
+                <motion.main
+                    key={router.route}
+                    initial="initial"
+                    animate="animate"
+                    variants={{
+                        initial: {
+                            opacity: 0
+                        },
+                        animate: {
+                            opacity: 1
+                        }
+                    }}
+                    className="relative md:px-48 xl:px-24  mt-12 md:mt-24   px-5 pt-8 pb-16  md:max-w-screen-2xl lg:mx-auto">
                     <Component {...pageProps} />
-                </AnimatePresence>
-            </main>
+                </motion.main>
+            </AnimatePresence>
+
             <Footer />
         </>
     );
