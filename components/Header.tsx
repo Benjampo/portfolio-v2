@@ -13,7 +13,7 @@ function Header() {
     };
 
     return (
-        <header className=" absolute top-0 w-full h-20 bg-white p-5 px-5 md:px-64    md:left-1/2 md:-translate-x-1/2">
+        <header className=" fixed z-50 top-0 w-full h-20 bg-white p-5 px-5 md:px-64    md:left-1/2 md:-translate-x-1/2">
             {/* mobile nav */}
             <div className="md:max-w-screen-2xl md:mx-auto px-5">
                 <nav className="flex relative justify-between w-full md:hidden items-center">

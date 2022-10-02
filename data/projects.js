@@ -14,6 +14,10 @@ import wb from '../assets/images/projects/wb/wb.png';
 import wb2 from '../assets/images/projects/wb/wb2.png';
 import wb3 from '../assets/images/projects/wb/wb3.png';
 
+import kodo from '../assets/images/projects/kodo/kodo1.png';
+import kodo2 from '../assets/images/projects/kodo/kodo2.png';
+import kodo3 from '../assets/images/projects/kodo/kodo3.png';
+
 const Projects = [
     {
         id: 'greubel-forsey',
@@ -31,9 +35,9 @@ const Projects = [
     {
         id: 'kodomo',
         title: 'Kodomo',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: kodo,
+        secSrc: kodo2,
+        thirdSrc: kodo3,
         url: 'https://kodomo-altrngo.herokuapp.com/',
         subtitle: 'Web app',
         context:
