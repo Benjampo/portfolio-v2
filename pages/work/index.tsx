@@ -31,7 +31,7 @@ function Index() {
                 variants={container}
                 initial="hidden"
                 animate="show"
-                className="grid  md:grid-cols-2  md:grid-rows-2 gap-12">
+                className="grid  lg:grid-cols-2  lg:grid-rows-2 gap-12">
                 {Projects.map((project: any, index: number) => (
                     <motion.li
                         className="cursor-pointer"
