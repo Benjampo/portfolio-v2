@@ -47,8 +47,8 @@ function About() {
             </motion.h1>
             <Card className=" col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 block flex flex-col-reverse md:flex-row">
                 <div className="px-5">
-                    <div className="flex items-center justify-between ">
-                        <div>
+                    <div className="flex flex-col-reverse lg:flex-row items-center justify-between ">
+                        <div className="self-start lg:self-auto">
                             <h2 className="font-normal text-2xl whitespace-nowrap">
                                 My name is Benjamin
                             </h2>
@@ -56,7 +56,7 @@ function About() {
                                 I’m a front-end developper
                             </h3>
                         </div>
-                        <div className="h-full w-1/3 ">
+                        <div className="h-full lg:w-1/3 ">
                             <figure className="rounded-full   ">
                                 <Image src={Profile} />
                             </figure>
@@ -132,26 +132,37 @@ function About() {
             </Card>
 
             <Card
-                className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-3 xl:justify-center"
+                className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-3 xl:justify-center cursor-pointer"
                 id="my-resume">
-                <motion.figure whileHover={{ scale: 1.2 }} className="cursor-pointer">
-                    <Image src={Resume} alt="Resume button" width={60} height={60} />
-                </motion.figure>
-
-                <h2 className="text-xl font-medium whitespace-nowrap xl:text-2xl xl:mt-1">
-                    Get my resume
-                </h2>
-            </Card>
-            <Link className="xl:box xl:row-start-4 xl:col-start-2" href="/contact">
-                <Card
-                    className="flex flex-col items-center gap-1 justify-between xl:justify-center"
-                    id="contact-card">
-                    <motion.figure whileHover={{ scale: 1.2 }} className="cursor-pointer">
-                        <Image src={Mail} alt="Mail button" width={60} height={60} />
+                <a target="_blank" href="./../assets/BenjaminPorchet_EN_CVV" download>
+                    <motion.figure
+                        whileHover={{ scale: 1.2 }}
+                        className="cursor-pointer flex justify-center">
+                        <Image src={Resume} alt="Resume button" width={60} height={60} />
                     </motion.figure>
-                    <h2 className="text-xl font-medium xl:text-2xl xl:mt-1">Drop me a line</h2>
-                </Card>
-            </Link>
+
+                    <h2 className="text-xl font-medium whitespace-nowrap xl:text-2xl xl:mt-1">
+                        Get my resume
+                    </h2>
+                </a>
+            </Card>
+
+            <Card
+                className="flex flex-col items-center gap-1 justify-between xl:justify-center xl:row-start-4 xl:col-start-2 cursor-pointer"
+                id="contact-card">
+                <Link className="xl:box w-full h-full  " href={'/contact'}>
+                    <div>
+                        <motion.figure
+                            whileHover={{ scale: 1.2 }}
+                            className="cursor-pointer flex justify-center">
+                            <Image src={Mail} alt="Mail button" width={60} height={60} />
+                        </motion.figure>
+                        <h2 className="text-xl font-medium xl:text-2xl xl:mt-1 pointer-events-none	">
+                            Drop me a line
+                        </h2>
+                    </div>
+                </Link>
+            </Card>
 
             <Card
                 id="my-socials"
@@ -162,7 +173,9 @@ function About() {
                             className="cursor-pointer"
                             whileHover={{ scale: 1.2 }}
                             key={index}>
-                            <Image alt={social.label} src={social.icon} width={48} />
+                            <a href={social.url} target="_blank" rel="noreferrer">
+                                <Image alt={social.label} src={social.icon} width={48} />
+                            </a>
                         </motion.li>
                     ))}
                 </ul>

@@ -66,9 +66,10 @@ const Home: NextPage = () => {
                                         className=" relative w-full md:w-5/6 h-[30rem] rounded-xl my-shadow overflow-hidden">
                                         <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                                             <Image
+                                                layout={'fill'}
+                                                objectFit={'cover'}
                                                 src={project.coverSrc}
                                                 alt={project.title}
-                                                layout={'fill'}
                                             />
                                         </figure>
                                     </motion.div>

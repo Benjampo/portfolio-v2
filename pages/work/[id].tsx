@@ -37,6 +37,7 @@ export function Project({ data }: any) {
                         <Image
                             src={data[0].coverSrc}
                             alt={`Main image of ${data[0].title}`}
+                            objectFit={'cover'}
                             layout={'fill'}
                         />
                     </figure>
@@ -46,6 +47,7 @@ export function Project({ data }: any) {
                         <Image
                             layout={'fill'}
                             src={data[0].secSrc}
+                            objectFit={'cover'}
                             alt={`Second media of ${data[0].title}`}
                         />
                     </figure>
@@ -55,6 +57,7 @@ export function Project({ data }: any) {
                         <Image
                             layout={'fill'}
                             src={data[0].thirdSrc}
+                            objectFit={'cover'}
                             alt={`Third media of ${data[0].title}`}
                         />
                     </figure>
