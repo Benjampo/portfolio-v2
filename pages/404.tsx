@@ -9,8 +9,10 @@ function Custom404() {
             <div className="mt-48">
                 <div className="flex flex-shrink-0 justify-center">
                     <Link href="/" className="inline-flex">
-                        <Image alt={'404 face'} src={Oops} width={224} height={224} />
-                        <span className="sr-only">Your Company</span>
+                        <div>
+                            <Image alt={'404 face'} src={Oops} width={224} height={224} />
+                            <span className="sr-only">Your Company</span>
+                        </div>
                     </Link>
                 </div>
                 <div className="py-8">
