@@ -9,10 +9,10 @@ function Custom404() {
             <section className="min-h-screen flex justify-center">
                 <div className="mt-48">
                     <div className="flex flex-shrink-0 justify-center">
-                        <a href="/" className="inline-flex">
+                        <Link href="/" className="inline-flex">
                             <Image src={Oops} width={224} height={224} />
                             <span className="sr-only">Your Company</span>
-                        </a>
+                        </Link>
                     </div>
                     <div className="py-8">
                         <div className="text-center">
