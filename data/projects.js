@@ -52,6 +52,7 @@ const Projects = [
         tasks: ['GSAP animations', 'SCSS and a part of Twig', 'Webiste updates and maintenance'],
         tech: ['HTML', 'SCSS', 'GSAP', 'Jquery', 'Grav CMS']
     },
+
     {
         id: 'kodomo',
         title: 'Kodomo',
@@ -66,70 +67,6 @@ const Projects = [
             'Because of the time and the learning proccess, we did not made the desktop version of it.',
         tasks: ['HTML and CSS Implementation', 'Design of the App', 'Back-end features'],
         tech: ['Ruby', 'Ruby on Rails', 'Bootstrap', 'CSS']
-    },
-    {
-        id: 'weebox-landing',
-        title: 'Weebox',
-        coverSrc: wb,
-        secSrc: wb2,
-        thirdSrc: wb3,
-        info: 'Website still on validation by the content team, so no public URL for now',
-        subtitle: 'Brand Website',
-        context: 'Website to promote the E-commerce platform weebox',
-        tasks: [
-            'Integration in SCSS and HTML',
-            'Js animations using GSAP',
-            'Grav CMS backoffice implementation'
-        ],
-        tech: ['HTML', 'SCSS', 'GSAP', 'Grav CMS', 'Grav CMS']
-    },
-    {
-        id: 'weebox',
-        title: 'Weebox',
-        coverSrc: wbx,
-        secSrc: wbx2,
-        thirdSrc: wbx3,
-        subtitle: 'Web App',
-        context: 'Web app used to manage e-commerce products, orders, clients',
-        tasks: [
-            'Creation of reusable components logic',
-            'Components styling',
-            'Components implementation'
-        ],
-        tech: ['VueJS', 'Laravel', 'PHP']
-    },
-    {
-        id: 'project-submission',
-        title: 'Project submission platform',
-        coverSrc: form3,
-        secSrc: form2,
-        thirdSrc: form,
-        subtitle: 'Web app',
-        context:
-            'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
-        tasks: [
-            'Creation of front-end interactions',
-            'Creation of reusable components',
-            'Laravel CRUD features'
-        ],
-        tech: ['VueJS', 'Laravel', 'SCSS', 'WordPress']
-    },
-    {
-        id: 'data-management-platform',
-        title: 'Data management Platform',
-        coverSrc: data,
-        secSrc: data2,
-        thirdSrc: data3,
-        subtitle: 'Web app',
-        context:
-            'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
-        tasks: [
-            'Creation of components',
-            'Creation of unit tests',
-            'Integration of UI',
-            'Creation of Front-end Logic'
-        ],
-        tech: ['ReactJs', 'SCSS', 'Webpack']
     },
     {
         id: 'ollabotanicals',
@@ -156,6 +93,71 @@ const Projects = [
         tasks: ['UI creation', 'UI integrations'],
         tech: ['ReactJS', 'NextJS']
     },
+    {
+        id: 'project-submission',
+        title: 'Project submission platform',
+        coverSrc: form3,
+        secSrc: form2,
+        thirdSrc: form,
+        subtitle: 'Web app',
+        context:
+            'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
+        tasks: [
+            'Creation of front-end interactions',
+            'Creation of reusable components',
+            'Laravel CRUD features'
+        ],
+        tech: ['VueJS', 'Laravel', 'SCSS', 'WordPress']
+    },
+    {
+        id: 'weebox',
+        title: 'Weebox',
+        coverSrc: wbx,
+        secSrc: wbx2,
+        thirdSrc: wbx3,
+        subtitle: 'Web App',
+        context: 'Web app used to manage e-commerce products, orders, clients',
+        tasks: [
+            'Creation of reusable components logic',
+            'Components styling',
+            'Components implementation'
+        ],
+        tech: ['VueJS', 'Laravel', 'PHP']
+    },
+    {
+        id: 'weebox-landing',
+        title: 'Weebox',
+        coverSrc: wb,
+        secSrc: wb2,
+        thirdSrc: wb3,
+        info: 'Website still on validation by the content team, so no public URL for now',
+        subtitle: 'Brand Website',
+        context: 'Website to promote the E-commerce platform weebox',
+        tasks: [
+            'Integration in SCSS and HTML',
+            'Js animations using GSAP',
+            'Grav CMS backoffice implementation'
+        ],
+        tech: ['HTML', 'SCSS', 'GSAP', 'Grav CMS', 'Grav CMS']
+    },
+    {
+        id: 'data-management-platform',
+        title: 'Data management Platform',
+        coverSrc: data,
+        secSrc: data2,
+        thirdSrc: data3,
+        subtitle: 'Web app',
+        context:
+            'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
+        tasks: [
+            'Creation of components',
+            'Creation of unit tests',
+            'Integration of UI',
+            'Creation of Front-end Logic'
+        ],
+        tech: ['ReactJs', 'SCSS', 'Webpack']
+    },
+
     {
         id: 'latent',
         title: 'Latent',
