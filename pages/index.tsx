@@ -15,19 +15,6 @@ const Home: NextPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="px-0">
-            <Head>
-                <title>Benjamin Porchet | Front-end Developper</title>
-                <meta
-                    name="description"
-                    content="  Front-end Developer applications oriented . 23 years old, I am passionate
-                        about creating and implementing solutions that make users lives easier.{' '}
-                        I started my journey as a Front-end Developer
-                        in 2017, while studying at CPNV in Switzerland. In 2020 I did a bootcamp of
-                        coding to improve my backend skills.
-                        After that I started a new job at maven
-                        while doing little projects for other teams and clients."
-                />
-            </Head>
             <section className="w-full h-[64vh] md:h-[64vh] flex flex-col justify-center items-center">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}

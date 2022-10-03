@@ -11,6 +11,17 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
+                    <title>Benjamin Porchet | Front-end Developper</title>
+                    <meta
+                        name="description"
+                        content="  Front-end Developer applications oriented . 23 years old, I am passionate
+                        about creating and implementing solutions that make users lives easier.{' '}
+                        I started my journey as a Front-end Developer
+                        in 2017, while studying at CPNV in Switzerland. In 2020 I did a bootcamp of
+                        coding to improve my backend skills.
+                        After that I started a new job at maven
+                        while doing little projects for other teams and clients."
+                    />
                     <link
                         rel="apple-touch-icon"
                         sizes="180x180"
