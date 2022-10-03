@@ -18,9 +18,9 @@ import kodo from '../public/projects/kodo/kodo1.png';
 import kodo2 from '../public/projects/kodo/kodo2.png';
 import kodo3 from '../public/projects/kodo/kodo3.png';
 
-import latent from '../public/projects/latent/latent.png';
-import latent2 from '../public/projects/latent/latent2.png';
-import latent3 from '../public/projects/latent/latent3.png';
+import latent4 from '../public/projects/latent/latent.png';
+import latent5 from '../public/projects/latent/latent2.png';
+import latent6 from '../public/projects/latent/latent3.png';
 
 import port from '../public/projects/portfolio/port.png';
 import port2 from '../public/projects/portfolio/port2.png';
@@ -161,9 +161,9 @@ const Projects = [
     {
         id: 'latent',
         title: 'Latent',
-        coverSrc: latent,
-        secSrc: latent2,
-        thirdSrc: latent3,
+        coverSrc: latent4,
+        secSrc: latent5,
+        thirdSrc: latent6,
         subtitle: 'Brand Website',
         context: 'Chat app made by a ECAL student',
         tasks: ['Helping on VueJs Integration', 'Imporving styling', 'Adding features'],
