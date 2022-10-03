@@ -1,42 +1,42 @@
-import greubel from './../assets/images/projects/greubel/greub_fold.png';
-import greubel2 from './../assets/images/projects/greubel/greub1.png';
-import greubel3 from './../assets/images/projects/greubel/greub2.png';
+import greubel from '../public/projects/greubel/greub_fold.png';
+import greubel2 from '../public/projects/greubel/greub1.png';
+import greubel3 from '../public/projects/greubel/greub2.png';
 
-import yc from './../assets/images/projects/yc/yc.png';
-import yc2 from './../assets/images/projects/yc/yc-2.png';
-import yc3 from './../assets/images/projects/yc/yc-3.png';
+import yc from '../public/projects/yc/yc.png';
+import yc2 from '../public/projects/yc/yc-2.png';
+import yc3 from '../public/projects/yc/yc-3.png';
 
-import olla from './../assets/images/projects/olla/olla1.png';
-import olla2 from './../assets/images/projects/olla/olla2.png';
-import olla3 from './../assets/images/projects/olla/olla3.png';
+import olla from '../public/projects/olla/olla1.png';
+import olla2 from '../public/projects/olla/olla2.png';
+import olla3 from '../public/projects/olla/olla3.png';
 
-import wb from './../assets/images/projects/wb/wb.png';
-import wb2 from './../assets/images/projects/wb/wb2.png';
-import wb3 from './../assets/images/projects/wb/wb3.png';
+import wb from '../public/projects/wb/wb.png';
+import wb2 from '../public/projects/wb/wb2.png';
+import wb3 from '../public/projects/wb/wb3.png';
 
-import kodo from './../assets/images/projects/kodo/kodo1.png';
-import kodo2 from './../assets/images/projects/kodo/kodo2.png';
-import kodo3 from './../assets/images/projects/kodo/kodo3.png';
+import kodo from '../public/projects/kodo/kodo1.png';
+import kodo2 from '../public/projects/kodo/kodo2.png';
+import kodo3 from '../public/projects/kodo/kodo3.png';
 
-import latent from './../assets/images/projects/latent/latent.png';
-import latent2 from './../assets/images/projects/latent/latent2.png';
-import latent3 from './../assets/images/projects/latent/latent3.png';
+import latent from '../public/projects/latent/latent.png';
+import latent2 from '../public/projects/latent/latent2.png';
+import latent3 from '../public/projects/latent/latent3.png';
 
-import port from './../assets/images/projects/portfolio/port.png';
-import port2 from './../assets/images/projects/portfolio/port2.png';
-import port3 from './../assets/images/projects/portfolio/port3.png';
+import port from '../public/projects/portfolio/port.png';
+import port2 from '../public/projects/portfolio/port2.png';
+import port3 from '../public/projects/portfolio/port3.png';
 
-import data from './../assets/images/projects/data/data1.png';
-import data2 from './../assets/images/projects/data/data2.png';
-import data3 from './../assets/images/projects/data/data3.png';
+import data from '../public/projects/data/data1.png';
+import data2 from '../public/projects/data/data2.png';
+import data3 from '../public/projects/data/data3.png';
 
-import form from './../assets/images/projects/form/form1.png';
-import form2 from './../assets/images/projects/form/form2.png';
-import form3 from './../assets/images/projects/form/form3.png';
+import form from '../public/projects/form/form1.png';
+import form2 from '../public/projects/form/form2.png';
+import form3 from '../public/projects/form/form3.png';
 
-import wbx from './../assets/images/projects/wbx/wbx1.png';
-import wbx2 from './../assets/images/projects/wbx/wbx2.png';
-import wbx3 from './../assets/images/projects/wbx/wbx3.png';
+import wbx from '../public/projects/wbx/wbx1.png';
+import wbx2 from '../public/projects/wbx/wbx2.png';
+import wbx3 from '../public/projects/wbx/wbx3.png';
 
 const Projects = [
     {
