@@ -26,6 +26,18 @@ import port from '../assets/images/projects/portfolio/port.png';
 import port2 from '../assets/images/projects/portfolio/port2.png';
 import port3 from '../assets/images/projects/portfolio/port3.png';
 
+import data from '../assets/images/projects/data/data1.png';
+import data2 from '../assets/images/projects/data/data2.png';
+import data3 from '../assets/images/projects/data/data3.png';
+
+import form from '../assets/images/projects/form/form1.png';
+import form2 from '../assets/images/projects/form/form2.png';
+import form3 from '../assets/images/projects/form/form3.png';
+
+import wbx from '../assets/images/projects/wbx/wbx1.png';
+import wbx2 from '../assets/images/projects/wbx/wbx2.png';
+import wbx3 from '../assets/images/projects/wbx/wbx3.png';
+
 const Projects = [
     {
         id: 'greubel-forsey',
@@ -61,7 +73,7 @@ const Projects = [
         coverSrc: wb,
         secSrc: wb2,
         thirdSrc: wb3,
-        url: 'https://maven.ch/weebox-vitrine/',
+        info: 'Website still on validation by the content team, so no public URL for now',
         subtitle: 'Brand Website',
         context: 'Website to promote the E-commerce platform weebox',
         tasks: [
@@ -74,9 +86,9 @@ const Projects = [
     {
         id: 'weebox',
         title: 'Weebox',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: wbx,
+        secSrc: wbx2,
+        thirdSrc: wbx3,
         subtitle: 'Web App',
         context: 'Web app used to manage e-commerce products, orders, clients',
         tasks: [
@@ -89,9 +101,9 @@ const Projects = [
     {
         id: 'project-submission',
         title: 'Project submission platform',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: form3,
+        secSrc: form2,
+        thirdSrc: form,
         subtitle: 'Web app',
         context:
             'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
@@ -105,9 +117,9 @@ const Projects = [
     {
         id: 'data-management-platform',
         title: 'Data management Platform',
-        coverSrc: greubel,
-        secSrc: greubel2,
-        thirdSrc: greubel3,
+        coverSrc: data,
+        secSrc: data2,
+        thirdSrc: data3,
         subtitle: 'Web app',
         context:
             'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
