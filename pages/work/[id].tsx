@@ -35,6 +35,7 @@ export function Project({ data }: any) {
                 <div className=" border border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
+                            priority={true}
                             src={data[0].coverSrc}
                             alt={`Main image of ${data[0].title}`}
                             objectFit={'cover'}
@@ -45,6 +46,7 @@ export function Project({ data }: any) {
                 <div className="border border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
+                            priority={true}
                             layout={'fill'}
                             src={data[0].secSrc}
                             objectFit={'cover'}
