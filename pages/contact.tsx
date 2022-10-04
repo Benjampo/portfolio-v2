@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import success from './../assets/icons/success.png';
+import Head from 'next/head';
 function Contact() {
     // States for contact form fields
     const [fullname, setFullname] = useState('');
@@ -89,6 +90,9 @@ function Contact() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
+            <Head>
+                <title>Benjamin Porchet | Front-end Developper</title>
+            </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.1 }}

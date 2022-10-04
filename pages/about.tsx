@@ -13,6 +13,7 @@ import Works from './../data/Works';
 import Mail from './../assets/images/mail.png';
 import Resume from './../assets/images/resume.png';
 import Profile from './../assets/icons/yes.png';
+import Head from 'next/head';
 
 function About() {
     const container = {
@@ -38,6 +39,9 @@ function About() {
             initial="hidden"
             animate="show"
             className="grid overflow-hidden grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 gap-5">
+            <Head>
+                <title>Benjamin Porchet | Front-end Developper</title>
+            </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 transition={{ delay: 0.1 }}

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import Router from 'next/router';
 import { motion } from 'framer-motion';
+import Head from 'next/head';
 
 export function Project({ data }: any) {
     return (
@@ -13,6 +14,9 @@ export function Project({ data }: any) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="my-4">
+            <Head>
+                <title>Benjamin Porchet | Front-end Developper</title>
+            </Head>
             <div className="mb-4 relative">
                 <button
                     className="absolute w-7 top-0 left-0 cursor-pointer -translate-x-[200%]"

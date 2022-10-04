@@ -2,6 +2,7 @@ import React from 'react';
 import Projects from '../../data/projects';
 import ProjectCard from '../../components/ProjectCard';
 import { motion } from 'framer-motion';
+import Head from 'next/head';
 function Index() {
     const container = {
         hidden: { opacity: 0 },
@@ -20,6 +21,9 @@ function Index() {
     };
     return (
         <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <Head>
+                <title>Benjamin Porchet | Front-end Developper</title>
+            </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.1 }}

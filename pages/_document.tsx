@@ -11,7 +11,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Benjamin Porchet | Front-end Developper</title>
                     <meta
                         name="description"
                         content="  Front-end Developer applications oriented . 23 years old, I am passionate
