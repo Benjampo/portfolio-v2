@@ -53,7 +53,7 @@ export function Project({ data }: any) {
                     </figure>
                 </div>
                 <div className=" col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
-                    <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
+                    <figure className=" absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             layout={'fill'}
                             src={data[0].thirdSrc}
@@ -81,7 +81,7 @@ export function Project({ data }: any) {
                 </div>
             </div>
             <div className="flex w-full  items-center justify-center">
-                {data[0].url ? (
+                {data[0].url && (
                     <a
                         className="text-gray-400 my-12 md:mx-24  text-2xl underline underline-offset-4"
                         href={data[0].url}
@@ -89,10 +89,9 @@ export function Project({ data }: any) {
                         rel="noreferrer">
                         Access website
                     </a>
-                ) : (
-                    <span className="text-gray-300 mt-24 mb-24 text-2xl ">
-                        This project is private, there is no public link
-                    </span>
+                )}
+                {data[0].info && (
+                    <span className="text-gray-300 mt-24 mb-24 text-2xl ">{data[0].info}</span>
                 )}
             </div>
         </motion.section>

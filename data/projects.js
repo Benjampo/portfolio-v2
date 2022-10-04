@@ -59,6 +59,7 @@ const Projects = [
         secSrc: kodo2,
         thirdSrc: kodo3,
         url: 'https://kodomo-altrngo.herokuapp.com/',
+        info: 'Only made for mobile devices',
         subtitle: 'Web app',
         context:
             'Web app made in two weeks with my colleagues from LeWagon. ' +
@@ -90,6 +91,7 @@ const Projects = [
         secSrc: wbx2,
         thirdSrc: wbx3,
         subtitle: 'Web App',
+        info: 'No public link for this project',
         context: 'Web app used to manage e-commerce products, orders, clients',
         tasks: [
             'Creation of reusable components logic',
@@ -105,8 +107,9 @@ const Projects = [
         secSrc: form2,
         thirdSrc: form,
         subtitle: 'Web app',
+        info: 'No public link for this project',
         context:
-            'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
+            'Web app made while working at maven for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
         tasks: [
             'Creation of front-end interactions',
             'Creation of reusable components',
@@ -121,8 +124,9 @@ const Projects = [
         secSrc: data2,
         thirdSrc: data3,
         subtitle: 'Web app',
+        info: 'No public link for this project',
         context:
-            'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
+            'Web app made while working at maven for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
         tasks: [
             'Creation of components',
             'Creation of unit tests',
@@ -138,6 +142,7 @@ const Projects = [
         secSrc: olla2,
         thirdSrc: olla3,
         url: 'https://ollabotanicals.com/fr',
+        info: 'No public link for this project',
         subtitle: 'Brand Website',
         context:
             'Website made while working at maven. The purpose was to showcase product of a cosmetic brand to the public.',
@@ -152,7 +157,7 @@ const Projects = [
         thirdSrc: port3,
         url: 'https://www.benjampo.ch',
         subtitle: 'Personnal Website',
-        context: 'Reealisation of my personnal website to showcase my work and skills',
+        context: 'Realisation of my personal website to showcase my work and skills',
         tasks: ['UI creation', 'UI integrations'],
         tech: ['ReactJS', 'NextJS']
     },
@@ -162,6 +167,7 @@ const Projects = [
         coverSrc: latent,
         secSrc: latent2,
         thirdSrc: latent3,
+        info: 'No public link for this project',
         subtitle: 'Brand Website',
         context: 'Chat app made by a ECAL student',
         tasks: ['Helping on VueJs Integration', 'Imporving styling', 'Adding features'],
@@ -176,7 +182,7 @@ const Projects = [
         url: 'https://yogacenter.ch/',
         subtitle: 'Brand Website',
         context:
-            'Website made while working at YantraConnection. The purpose was to showcase the brand with a simple website',
+            'Website made while working at YantraConnection. The purpose was to showcase the other business of the brand with a simple website',
         tasks: ['Integration in Wordpress', 'SCSS and styling', 'Webiste updates and maintenance'],
         tech: ['HTML', 'SCSS', 'Wordpress']
     }
