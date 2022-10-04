@@ -8,7 +8,7 @@ function Card(props: any) {
     return (
         <motion.div
             variants={item}
-            className={`w-full bg-white rounded-xl  p-4 my-shadow ${props.className}`}>
+            className={`w-full  bg-white rounded-xl  p-4 my-shadow ${props.className}`}>
             {props.children}
         </motion.div>
     );

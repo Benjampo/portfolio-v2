@@ -93,7 +93,7 @@ function Contact() {
                 initial={{ opacity: 0, y: 25 }}
                 transition={{ delay: 0.1 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-bold text-6xl text-center my-6 pb-2 ">
+                className="font-bold text-6xl text-center my-6 pb-2 md:text-8xl ">
                 Contact
             </motion.h1>
 
@@ -201,12 +201,14 @@ function Contact() {
                     <ul className="flex justify-center gap-5">
                         {Socials.map((social) => (
                             <li key={social.label}>
-                                <Image
-                                    src={social.icon}
-                                    alt={`Icon of ${social.label}`}
-                                    height={30}
-                                    width={30}
-                                />
+                                <a href={social.url} target="_blank" rel="noreferrer">
+                                    <Image
+                                        src={social.icon}
+                                        alt={`Icon of ${social.label}`}
+                                        height={30}
+                                        width={30}
+                                    />
+                                </a>
                             </li>
                         ))}
                     </ul>

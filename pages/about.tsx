@@ -42,7 +42,7 @@ function About() {
                 initial={{ opacity: 0, y: 50 }}
                 transition={{ delay: 0.1 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl">
+                className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-[12rem]">
                 About
             </motion.h1>
             <Card className=" pb-12 col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 block flex flex-col-reverse md:flex-row">
@@ -104,7 +104,7 @@ function About() {
                 </ul>
             </Card>
             <Card
-                className="col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-4 xl:row-end-7"
+                className="pt-8 col-start-1 col-end-3 xl:box xl:col-start-1 xl:col-end-3 xl:row-start-3 xl:row-end-6"
                 id="work">
                 <h2 className="font-medium text-2xl mb-2 xl:text-3xl">Work</h2>
                 <ul className="flex flex-col gap-3">
@@ -134,9 +134,9 @@ function About() {
             </Card>
 
             <Card
-                className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-3 xl:justify-center cursor-pointer"
+                className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-4 xl:justify-center cursor-pointer"
                 id="my-resume">
-                <a target="_blank" href="./../assets/BenjaminPorchet_EN_CVV" download>
+                <a target="_blank" href="/static/BenjaminPorchet_EN_CV.pdf" download>
                     <motion.figure
                         whileHover={{ scale: 1.2 }}
                         className="cursor-pointer flex justify-center">
@@ -150,7 +150,7 @@ function About() {
             </Card>
 
             <Card
-                className="flex flex-col items-center gap-1 justify-between xl:justify-center xl:row-start-4 xl:col-start-2 cursor-pointer"
+                className="flex flex-col items-center gap-1 justify-between xl:justify-center xl:row-start-5 xl:col-start-4 cursor-pointer"
                 id="contact-card">
                 <Link className="xl:box w-full h-full  " href={'/contact'}>
                     <div>
@@ -168,7 +168,7 @@ function About() {
 
             <Card
                 id="my-socials"
-                className="col-start-1 col-end-3 flex flex-row-reverse items-center justify-around xl:box xl:row-start-3 xl:col-start-2 xl:flex-col xl:justify-center">
+                className="col-start-1 col-end-3 flex flex-row-reverse items-center justify-around xl:box xl:row-start-4 xl:col-start-4 xl:flex-col xl:justify-center">
                 <ul className="flex flex-row justify-center gap-5 ">
                     {Socials.map((social, index) => (
                         <motion.li

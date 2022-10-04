@@ -32,7 +32,7 @@ export function Project({ data }: any) {
                 </ul>
             </div>
             <div className="grid grid-cols-4 gap-4">
-                <div className=" col-span-4 relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
+                <div className=" border border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             src={data[0].coverSrc}
@@ -42,7 +42,7 @@ export function Project({ data }: any) {
                         />
                     </figure>
                 </div>
-                <div className="col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                <div className="border border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             layout={'fill'}
@@ -52,8 +52,8 @@ export function Project({ data }: any) {
                         />
                     </figure>
                 </div>
-                <div className=" col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
-                    <figure className=" absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
+                <div className=" border border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                    <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             layout={'fill'}
                             src={data[0].thirdSrc}
@@ -65,11 +65,11 @@ export function Project({ data }: any) {
             </div>
 
             <div className="md:flex my-5 ">
-                <div className="my-4 md:w-1/2">
+                <div className="my-4  pr-7 md:w-1/2">
                     <h3 className="font-medium text-gray-400 text-xl  mb-3">The context</h3>
                     <p className="font-normal text-xl">{data[0].context}</p>
                 </div>
-                <div className="my-4 md:w-1/2">
+                <div className="my-4  md:w-1/2">
                     <h3 className="font-medium text-gray-400 text-xl mb-3">What I did</h3>
                     <ul className="list-disc">
                         {data[0].tasks.map((task: string, index: number) => (
