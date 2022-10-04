@@ -22,8 +22,8 @@ function ProjectCard({ project, span, row }: CardProps) {
     return (
         <motion.div whileHover={{ scale: 1.02 }} variants={item}>
             <Link key={project.id} href={`/work/${project.id}`}>
-                <article className=" border border-2 border-blue-200 relative w-full  h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow">
-                    <figure className=" h-96">
+                <article className="border border-2 border-blue-200 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow">
+                    <figure className="h-64 md:h-96">
                         <Image
                             layout={'fill'}
                             objectFit={'cover'}

@@ -58,7 +58,7 @@ const Home: NextPage = () => {
                                         initial={{ opacity: 0, y: 50 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         whileHover={{ scale: 1.02 }}
-                                        className=" border border-2 border-blue-200 relative w-full md:w-5/6 h-[40rem] rounded-xl my-shadow overflow-hidden">
+                                        className=" border border-2 border-blue-200 relative w-full md:w-5/6  h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                                         <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                                             <Image
                                                 layout={'fill'}

@@ -99,6 +99,7 @@ const Projects = [
         secSrc: form2,
         thirdSrc: form,
         subtitle: 'Web app',
+        info: 'No public link for this project',
         context:
             'Web app made for an university allowing interns to submit projects and for admin to manage the submissions. For privacy reasons, UI and names have been changed on screenshots',
         tasks: [
@@ -147,6 +148,7 @@ const Projects = [
         secSrc: data2,
         thirdSrc: data3,
         subtitle: 'Web app',
+        info: 'No public link for this project',
         context:
             'Web app made for an international company allowing employees to search, edit, save and export data. For privacy reasons, UI and names have been changed on screenshots',
         tasks: [
