@@ -20,7 +20,7 @@ const Home: NextPage = () => {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 }}>
-                    <Image src={benjampo} alt="" />
+                    <Image src={benjampo} priority={true} alt="Benjampo face" />
                 </motion.div>
 
                 <motion.span
@@ -64,6 +64,7 @@ const Home: NextPage = () => {
                                                 layout={'fill'}
                                                 objectFit={'cover'}
                                                 src={project.coverSrc}
+                                                priority={true}
                                                 alt={project.title}
                                             />
                                         </figure>
