@@ -69,6 +69,7 @@ const Home: NextPage = () => {
                                                 src={project.coverSrc}
                                                 priority={true}
                                                 alt={project.title}
+                                                placeholder="blur"
                                             />
                                         </figure>
                                     </motion.div>

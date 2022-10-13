@@ -39,11 +39,13 @@ export function Project({ data }: any) {
                 <div className=" border border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
+                            loading="eager"
                             priority={true}
                             src={data[0].coverSrc}
                             alt={`Main image of ${data[0].title}`}
                             objectFit={'cover'}
                             layout={'fill'}
+                            placeholder="blur"
                         />
                     </figure>
                 </div>
@@ -55,6 +57,7 @@ export function Project({ data }: any) {
                             src={data[0].secSrc}
                             objectFit={'cover'}
                             alt={`Second media of ${data[0].title}`}
+                            placeholder="blur"
                         />
                     </figure>
                 </div>
@@ -66,6 +69,7 @@ export function Project({ data }: any) {
                             src={data[0].thirdSrc}
                             objectFit={'cover'}
                             alt={`Third media of ${data[0].title}`}
+                            placeholder="blur"
                         />
                     </figure>
                 </div>

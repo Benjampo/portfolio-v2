@@ -29,6 +29,8 @@ function ProjectCard({ project, span, row }: CardProps) {
                             objectFit={'cover'}
                             src={project.coverSrc}
                             alt={`${project.title} main image`}
+                            placeholder="blur"
+                            priority={true}
                         />
                     </figure>
                     <div className="py-3">
