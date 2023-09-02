@@ -12,7 +12,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <>
             <Header />
             <Toaster />
-            <Analytics />
             <AnimatePresence
                 mode={'wait'}
                 initial={false}
@@ -31,6 +30,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
                     }}
                     className="relative md:px-48 xl:px-24  mt-12 md:mt-24   px-5 pt-8 pb-16  md:max-w-screen-2xl lg:mx-auto">
                     <Component {...pageProps} />
+                    <Analytics />
                 </motion.main>
             </AnimatePresence>
 
