@@ -40,7 +40,7 @@ function About() {
             animate="show"
             className="grid overflow-hidden grid-cols-2 xl:grid-cols-4 xl:grid-rows-2 gap-5">
             <Head>
-                <title>Benjamin Porchet | Front-end Developper</title>
+                <title>Benjamin Porchet | Full-stack Developper</title>
             </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 50 }}
@@ -57,7 +57,7 @@ function About() {
                                 My name is Benjamin
                             </h2>
                             <h3 className="font-normal text-xl whitespace-nowrap text-gray-400">
-                                I’m a front-end developper
+                                I’m a full-stack developper
                             </h3>
                         </div>
                         <div className="h-full    ">
@@ -68,13 +68,14 @@ function About() {
                     </div>
 
                     <p className="font-normal  ">
-                        Front-end Developer applications oriented . 23 years old, I am passionate
-                        about creating and implementing solutions that make users lives easier.{' '}
-                        <span className="block mb-2" />I started my journey as a Front-end Developer
-                        in 2017, while studying at CPNV in Switzerland. In 2020 I did a bootcamp of
-                        coding to improve my backend skills.
+                        Full-stack nodeJs Developer specialized in front-end . 23 years old, I am
+                        passionate about creating and implementing solutions that make users lives
+                        easier. <span className="block mb-2" />I started my journey as a Front-end
+                        Developer in 2017, while studying at CPNV in Switzerland. In 2020 I did a
+                        bootcamp of coding to improve my backend skills.
                         <span className="block mb-2" /> After that I started a new job at maven
-                        while doing little projects for other teams and clients.
+                        while doing little projects for other teams and clients. I am now working at
+                        quanthome, a startup in the real estate field
                     </p>
                 </div>
             </Card>

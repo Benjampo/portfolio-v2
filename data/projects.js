@@ -166,9 +166,10 @@ const Projects = [
         coverSrc: latent4,
         secSrc: latent5,
         thirdSrc: latent6,
+        url: 'https://ecal.ch/fr/feed/events/1673/exposition-du-prix-plateforme-10-x-ecal-melanie-fontaine-latent/',
         info: 'No public link for this project',
         subtitle: 'Brand Website',
-        context: 'Chat app made by a ECAL student',
+        context: 'Chat app made by a ECAL student. Won an ECAL award and is currently exposed at plateforme10 in Lausanne, switzerland' ,
         tasks: ['Helping on VueJs Integration', 'Imporving styling', 'Adding features'],
         tech: ['VueJS', 'SCSS']
     },

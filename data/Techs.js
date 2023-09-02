@@ -16,16 +16,20 @@ const Techs = [
         url: 'https://sass-lang.com/'
     },
     {
-        label: 'TailWind',
+        label: 'TailwindCSS',
         url: 'https://tailwindcss.com/'
     },
     {
-        label: 'Js',
+        label: 'Javascript',
         url: 'https://developer.mozilla.org/fr/docs/Web/JavaScript'
     },
     {
         label: 'TypeScript',
         url: 'https://www.typescriptlang.org/'
+    },
+    {
+        label: 'NodeJS',
+        url: 'https://nodejs.org/en'
     },
     {
         label: 'React',
