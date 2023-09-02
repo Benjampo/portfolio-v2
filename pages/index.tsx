@@ -1,10 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
 import { motion } from 'framer-motion';
 import benjampo from './../assets/benjampo_gif.gif';
-import ProjectCard from '../components/ProjectCard';
 import Projects from '../data/projects';
 import Link from 'next/link';
 import React from 'react';

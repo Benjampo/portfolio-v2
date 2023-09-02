@@ -47,7 +47,6 @@ async function sendEmail(
       </html>`
         });
     } catch (error: any) {
-        // console.log(error);
         return res.status(error.statusCode || 500).json({ error: error.message });
     }
 
