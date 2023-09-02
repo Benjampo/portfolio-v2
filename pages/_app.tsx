@@ -5,12 +5,14 @@ import Footer from '../components/Footer';
 import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
+
 function MyApp({ Component, pageProps, router }: AppProps) {
     return (
         <>
             <Header />
             <Toaster />
-
+            <Analytics />
             <AnimatePresence
                 mode={'wait'}
                 initial={false}
