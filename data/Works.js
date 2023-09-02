@@ -1,6 +1,12 @@
 const Works = [
     {
-        id: '1',
+        id: '2',
+        title: 'Quanthome',
+        description: 'Building a data platform that parallels the innovation and intricacy seen in groundbreaking AI projects',
+        year: '2023'
+    },
+    {
+        id: '2',
         title: 'Maven Sarl',
         description: 'Building websites and web apps at maven',
         year: '2022'

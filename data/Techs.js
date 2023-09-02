@@ -28,20 +28,12 @@ const Techs = [
         url: 'https://www.typescriptlang.org/'
     },
     {
-        label: 'Vue',
-        url: 'https://vuejs.org/'
-    },
-    {
         label: 'React',
         url: 'https://reactjs.org/'
     },
     {
         label: 'NextJs',
         url: 'https://nextjs.org/'
-    },
-    {
-        label: 'NuxtJS',
-        url: 'https://nuxtjs.org/fr/'
     },
     {
         label: 'PHP',

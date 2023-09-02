@@ -83,10 +83,10 @@ function About() {
                     <h2 className="text-xl font-medium xl:text-3xl">Currently working</h2>
                     <a
                         className="text-gray-300 font-bold hover:text-blue-400 text-6xl xl:text-8xl transition-all hover:font-black"
-                        href="https://maven.ch/fr"
+                        href="https://www.quanthome.ch/"
                         target="_blank"
                         rel="noreferrer">
-                        @maven
+                        @quanthome
                     </a>
                 </div>
             </Card>

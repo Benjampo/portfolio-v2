@@ -58,7 +58,7 @@ const Projects = [
         coverSrc: kodo,
         secSrc: kodo2,
         thirdSrc: kodo3,
-        url: 'https://kodomo-altrngo.herokuapp.com/',
+        info: 'No public link for this project',
         subtitle: 'Web app',
         context:
             'Web app made in two weeks with my colleagues from LeWagon. ' +
