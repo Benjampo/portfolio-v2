@@ -16,7 +16,7 @@ const Home: NextPage = () => {
             exit={{ opacity: 0 }}
             className="px-0">
             <Head>
-                <title>Benjamin Porchet | Front-end Developper</title>
+                <title>Benjamin Porchet | Full-stack Developper</title>
             </Head>
             <section className="w-full h-[64vh] md:h-[64vh] flex flex-col justify-center items-center">
                 <motion.div
