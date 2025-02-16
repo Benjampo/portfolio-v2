@@ -1,11 +1,10 @@
+import { motion } from 'framer-motion';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import benjampo from './../assets/benjampo_gif.gif';
-import Projects from '../data/projects';
 import Link from 'next/link';
-import React from 'react';
+import Projects from '../data/projects';
+import benjampo from './../assets/benjampo_gif.gif';
 const Home: NextPage = () => {
     return (
         <motion.section

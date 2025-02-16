@@ -1,19 +1,18 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 import Card from '../components/Card';
 
 import Socials from '../data/Socials';
-import Techs from './../data/Techs';
 import Studies from './../data/Studies';
+import Techs from './../data/Techs';
 import Works from './../data/Works';
 
+import Head from 'next/head';
+import Profile from './../assets/icons/yes.png';
 import Mail from './../assets/images/mail.png';
 import Resume from './../assets/images/resume.png';
-import Profile from './../assets/icons/yes.png';
-import Head from 'next/head';
 
 function About() {
     const container = {
@@ -68,7 +67,7 @@ function About() {
                     </div>
 
                     <p className="font-normal  ">
-                        Full-stack nodeJs Developer specialized in front-end . 23 years old, I am
+                        Full-stack nodeJs Developer specialized in front-end . 26 years old, I am
                         passionate about creating and implementing solutions that make users lives
                         easier. <span className="block mb-2" />I started my journey as a Front-end
                         Developer in 2017, while studying at CPNV in Switzerland. In 2020 I did a

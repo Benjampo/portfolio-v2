@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import Projects from '../../data/projects';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import Router from 'next/router';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
+import Image from 'next/image';
+import Router from 'next/router';
+import Projects from '../../data/projects';
 
 export function Project({ data }: any) {
     return (
@@ -15,7 +13,7 @@ export function Project({ data }: any) {
             exit={{ opacity: 0 }}
             className="my-4">
             <Head>
-                <title>Benjamin Porchet | Front-end Developper</title>
+                <title>Benjamin Porchet | Full-stack Developper</title>
             </Head>
             <div className="mb-4 relative">
                 <button

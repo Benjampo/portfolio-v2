@@ -1,12 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/20/solid';
-import Socials from './../data/Socials';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useState } from 'react';
+import Socials from './../data/Socials';
 
-import success from './../assets/icons/success.png';
 import Head from 'next/head';
+import success from './../assets/icons/success.png';
 function Contact() {
     // States for contact form fields
     const [fullname, setFullname] = useState('');
@@ -91,7 +90,7 @@ function Contact() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
             <Head>
-                <title>Benjamin Porchet | Front-end Developper</title>
+                <title>Benjamin Porchet | Full-stack Developper</title>
             </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}

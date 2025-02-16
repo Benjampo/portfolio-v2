@@ -3,7 +3,7 @@ const Works = [
         id: '2',
         title: 'Quanthome',
         description: 'Building a data platform that parallels the innovation and intricacy seen in groundbreaking AI projects',
-        year: '2023'
+        year: '2023-2025'
     },
     {
         id: '2',
