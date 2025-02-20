@@ -1,10 +1,9 @@
-import React from 'react';
-import mail from './../assets/images/mail.png';
-import Image from 'next/image';
-import Socials from '../data/Socials';
 import { motion } from 'framer-motion';
-import MenuItems from '../data/Menu';
+import Image from 'next/image';
 import Link from 'next/link';
+import MenuItems from '../data/Menu';
+import Socials from '../data/Socials';
+import mail from './../assets/images/mail.png';
 function Footer() {
     return (
         <footer className="bg-white h-100 relative bottom-0 pt-12 pb-24 ">
@@ -39,7 +38,7 @@ function Footer() {
                     </ul>
                     <div className="w-full text-center text-gray-300 md:flex md:flex-row md:justify-between">
                         <span className="block">designed and coded with ❤️ by me</span>
-                        <span className="block">© 2022 Benjamin Porchet</span>
+                        <span className="block">© 2025 Benjamin Porchet</span>
                     </div>
                 </div>
             </div>
