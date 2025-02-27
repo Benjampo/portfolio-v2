@@ -119,8 +119,8 @@ function Contact() {
 
                     <label
                         htmlFor="fullname"
-                        className="text-gray-500 font-normal mt-8 text-gray-400">
-                        Full name<span className="text-blue-300 text-gray-400">*</span>
+                        className="font-normal mt-8 text-gray-400">
+                        Full name<span className=" text-gray-400">*</span>
                     </label>
                     <input
                         type="text"
@@ -132,7 +132,7 @@ function Contact() {
                         className="bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500"
                     />
 
-                    <label htmlFor="email" className="text-gray-500 font-normal mt-4 text-gray-400">
+                    <label htmlFor="email" className="font-normal mt-4 text-gray-400">
                         E-mail<span className="text-blue-300">*</span>
                     </label>
                     <input
@@ -147,7 +147,7 @@ function Contact() {
 
                     <label
                         htmlFor="subject"
-                        className="text-gray-500 font-normal mt-4 text-gray-400">
+                        className="font-normal mt-4 text-gray-400">
                         Subject<span className="text-blue-300">*</span>
                     </label>
                     <input
@@ -162,7 +162,7 @@ function Contact() {
 
                     <label
                         htmlFor="message"
-                        className="text-gray-500 font-normal mt-4 text-gray-400">
+                        className="font-normal mt-4 text-gray-400">
                         Message<span className="text-blue-300">*</span>
                     </label>
                     <textarea
@@ -178,7 +178,7 @@ function Contact() {
                             whileTap={{ scale: 1.15 }}
                             type="submit"
                             className="group px-4 mt-8 py-4 bg-black text-white font-bold rounded-full  flex flex-row items-center">
-                            <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 ease-out transition duration-500 ease-in-out" />
+                            <PaperAirplaneIcon className="h-6 group-hover:translate-x-1 transition duration-500 ease-in-out" />
                         </motion.button>
                     </div>
                 </motion.form>

@@ -34,7 +34,7 @@ export function Project({ data }: any) {
                 </ul>
             </div>
             <div className="grid grid-cols-4 gap-4">
-                <div className=" border border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
+                <div className="border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             loading="eager"
@@ -47,7 +47,7 @@ export function Project({ data }: any) {
                         />
                     </figure>
                 </div>
-                <div className="border border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                <div className="border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             priority={true}
@@ -59,7 +59,7 @@ export function Project({ data }: any) {
                         />
                     </figure>
                 </div>
-                <div className=" border border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                <div className="border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             priority={true}

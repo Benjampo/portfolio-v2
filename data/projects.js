@@ -1,10 +1,10 @@
-import greubel from '../public/projects/greubel/greub_fold.png';
 import greubel2 from '../public/projects/greubel/greub1.png';
 import greubel3 from '../public/projects/greubel/greub2.png';
+import greubel from '../public/projects/greubel/greub_fold.png';
 
-import yc from '../public/projects/yc/yc.png';
 import yc2 from '../public/projects/yc/yc-2.png';
 import yc3 from '../public/projects/yc/yc-3.png';
+import yc from '../public/projects/yc/yc.png';
 
 import olla from '../public/projects/olla/olla1.png';
 import olla2 from '../public/projects/olla/olla2.png';
@@ -131,7 +131,7 @@ const Projects = [
         coverSrc: wb,
         secSrc: wb2,
         thirdSrc: wb3,
-        info: 'Website still on validation by the content team, so no public URL for now',
+        url: 'https://www.weebox.ch',
         subtitle: 'Brand Website',
         context: 'Website to promote the E-commerce platform weebox',
         tasks: [
