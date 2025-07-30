@@ -67,7 +67,7 @@ function About() {
                     </div>
 
                     <p className="font-normal  ">
-                        Full-stack nodeJs Developer specialized in front-end . 26 years old, I am
+                        Full-stack nodeJs Developer specialized in front-end . 23 years old, I am
                         passionate about creating and implementing solutions that make users lives
                         easier. <span className="block mb-2" />I started my journey as a Front-end
                         Developer in 2017, while studying at CPNV in Switzerland. In 2020 I did a
@@ -140,7 +140,7 @@ function About() {
             <Card
                 className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-4 xl:justify-center cursor-pointer"
                 id="my-resume">
-                <a target="_blank" href="/public/BenjaminPorchet_CV_EN.pdf" download>
+                <a target="_blank" href="/static/BenjaminPorchet_CV_EN.pdf" download>
                     <motion.figure
                         whileHover={{ scale: 1.2 }}
                         className="cursor-pointer flex justify-center">

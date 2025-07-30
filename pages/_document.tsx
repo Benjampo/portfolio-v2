@@ -12,7 +12,7 @@ class MyDocument extends Document {
                 <Head>
                     <meta
                         name="description"
-                        content="  Full-stack Developer applications oriented . 26 years old, I am passionate
+                        content="  Front-end Developer applications oriented . 23 years old, I am passionate
                         about creating and implementing solutions that make users lives easier.{' '}
                         I started my journey as a Front-end Developer
                         in 2017, while studying at CPNV in Switzerland. In 2020 I did a bootcamp of
