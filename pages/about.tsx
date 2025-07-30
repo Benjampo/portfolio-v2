@@ -140,7 +140,7 @@ function About() {
             <Card
                 className="flex flex-col items-center gap-1 justify-between xl:box xl:row-start-4 xl:justify-center cursor-pointer"
                 id="my-resume">
-                <a target="_blank" href="/static/BenjaminPorchet_EN_CV.pdf" download>
+                <a target="_blank" href="/public/BenjaminPorchet_CV_EN.pdf" download>
                     <motion.figure
                         whileHover={{ scale: 1.2 }}
                         className="cursor-pointer flex justify-center">
