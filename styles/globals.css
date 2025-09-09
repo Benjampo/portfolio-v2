@@ -2,21 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-    --color-blue-sky: #F9FCFF;
+  --color-blue-sky: #f9fcff;
 }
 
-html, body {
-    width: 100%;
-    height: 100vh;
-    background-color: var(--color-blue-sky);
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-blue-sky);
 }
 .my-shadow {
-    box-shadow: 5px 5px 10px 10px rgba(39, 149, 251, 0.03);
+  box-shadow: 5px 5px 10px 10px rgba(39, 149, 251, 0.03);
 }
 .my-shadow:hover {
-    box-shadow: 6px 15px 24px 10px rgba(39, 149, 251, 0.03);
+  box-shadow: 6px 15px 24px 10px rgba(39, 149, 251, 0.03);
 }
 #__next {
-   height: 100%;
-
+  height: 100%;
 }

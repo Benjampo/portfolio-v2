@@ -3,21 +3,23 @@ import sendgrid from '@sendgrid/mail';
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 async function sendEmail(
-    req: { body: { subject: string; fullname: string; email: string; message: string } },
-    res: {
-        status: (arg0: number) => {
-            (): any;
-            new (): any;
-            json: { (arg0: { error: any }): any; new (): any };
-        };
-    }
+  req: {
+    body: { subject: string; fullname: string; email: string; message: string };
+  },
+  res: {
+    status: (arg0: number) => {
+      (): any;
+      new (): any;
+      json: { (arg0: { error: any }): any; new (): any };
+    };
+  }
 ) {
-    try {
-        await sendgrid.send({
-            to: 'benjaminporchet.pro@gmail.com', // Your email where you'll receive emails
-            from: 'contact@benjampo.ch', // your website email address here
-            subject: `[Contact from website] : ${req.body.subject}`,
-            html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  try {
+    await sendgrid.send({
+      to: 'benjaminporchet.pro@gmail.com', // Your email where you'll receive emails
+      from: 'contact@benjampo.ch', // your website email address here
+      subject: `[Contact from website] : ${req.body.subject}`,
+      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html lang="en">
       <head>
         <meta charset="utf-8">
@@ -44,13 +46,13 @@ async function sendEmail(
           
               </div>
       </body>
-      </html>`
-        });
-    } catch (error: any) {
-        return res.status(error.statusCode || 500).json({ error: error.message });
-    }
+      </html>`,
+    });
+  } catch (error: any) {
+    return res.status(error.statusCode || 500).json({ error: error.message });
+  }
 
-    return res.status(200).json({ error: '' });
+  return res.status(200).json({ error: '' });
 }
 
 export default sendEmail;
