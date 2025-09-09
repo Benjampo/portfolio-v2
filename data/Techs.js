@@ -47,5 +47,25 @@ const Techs = [
     label: 'Laravel',
     url: 'https://laravel.com/',
   },
+  {
+    label: 'SQL',
+    url: 'https://www.postgresql.org/',
+  },
+  {
+    label: 'Git',
+    url: 'https://git-scm.com/',
+  },
+  {
+    label: 'Figma',
+    url: 'https://www.figma.com/',
+  },
+  {
+    label: 'Python',
+    url: 'https://www.python.org/',
+  },
+  {
+    label: 'Docker',
+    url: 'https://www.docker.com/',
+  },
 ];
 export default Techs;

@@ -78,7 +78,7 @@ function Header() {
                 <Link href={filtered.url}>
                   <span
                     className={`py-2 px-4 rounded-full hover:bg-gray-200 hover:text-black cursor-pointer transition-colors block ${
-                      router.asPath === filtered.url
+                      router.asPath.includes(filtered.url)
                         ? 'bg-black text-white'
                         : 'text-black'
                     }`}
