@@ -8,9 +8,7 @@ import Projects from '../../data/projects';
 export function Project({ data }: any) {
     return (
         <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+
             className="my-4">
             <Head>
                 <title>Benjamin Porchet | Full-stack Developper</title>
@@ -21,8 +19,8 @@ export function Project({ data }: any) {
                     onClick={() => Router.back()}>
                     <ArrowLeftIcon className="text-gray-400" />
                 </button>
-                <h2 className="text-gray-400 text-xl font-medium">{data[0].subtitle}</h2>
-                <h1 className="font-bold mb-2 text-4xl">{data[0].title}</h1>
+                <motion.h2 className="text-gray-400 text-xl font-medium">{data[0].subtitle}</motion.h2>
+                <motion.h1   className="font-bold mb-2 text-4xl">{data[0].title}</motion.h1>
                 <ul className="flex flex-wrap gap-1">
                     {data[0].tech.map((tech: string, index: number) => (
                         <li
@@ -34,7 +32,11 @@ export function Project({ data }: any) {
                 </ul>
             </div>
             <div className="grid grid-cols-4 gap-4">
-                <div className="border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
+                <motion.div 
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             loading="eager"
@@ -46,8 +48,12 @@ export function Project({ data }: any) {
                             placeholder="blur"
                         />
                     </figure>
-                </div>
-                <div className="border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                </motion.div>
+                <motion.div 
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             priority={true}
@@ -58,8 +64,12 @@ export function Project({ data }: any) {
                             placeholder="blur"
                         />
                     </figure>
-                </div>
-                <div className="border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
+                </motion.div>
+                <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden">
                     <figure className="absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full">
                         <Image
                             priority={true}
@@ -70,7 +80,7 @@ export function Project({ data }: any) {
                             placeholder="blur"
                         />
                     </figure>
-                </div>
+                </motion.div>
             </div>
 
             <div className="md:flex my-5 ">

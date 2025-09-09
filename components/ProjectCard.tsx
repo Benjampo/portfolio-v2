@@ -1,8 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import benjampo from '../assets/images/benjampo.png';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 type CardProps = {
     span: string;
     row: string;
@@ -15,14 +13,11 @@ type CardProps = {
 };
 
 function ProjectCard({ project, span, row }: CardProps) {
-    const item = {
-        hidden: { opacity: 0, y: 25 },
-        show: { opacity: 1, y: 0 }
-    };
+
     return (
-        <motion.div whileHover={{ scale: 1.02 }} variants={item}>
+        <motion.div whileHover={{ scale: 1.02 }}>
             <Link key={project.id} href={`/work/${project.id}`}>
-                <article className="border border-2 border-blue-200 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow">
+                <article className="border-2 border-blue-200 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow">
                     <figure className="h-64 md:h-96">
                         <Image
                             layout={'fill'}

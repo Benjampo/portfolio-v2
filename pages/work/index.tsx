@@ -19,13 +19,13 @@ function Index() {
         show: { opacity: 1, y: 0 }
     };
     return (
-        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.section >
             <Head>
                 <title>Benjamin Porchet | Full-stack Developper</title>
             </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
-                transition={{ delay: 0.1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="font-bold text-6xl text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl">
                 Work
@@ -39,8 +39,10 @@ function Index() {
                     <motion.li
                         className="cursor-pointer"
                         key={index}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}>
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2, delay: 0.15 * index }}
+                    >
                         <h1 className="text-gray-400 text-base font-normal">{project.title}</h1>
                         <h2 className="text-gray-300 text-base font-normal mb-4">
                             {project.subtitle}

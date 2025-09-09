@@ -94,7 +94,7 @@ function Contact() {
             </Head>
             <motion.h1
                 initial={{ opacity: 0, y: 25 }}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="font-bold text-6xl text-center my-6 pb-2 md:text-8xl ">
                 Contact
@@ -111,7 +111,7 @@ function Contact() {
             ) : (
                 <motion.form
                     initial={{ opacity: 0, y: 25 }}
-                    transition={{ delay: 0.2 }}
+                    transition={{ delay: 0.1, duration: 0.5 }}
                     animate={{ opacity: 1, y: 0 }}
                     onSubmit={handleSubmit}
                     className="rounded-2xl my-shadow  flex flex-col px-8 py-8 bg-white ">
@@ -186,7 +186,7 @@ function Contact() {
 
             <motion.div
                 initial={{ opacity: 0, y: 25 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex mt-5 flex-col md:flex-row gap-5">
                 <div className="group text-center w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow">

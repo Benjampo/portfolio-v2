@@ -19,10 +19,10 @@ function About() {
         hidden: { opacity: 0 },
         show: {
             opacity: 1,
-
             transition: {
                 delay: 0.25,
-                staggerChildren: 0.05
+                duration: 0.5,
+                staggerChildren: 0.15
             }
         }
     };
