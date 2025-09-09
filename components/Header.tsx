@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import logo from './../assets/images/logo.svg';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { ArrowLeftIcon, Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import logo from './../assets/images/logo.svg';
 import MenuItems from './../data/Menu';
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -26,7 +26,7 @@ function Header() {
 
                     <div
                         className={
-                            'top-0 w-screen left-0 w-screen h-screen bg-white z-10 p-5 transform transition-transform ease-in-out ' +
+                            'top-0  left-0 w-screen h-screen bg-white z-10 p-5 transform transition-transform ease-in-out ' +
                             (isMenuOpen ? 'fixed ' : 'fixed -translate-x-[100%] ')
                         }>
                         <div className="flex justify-between">
@@ -38,14 +38,18 @@ function Header() {
                                     key={item.label}
                                     onClick={handleMenu}
                                     className="text-center font-bold text-6xl">
-                                    <Link href={item.url}>{item.label}</Link>
+                                    <Link href={item.url}>
+                                        <span className="py-2 px-4 block cursor-pointer">
+                                            {item.label}
+                                        </span>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
-                        <ul className="flex flex-col gap-1 justify-center">
+                        {/* <ul className="flex flex-col gap-1 justify-center">
                             <li>Français</li>
                             <li>Anglais</li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </nav>
 
@@ -66,14 +70,17 @@ function Header() {
                         {MenuItems.filter((item) => {
                             return item.label !== 'Home';
                         }).map((filtered) => (
-                            <li
-                                className={`py-2 px-4  rounded-full hover:bg-gray-200 hover:text-black ${
-                                    router.asPath === filtered.url
-                                        ? 'bg-black text-white'
-                                        : 'text-black'
-                                }`}
-                                key={filtered.label}>
-                                <Link href={filtered.url}>{filtered.label}</Link>
+                            <li key={filtered.label}>
+                                <Link href={filtered.url}>
+                                    <span
+                                        className={`py-2 px-4 rounded-full hover:bg-gray-200 hover:text-black cursor-pointer transition-colors block ${
+                                            router.asPath === filtered.url
+                                                ? 'bg-black text-white'
+                                                : 'text-black'
+                                        }`}>
+                                        {filtered.label}
+                                    </span>
+                                </Link>
                             </li>
                         ))}
                     </ul>

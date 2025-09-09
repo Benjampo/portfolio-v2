@@ -48,7 +48,7 @@ function About() {
                 className="font-bold text-6xl col-start-1 col-end-3 text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-[12rem]">
                 About
             </motion.h1>
-            <Card className=" pb-12 col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 block flex flex-col-reverse md:flex-row">
+            <Card className=" pb-12 col-start-1 col-end-3 xl:box xl:col-start-3 xl:col-end-5 xl:row-start-1 xl:row-end-3 flex flex-col-reverse md:flex-row">
                 <div className="px-5">
                     <div className="flex flex-col-reverse lg:flex-row items-center justify-between ">
                         <div className="self-start lg:self-auto">
@@ -61,7 +61,7 @@ function About() {
                         </div>
                         <div className="h-full    ">
                             <figure className="rounded-full m-12  bg-blue-400  ">
-                                <Image src={Profile} />
+                                <Image src={Profile} alt="Profile picture" />
                             </figure>
                         </div>
                     </div>
