@@ -1,9 +1,17 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 function Card(props: any) {
   const item = {
-    hidden: { opacity: 0, y: 25 },
-    show: { opacity: 1, y: 0 },
+    hidden: {
+      opacity: 0,
+      y: 25,
+      transition: { duration: 0.5, ease: 'easeInOut' },
+    },
+
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: 'easeInOut' },
+    },
   };
   return (
     <motion.div

@@ -19,12 +19,17 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           key={router.route}
           initial='initial'
           animate='animate'
+          exit='exit'
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
           variants={{
             initial: {
               opacity: 0,
             },
             animate: {
               opacity: 1,
+            },
+            exit: {
+              opacity: 0,
             },
           }}
           className='relative md:px-48 xl:px-24  mt-12 md:mt-24   px-5 pt-8 pb-16  md:max-w-screen-2xl lg:mx-auto'

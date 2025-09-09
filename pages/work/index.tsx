@@ -24,9 +24,9 @@ function Index() {
         <title>Benjamin Porchet | Full-stack Developper</title>
       </Head>
       <motion.h1
-        initial={{ opacity: 0, y: 25 }}
-        transition={{ duration: 0.3, delay: 0.2 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.3, delay: 0.2, ease: 'easeInOut' }}
+        animate={{ opacity: 1 }}
         className='font-bold text-6xl text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl'
       >
         Work
@@ -43,7 +43,11 @@ function Index() {
             key={index}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.15 * index }}
+            transition={{
+              duration: 0.2,
+              delay: 0.15 * index,
+              ease: 'easeInOut',
+            }}
           >
             <h1 className='text-gray-400 text-base font-normal'>
               {project.title}
