@@ -16,7 +16,13 @@ import Resume from './../assets/images/resume.png';
 
 function About() {
     const container = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0, 
+            transition: {
+                delay: 0.25,
+                duration: 0.5,
+                staggerChildren: 0.15
+            } 
+        },
         show: {
             opacity: 1,
             transition: {
@@ -27,8 +33,16 @@ function About() {
         }
     };
     const item = {
-        hidden: { opacity: 0, y: 25 },
-        show: { opacity: 1, y: 0 }
+        hidden: { opacity: 0, y: 25, transition: {
+                delay: 0.25,
+                duration: 0.5,
+                staggerChildren: 0.15
+            }  },
+        show: { opacity: 1, y: 0, transition: {
+                delay: 0.25,
+                duration: 0.5,
+                staggerChildren: 0.15
+            }  }
     };
 
     return (
