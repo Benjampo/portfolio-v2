@@ -105,7 +105,7 @@ function Contact() {
       {showSuccessMessage ? (
         <motion.div className='flex justify-center items-center min-w-full 6 h-96 rounded-2xl my-shadow flex-col px-8 py-8 bg-white '>
           <motion.figure>
-            <Image src={success} width={200} height={200} />
+            <Image src={success} width={200} height={200} alt='Success' />
           </motion.figure>
           <h2 className='font-bold text-xl text-center mt-2 '>
             Thanks for you message!
@@ -115,7 +115,7 @@ function Contact() {
       ) : (
         <motion.form
           initial={{ opacity: 0, y: 25 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
+          transition={{ delay: 0.1, duration: 0.5, ease: 'easeInOut' }}
           animate={{ opacity: 1, y: 0 }}
           onSubmit={handleSubmit}
           className='rounded-2xl my-shadow  flex flex-col px-8 py-8 bg-white '
@@ -187,7 +187,7 @@ function Contact() {
 
       <motion.div
         initial={{ opacity: 0, y: 25 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
+        transition={{ delay: 0.3, duration: 0.5, ease: 'easeInOut' }}
         animate={{ opacity: 1, y: 0 }}
         className='flex mt-5 flex-col md:flex-row gap-5'
       >
@@ -201,7 +201,7 @@ function Contact() {
         </div>
         <motion.div
           initial={{ opacity: 0, y: 25 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.4, ease: 'easeInOut' }}
           animate={{ opacity: 1, y: 0 }}
           className='group w-full bg-white rounded-xl  p-4 cursor-pointer my-shadow'
         >
