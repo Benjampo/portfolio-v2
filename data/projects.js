@@ -38,13 +38,13 @@ import wbx from '../public/projects/wbx/wbx1.png';
 import wbx2 from '../public/projects/wbx/wbx2.png';
 import wbx3 from '../public/projects/wbx/wbx3.png';
 
-import qhPlatform from '../public/projects/quanthome-platform/qh-platform1.svg';
-import qhPlatform2 from '../public/projects/quanthome-platform/qh-platform2.svg';
-import qhPlatform3 from '../public/projects/quanthome-platform/qh-platform3.svg';
+import qhPlatform from '../public/projects/quanthome-platform/qh-platform1.png';
+import qhPlatform2 from '../public/projects/quanthome-platform/qh-platform2.png';
+import qhPlatform3 from '../public/projects/quanthome-platform/qh-platform3.png';
 
-import qhAi from '../public/projects/quanthome-ai/qh-ai1.svg';
-import qhAi2 from '../public/projects/quanthome-ai/qh-ai2.svg';
-import qhAi3 from '../public/projects/quanthome-ai/qh-ai3.svg';
+import qhAi from '../public/projects/quanthome-ai/qh-ai1.png';
+import qhAi2 from '../public/projects/quanthome-ai/qh-ai2.png';
+import qhAi3 from '../public/projects/quanthome-ai/qh-ai3.png';
 
 const Projects = [
   {
