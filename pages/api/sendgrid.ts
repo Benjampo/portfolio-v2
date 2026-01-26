@@ -40,13 +40,17 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
   if (formLoadTime) {
     const timeSpent = Date.now() - formLoadTime;
     if (timeSpent < MIN_FORM_TIME_MS) {
-      return res.status(400).json({ error: 'Please take your time filling out the form.' });
+      return res
+        .status(400)
+        .json({ error: 'Please take your time filling out the form.' });
     }
   }
 
   // Spam check 3: Validate email format
   if (!EMAIL_REGEX.test(email)) {
-    return res.status(400).json({ error: 'Please enter a valid email address.' });
+    return res
+      .status(400)
+      .json({ error: 'Please enter a valid email address.' });
   }
 
   // Spam check 4: Check for spam keywords
@@ -56,12 +60,16 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
     keyword => lowerMessage.includes(keyword) || lowerSubject.includes(keyword)
   );
   if (hasSpamKeyword) {
-    return res.status(400).json({ error: 'Your message was flagged as spam. Please revise and try again.' });
+    return res.status(400).json({
+      error: 'Your message was flagged as spam. Please revise and try again.',
+    });
   }
 
   // Spam check 5: Basic field length validation
   if (fullname.length > 100 || subject.length > 200 || message.length > 5000) {
-    return res.status(400).json({ error: 'Please keep your message within reasonable length limits.' });
+    return res.status(400).json({
+      error: 'Please keep your message within reasonable length limits.',
+    });
   }
 
   try {
