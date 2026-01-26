@@ -38,7 +38,52 @@ import wbx from '../public/projects/wbx/wbx1.png';
 import wbx2 from '../public/projects/wbx/wbx2.png';
 import wbx3 from '../public/projects/wbx/wbx3.png';
 
+import qhPlatform from '../public/projects/quanthome-platform/qh-platform1.png';
+import qhPlatform2 from '../public/projects/quanthome-platform/qh-platform2.png';
+import qhPlatform3 from '../public/projects/quanthome-platform/qh-platform3.png';
+
+import qhAi from '../public/projects/quanthome-ai/qh-ai1.png';
+import qhAi2 from '../public/projects/quanthome-ai/qh-ai2.png';
+import qhAi3 from '../public/projects/quanthome-ai/qh-ai3.png';
+
 const Projects = [
+  {
+    id: 'quanthome-platform',
+    title: 'Quanthome Platform',
+    coverSrc: qhPlatform,
+    secSrc: qhPlatform2,
+    thirdSrc: qhPlatform3,
+    url: 'https://quanthome.com/products/platform',
+    subtitle: 'Web App',
+    context:
+      'Full-stack development of a real estate analytics platform. Worked on all aspects of the application from frontend to backend, including infrastructure and deployment.',
+    tasks: [
+      'Full-stack development',
+      'Frontend integration',
+      'Email system implementation',
+      'Authentication and permissions',
+      'Resource operations (CRUD)',
+      'Deployment and Docker configuration',
+    ],
+    tech: ['ReactJS', 'TypeScript', 'NodeJS', 'Docker', 'PostgreSQL'],
+  },
+  {
+    id: 'quanthome-ai',
+    title: 'Quanthome AI',
+    coverSrc: qhAi,
+    secSrc: qhAi2,
+    thirdSrc: qhAi3,
+    url: 'https://quanthome.com/products/qai',
+    subtitle: 'Web App',
+    context:
+      'Frontend development and integration for an AI-powered analytics tool. Focused on creating an intuitive user interface for complex AI features.',
+    tasks: [
+      'Frontend development',
+      'UI/UX integration',
+      'Component implementation',
+    ],
+    tech: ['ReactJS', 'TypeScript', 'SCSS'],
+  },
   {
     id: 'greubel-forsey',
     title: 'Greubel Forsey',
