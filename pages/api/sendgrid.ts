@@ -1,6 +1,7 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
 import sendgrid from '@sendgrid/mail';
 
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY!);
 
 // Minimum time (in ms) user should spend on form - too fast = bot
 const MIN_FORM_TIME_MS = 3000; // 3 seconds
@@ -21,25 +22,12 @@ const SPAM_KEYWORDS = [
   'bitcoin investment',
 ];
 
-async function sendEmail(
-  req: {
-    body: {
-      subject: string;
-      fullname: string;
-      email: string;
-      message: string;
-      website?: string; // honeypot field
-      formLoadTime?: number; // timestamp when form loaded
-    };
-  },
-  res: {
-    status: (arg0: number) => {
-      (): any;
-      new (): any;
-      json: { (arg0: { error: any }): any; new (): any };
-    };
+async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
-) {
+
   const { subject, fullname, email, message, website, formLoadTime } = req.body;
 
   // Spam check 1: Honeypot field should be empty
@@ -52,13 +40,17 @@ async function sendEmail(
   if (formLoadTime) {
     const timeSpent = Date.now() - formLoadTime;
     if (timeSpent < MIN_FORM_TIME_MS) {
-      return res.status(400).json({ error: 'Please take your time filling out the form.' });
+      return res
+        .status(400)
+        .json({ error: 'Please take your time filling out the form.' });
     }
   }
 
   // Spam check 3: Validate email format
   if (!EMAIL_REGEX.test(email)) {
-    return res.status(400).json({ error: 'Please enter a valid email address.' });
+    return res
+      .status(400)
+      .json({ error: 'Please enter a valid email address.' });
   }
 
   // Spam check 4: Check for spam keywords
@@ -68,12 +60,16 @@ async function sendEmail(
     keyword => lowerMessage.includes(keyword) || lowerSubject.includes(keyword)
   );
   if (hasSpamKeyword) {
-    return res.status(400).json({ error: 'Your message was flagged as spam. Please revise and try again.' });
+    return res.status(400).json({
+      error: 'Your message was flagged as spam. Please revise and try again.',
+    });
   }
 
   // Spam check 5: Basic field length validation
   if (fullname.length > 100 || subject.length > 200 || message.length > 5000) {
-    return res.status(400).json({ error: 'Please keep your message within reasonable length limits.' });
+    return res.status(400).json({
+      error: 'Please keep your message within reasonable length limits.',
+    });
   }
 
   try {
