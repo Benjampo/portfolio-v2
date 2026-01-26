@@ -13,6 +13,11 @@ function Contact() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
+  // Anti-spam: honeypot field (should remain empty)
+  const [website, setWebsite] = useState('');
+  // Anti-spam: track form load time
+  const [formLoadTime] = useState(() => Date.now());
+
   const [errors, setErrors] = useState({});
 
   const [buttonText, setButtonText] = useState('Send');
@@ -61,6 +66,9 @@ function Contact() {
           fullname: fullname,
           subject: subject,
           message: message,
+          // Anti-spam fields
+          website: website, // honeypot - should be empty
+          formLoadTime: formLoadTime,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -146,6 +154,18 @@ function Contact() {
               setEmail(e.target.value);
             }}
             className='bg-gray-50  py-2 pl-4 focus:outline-none focus:rounded-md focus:ring-1 ring-blue-400 font-light text-gray-500'
+          />
+
+          {/* Honeypot field - hidden from humans, bots will fill it */}
+          <input
+            type='text'
+            name='website'
+            value={website}
+            onChange={e => setWebsite(e.target.value)}
+            className='absolute -left-[9999px] opacity-0'
+            tabIndex={-1}
+            autoComplete='off'
+            aria-hidden='true'
           />
 
           <label htmlFor='subject' className='font-normal mt-4 text-gray-400'>
