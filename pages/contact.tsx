@@ -57,7 +57,7 @@ function Contact() {
 
   return (
     <motion.section
-      className='mt-24 max-w-2xl mx-auto'
+      className='mt-24 max-w-xl mx-auto'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -70,27 +70,37 @@ function Contact() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='font-bold text-7xl md:text-9xl text-center mb-12 tracking-tight'
+        className='font-bold text-7xl md:text-9xl text-center mb-6 tracking-tight'
       >
         Contact
       </motion.h1>
 
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className='text-center text-black/25 text-sm mb-16'
+      >
+        Have a project in mind or just want to say hello?
+      </motion.p>
+
       {showSuccessMessage ? (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', damping: 20 }}
-          className='glass flex justify-center items-center h-80 flex-col'
+          className='text-center py-20'
         >
-          <motion.figure
+          <motion.div
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: 'spring', damping: 12, delay: 0.2 }}
+            className='inline-block'
           >
-            <Image src={success} width={140} height={140} alt='Success' />
-          </motion.figure>
-          <h2 className='font-bold text-lg mt-6'>Thanks for your message!</h2>
-          <p className='text-black/35 text-sm mt-1'>I will answer you as soon as I can</p>
+            <Image src={success} width={100} height={100} alt='Success' />
+          </motion.div>
+          <h2 className='font-bold text-xl mt-8'>Thanks for your message!</h2>
+          <p className='text-black/30 text-sm mt-2'>I will answer you as soon as I can</p>
         </motion.div>
       ) : (
         <motion.form
@@ -98,29 +108,25 @@ function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           onSubmit={handleSubmit}
-          className='glass glass-shimmer flex flex-col p-8 md:p-10'
+          className='flex flex-col'
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'>
-            Drop a line
-          </span>
-
-          <label className='text-xs font-medium text-black/30 mt-8'>Name</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Name</label>
           <input
             type='text'
             value={fullname}
             onChange={e => setFullname(e.target.value)}
             name='fullname'
-            className='glass-input mt-2'
+            className='clean-input'
             placeholder='Your name'
           />
 
-          <label className='text-xs font-medium text-black/30 mt-6'>Email</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Email</label>
           <input
             type='email'
             name='email'
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className='glass-input mt-2'
+            className='clean-input'
             placeholder='hello@example.com'
           />
 
@@ -136,26 +142,26 @@ function Contact() {
             aria-hidden='true'
           />
 
-          <label className='text-xs font-medium text-black/30 mt-6'>Subject</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Subject</label>
           <input
             type='text'
             name='subject'
             value={subject}
             onChange={e => setSubject(e.target.value)}
-            className='glass-input mt-2'
+            className='clean-input'
             placeholder='What is this about?'
           />
 
-          <label className='text-xs font-medium text-black/30 mt-6'>Message</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Message</label>
           <textarea
             name='message'
             value={message}
             onChange={e => setMessage(e.target.value)}
-            className='glass-input mt-2 min-h-[140px] resize-none'
+            className='clean-input min-h-[120px] resize-none'
             placeholder='Tell me more...'
           />
 
-          <div className='flex items-center justify-end mt-8'>
+          <div className='flex items-center justify-end mt-12'>
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.94 }}
@@ -179,38 +185,33 @@ function Contact() {
         </motion.form>
       )}
 
+      {/* ── Divider ── */}
+      <div className='w-12 h-[1px] bg-black/[0.06] mx-auto my-16' />
+
+      {/* ── Alt contact ── */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className='flex mt-5 flex-col md:flex-row gap-4'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className='text-center mb-8'
       >
         <motion.a
           whileHover={{ scale: 1.02 }}
-          className='glass text-center w-full p-5 cursor-pointer block'
+          className='text-xl md:text-2xl font-light text-black/20 hover:text-black transition-colors duration-500 cursor-pointer'
           href='mailto:contact@benjampo.ch'
         >
-          <span className='text-lg md:text-xl font-medium text-black/30 hover:text-black transition-colors duration-300'>
-            contact@benjampo.ch
-          </span>
+          contact@benjampo.ch
         </motion.a>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className='glass w-full p-5 flex items-center justify-center'
-        >
-          <ul className='flex gap-6'>
-            {Socials.map(social => (
-              <motion.li key={social.label} whileHover={{ scale: 1.2, y: -3 }}>
-                <a href={social.url} target='_blank' rel='noreferrer'>
-                  <Image src={social.icon} alt={social.label} height={24} width={24} />
-                </a>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
+        <ul className='flex justify-center gap-6 mt-8'>
+          {Socials.map(social => (
+            <motion.li key={social.label} whileHover={{ scale: 1.2, y: -3 }}>
+              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-20 hover:opacity-100 transition-opacity duration-300'>
+                <Image src={social.icon} alt={social.label} height={22} width={22} />
+              </a>
+            </motion.li>
+          ))}
+        </ul>
       </motion.div>
     </motion.section>
   );

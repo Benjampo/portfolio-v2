@@ -15,11 +15,7 @@ function SplitText({ text, className, delay = 0 }: { text: string; className?: s
           key={i}
           initial={{ opacity: 0, y: 60, rotateX: -90 }}
           animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{
-            duration: 0.6,
-            delay: delay + i * 0.04,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          transition={{ duration: 0.6, delay: delay + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
           className='inline-block'
           style={{ transformOrigin: 'bottom' }}
         >
@@ -54,11 +50,9 @@ function HeroImage() {
         initial={{ opacity: 0, scale: 0.6, rotateY: -30 }}
         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className='glass-strong !rounded-[28px] p-2 inline-block'
+        className='rounded-[22px] overflow-hidden inline-block'
       >
-        <div className='rounded-[22px] overflow-hidden'>
-          <Image src={benjampo} priority alt='Benjamin' />
-        </div>
+        <Image src={benjampo} priority alt='Benjamin' />
       </motion.div>
     </div>
   );
@@ -67,14 +61,14 @@ function HeroImage() {
 function ProjectItem({ project, index }: { project: any; index: number }) {
   const ref = useRef<HTMLLIElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.98]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const containerScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1, 0.98]);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [5, -5]), { stiffness: 200, damping: 25 });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-5, 5]), { stiffness: 200, damping: 25 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [4, -4]), { stiffness: 200, damping: 25 });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-4, 4]), { stiffness: 200, damping: 25 });
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
@@ -84,7 +78,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
   };
 
   return (
-    <motion.li ref={ref} style={{ y, scale }}>
+    <motion.li ref={ref} style={{ scale: containerScale }}>
       <Link href={`/work/${project.id}`}>
         <article className='group flex flex-col md:flex-row gap-6 items-start'>
           <div className='md:w-1/6 pt-2 flex flex-col gap-1'>
@@ -117,21 +111,21 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true, margin: '-100px' }}
-              className='glass-image-card cursor-pointer overflow-hidden'
+              className='image-card cursor-pointer'
             >
               <figure className='relative w-full h-[16rem] md:h-[42rem] overflow-hidden'>
-                <div className='absolute inset-0 transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]'>
-                  <Image
-                    layout='fill'
-                    objectFit='cover'
-                    src={project.coverSrc}
-                    priority={index === 0}
-                    alt={project.title}
-                    placeholder='blur'
-                  />
-                </div>
-                {/* Bottom gradient overlay */}
-                <div className='absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+                <motion.div className='absolute inset-0' style={{ y: imgY }}>
+                  <div className='absolute inset-[-20%] transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]'>
+                    <Image
+                      layout='fill'
+                      objectFit='cover'
+                      src={project.coverSrc}
+                      priority={index === 0}
+                      alt={project.title}
+                      placeholder='blur'
+                    />
+                  </div>
+                </motion.div>
               </figure>
             </motion.div>
           </div>
@@ -148,10 +142,8 @@ const Home: NextPage = () => {
         <title>Benjamin Porchet | Full-stack Developer</title>
       </Head>
 
-      {/* ── Hero ── */}
       <section className='min-h-[75vh] flex flex-col justify-center items-center gap-8'>
         <HeroImage />
-
         <div className='text-center overflow-hidden'>
           <h1 className='font-bold text-6xl md:text-8xl tracking-tight'>
             <SplitText text='Hello' delay={0.4} />
@@ -166,7 +158,6 @@ const Home: NextPage = () => {
           </motion.p>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
@@ -181,7 +172,6 @@ const Home: NextPage = () => {
         </motion.div>
       </section>
 
-      {/* ── Projects ── */}
       <section className='mt-16'>
         <motion.span
           initial={{ opacity: 0, y: 20 }}

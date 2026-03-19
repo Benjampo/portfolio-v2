@@ -9,7 +9,7 @@ import Projects from '../../data/projects';
 function ParallaxImage({ src, alt, delay, className }: { src: any; alt: string; delay: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
     <motion.div
@@ -17,18 +17,20 @@ function ParallaxImage({ src, alt, delay, className }: { src: any; alt: string; 
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`glass-image-card ${className || ''}`}
+      className={`image-card ${className || ''}`}
     >
-      <motion.figure className='relative w-full h-full overflow-hidden' style={{ y }}>
-        <Image
-          priority
-          layout='fill'
-          src={src}
-          objectFit='cover'
-          alt={alt}
-          placeholder='blur'
-        />
-      </motion.figure>
+      <figure className='relative w-full h-full overflow-hidden'>
+        <motion.div className='absolute inset-[-20%]' style={{ y }}>
+          <Image
+            priority
+            layout='fill'
+            src={src}
+            objectFit='cover'
+            alt={alt}
+            placeholder='blur'
+          />
+        </motion.div>
+      </figure>
     </motion.div>
   );
 }
@@ -42,7 +44,6 @@ export function Project({ data }: any) {
         <title>{project.title} | Benjamin Porchet</title>
       </Head>
 
-      {/* Header */}
       <div className='mb-10 relative'>
         <motion.button
           whileHover={{ scale: 1.15, x: -6 }}
@@ -65,7 +66,7 @@ export function Project({ data }: any) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'
+          className='text-[11px] uppercase tracking-[0.2em] text-black/20 font-semibold'
         >
           {project.subtitle}
         </motion.span>
@@ -85,14 +86,13 @@ export function Project({ data }: any) {
           className='flex flex-wrap gap-2'
         >
           {project.tech.map((tech: string, index: number) => (
-            <li className='glass-pill pointer-events-none text-xs' key={index}>
+            <li className='pill pointer-events-none text-xs' key={index}>
               {tech}
             </li>
           ))}
         </motion.ul>
       </div>
 
-      {/* Images */}
       <div className='grid grid-cols-4 gap-4'>
         <ParallaxImage
           src={project.coverSrc}
@@ -114,30 +114,30 @@ export function Project({ data }: any) {
         />
       </div>
 
-      {/* Content */}
-      <div className='md:flex gap-4 mt-6'>
+      {/* Content — no cards, just open layout */}
+      <div className='md:flex gap-16 mt-16'>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='glass p-7 my-3 md:w-1/2'
+          className='md:w-1/2 mb-10'
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'>Context</span>
-          <p className='text-black/50 text-base leading-relaxed mt-4'>{project.context}</p>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/15 font-semibold'>Context</span>
+          <p className='text-black/40 text-lg leading-relaxed mt-4'>{project.context}</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='glass p-7 my-3 md:w-1/2'
+          className='md:w-1/2 mb-10'
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'>What I did</span>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/15 font-semibold'>What I did</span>
           <ul className='mt-4 space-y-3'>
             {project.tasks.map((task: string, index: number) => (
-              <li className='flex items-start gap-3 text-black/50 text-base' key={index}>
-                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/20 flex-shrink-0' />
+              <li className='flex items-start gap-3 text-black/40 text-lg' key={index}>
+                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/15 flex-shrink-0' />
                 {task}
               </li>
             ))}
@@ -145,8 +145,7 @@ export function Project({ data }: any) {
         </motion.div>
       </div>
 
-      {/* CTA */}
-      <div className='flex w-full items-center justify-center mt-12 mb-8'>
+      <div className='flex w-full items-center justify-center mt-8 mb-8'>
         {project.url && (
           <motion.a
             whileHover={{ scale: 1.05 }}
@@ -160,7 +159,7 @@ export function Project({ data }: any) {
           </motion.a>
         )}
         {project.info && (
-          <span className='text-black/25 text-lg'>{project.info}</span>
+          <span className='text-black/20 text-lg'>{project.info}</span>
         )}
       </div>
     </motion.section>

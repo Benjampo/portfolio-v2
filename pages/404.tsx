@@ -13,9 +13,7 @@ function Custom404() {
           transition={{ type: 'spring', damping: 15 }}
           className='flex justify-center mb-8'
         >
-          <div className='glass-strong p-8 rounded-[32px] inline-block'>
-            <Image alt='404' src={Oops} width={140} height={140} />
-          </div>
+          <Image alt='404' src={Oops} width={120} height={120} />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +27,7 @@ function Custom404() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
-          className='text-black/30 text-sm mb-10'
+          className='text-black/25 text-sm mb-10'
         >
           This page doesn't exist.
         </motion.p>

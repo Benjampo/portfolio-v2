@@ -11,7 +11,7 @@ import Works from './../data/Works';
 import Head from 'next/head';
 import Profile from './../assets/icons/yes.png';
 
-function ProfileCard() {
+function ProfileImage() {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -35,11 +35,9 @@ function ProfileCard() {
         initial={{ opacity: 0, scale: 0.7, rotateY: -25 }}
         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
         transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className='glass-strong !rounded-[32px] p-3 inline-block'
+        className='rounded-full overflow-hidden inline-block'
       >
-        <div className='rounded-[26px] overflow-hidden'>
-          <Image src={Profile} alt='Benjamin Porchet' width={160} height={160} />
-        </div>
+        <Image src={Profile} alt='Benjamin Porchet' width={120} height={120} />
       </motion.div>
     </div>
   );
@@ -50,31 +48,27 @@ function TimelineItem({ year, title, description, type, location, index }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as const }}
-      className='flex gap-6 group'
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] as const }}
+      className='group pb-12 border-l border-black/[0.06] pl-8 relative'
     >
-      <div className='flex flex-col items-center pt-1.5'>
-        <div className='w-2 h-2 rounded-full bg-black/15 group-hover:bg-black transition-colors duration-500 flex-shrink-0' />
-        <div className='w-[1px] flex-1 bg-black/[0.06] mt-2' />
+      {/* Dot */}
+      <div className='absolute left-0 top-1 -translate-x-1/2 w-2 h-2 rounded-full bg-black/10 group-hover:bg-black group-hover:scale-150 transition-all duration-500' />
+      <div className='flex items-center gap-3 flex-wrap'>
+        <span className='text-[11px] font-semibold text-black/20 tabular-nums tracking-wider'>{year}</span>
+        {type && (
+          <span className='text-[10px] uppercase tracking-wider text-black/20 border border-black/[0.06] rounded-full px-2.5 py-0.5'>
+            {type}
+          </span>
+        )}
+        {location && (
+          <span className='text-[10px] text-black/15'>{location}</span>
+        )}
       </div>
-      <div className='pb-10'>
-        <div className='flex items-center gap-3 flex-wrap'>
-          <span className='text-[11px] font-semibold text-black/20 tabular-nums tracking-wider'>{year}</span>
-          {type && (
-            <span className='text-[10px] uppercase tracking-wider text-black/20 glass-subtle px-2 py-0.5 !rounded-full'>
-              {type}
-            </span>
-          )}
-          {location && (
-            <span className='text-[10px] text-black/15'>{location}</span>
-          )}
-        </div>
-        <h3 className='text-lg font-semibold mt-1.5'>{title}</h3>
-        <p className='text-sm text-black/40 mt-1.5 leading-relaxed max-w-lg'>{description}</p>
-      </div>
+      <h3 className='text-xl font-semibold mt-2'>{title}</h3>
+      <p className='text-sm text-black/35 mt-2 leading-relaxed max-w-lg'>{description}</p>
     </motion.div>
   );
 }
@@ -82,7 +76,7 @@ function TimelineItem({ year, title, description, type, location, index }: {
 function About() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: scrollRef, offset: ['start start', 'end end'] });
-  const titleY = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
 
   return (
     <motion.section
@@ -96,15 +90,15 @@ function About() {
       </Head>
 
       {/* ── Hero ── */}
-      <div className='min-h-[55vh] flex flex-col justify-center items-center text-center mb-20'>
-        <ProfileCard />
+      <div className='min-h-[50vh] flex flex-col justify-center items-center text-center mb-24'>
+        <ProfileImage />
 
         <motion.h1
           style={{ y: titleY }}
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className='font-bold text-7xl md:text-[10rem] leading-none tracking-tight mt-8'
+          className='font-bold text-7xl md:text-[10rem] leading-none tracking-tight mt-6'
         >
           About
         </motion.h1>
@@ -115,33 +109,29 @@ function About() {
           transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className='mt-4 flex items-center gap-3 flex-wrap justify-center'
         >
-          <span className='text-lg text-black/40 font-light'>Benjamin Porchet</span>
-          <span className='text-black/10'>|</span>
-          <span className='text-lg text-black/40 font-light'>Software Developer</span>
-          <span className='text-black/10'>|</span>
-          <span className='text-lg text-black/40 font-light'>Lausanne, Switzerland</span>
+          <span className='text-base text-black/35 font-light'>Software Developer</span>
+          <span className='w-1 h-1 rounded-full bg-black/10' />
+          <span className='text-base text-black/35 font-light'>Lausanne, Switzerland</span>
         </motion.div>
       </div>
 
       {/* ── Bio ── */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='glass glass-shimmer p-8 md:p-12 mb-6 max-w-3xl mx-auto'
+        className='max-w-2xl mx-auto mb-32'
       >
-        <p className='text-base md:text-lg text-black/50 leading-[1.8] font-light'>
+        <p className='text-lg md:text-xl text-black/40 leading-[1.9] font-light'>
           Graduated in Software Development from the Centre professionnel du Nord vaudois,
           I am currently working as a software developer at Jobtrek, where I contribute to building
           tools that support young people in their professional integration.
         </p>
-        <p className='text-base md:text-lg text-black/50 leading-[1.8] font-light mt-4'>
+        <p className='text-lg md:text-xl text-black/40 leading-[1.9] font-light mt-6'>
           Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome,
-          I have built strong skills in React, Node.js, Python, and cloud services. My background also
-          includes frontend work at Maven Sàrl and a role as assistant archivist at the University of Lausanne.
-          Bilingual in French and English, I am committed to creating innovative technological solutions
-          tailored to users' needs.
+          I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French
+          and English, I am committed to creating innovative technological solutions tailored to users' needs.
         </p>
       </motion.div>
 
@@ -151,21 +141,21 @@ function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='glass p-8 md:p-12 mb-6 text-center'
+        className='text-center mb-32'
       >
-        <span className='text-[11px] uppercase tracking-[0.25em] text-black/20 font-semibold'>Currently at</span>
+        <span className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold'>Currently at</span>
         <motion.a
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className='block font-bold text-6xl md:text-8xl mt-3 hover:opacity-30 transition-opacity duration-500 cursor-pointer'
+          className='block font-bold text-7xl md:text-9xl mt-4 hover:opacity-25 transition-opacity duration-500 cursor-pointer tracking-tight'
           href='https://www.jobtrek.ch/'
           target='_blank'
           rel='noreferrer'
         >
           jobtrek
         </motion.a>
-        <p className='text-sm text-black/25 mt-3 max-w-md mx-auto'>
-          A foundation helping young people in difficulty find their path through professional integration programs.
+        <p className='text-sm text-black/20 mt-4 max-w-sm mx-auto leading-relaxed'>
+          A foundation helping young people in difficulty find their path through professional integration.
         </p>
       </motion.div>
 
@@ -175,21 +165,21 @@ function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='glass p-8 md:p-12 mb-20'
+        className='mb-32'
       >
-        <span className='text-[11px] uppercase tracking-[0.25em] text-black/20 font-semibold block mb-6'>Stack</span>
-        <ul className='flex flex-wrap gap-2'>
+        <span className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-8'>Stack</span>
+        <ul className='flex flex-wrap gap-2.5'>
           {Techs.map((tech, index) => (
             <motion.li
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.03, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.08, y: -2 }}
+              transition={{ delay: index * 0.025, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.08, y: -3 }}
               whileTap={{ scale: 0.94 }}
             >
-              <a href={tech.url} rel='noreferrer' target='_blank' className='glass-pill block cursor-pointer'>
+              <a href={tech.url} rel='noreferrer' target='_blank' className='pill block cursor-pointer'>
                 {tech.label}
               </a>
             </motion.li>
@@ -197,20 +187,23 @@ function About() {
         </ul>
       </motion.div>
 
+      {/* ── Divider ── */}
+      <div className='w-12 h-[1px] bg-black/[0.06] mx-auto mb-32' />
+
       {/* ── Timeline ── */}
-      <div className='grid md:grid-cols-2 gap-x-16 gap-y-0 mb-20'>
+      <div className='grid md:grid-cols-2 gap-x-20 gap-y-0 mb-32'>
         <div>
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/20 font-semibold block mb-8'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-10'
           >
             Experience
           </motion.span>
           {Works.map((work, i) => (
             <TimelineItem
-              key={work.id}
+              key={work.id + work.year}
               year={work.year}
               title={work.title}
               description={work.description}
@@ -226,7 +219,7 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/20 font-semibold block mb-8'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-10'
           >
             Education
           </motion.span>
@@ -240,16 +233,15 @@ function About() {
             />
           ))}
 
-          {/* Languages */}
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/20 font-semibold block mt-8 mb-6'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mt-6 mb-8'
           >
             Languages
           </motion.span>
-          <div className='flex flex-wrap gap-3'>
+          <div className='flex gap-8'>
             {[
               { lang: 'French', level: 'Native' },
               { lang: 'English', level: 'Professional' },
@@ -260,24 +252,23 @@ function About() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className='glass-subtle px-5 py-3 flex flex-col'
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className='text-sm font-semibold'>{item.lang}</span>
-                <span className='text-[11px] text-black/25'>{item.level}</span>
+                <span className='text-sm font-semibold block'>{item.lang}</span>
+                <span className='text-[11px] text-black/20'>{item.level}</span>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ── Bottom Strip ── */}
+      {/* ── Bottom ── */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className='glass p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6'
+        className='flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-black/[0.06]'
       >
         <motion.a
           whileHover={{ scale: 1.03 }}
@@ -296,8 +287,8 @@ function About() {
         <ul className='flex items-center gap-6'>
           {Socials.map((social, index) => (
             <motion.li whileHover={{ scale: 1.2, y: -3 }} key={index}>
-              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-30 hover:opacity-100 transition-opacity duration-300'>
-                <Image alt={social.label} src={social.icon} width={24} />
+              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-25 hover:opacity-100 transition-opacity duration-300'>
+                <Image alt={social.label} src={social.icon} width={22} />
               </a>
             </motion.li>
           ))}
@@ -307,7 +298,7 @@ function About() {
           <motion.span
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className='text-sm font-medium text-black/30 hover:text-black transition-colors duration-300 cursor-pointer'
+            className='text-sm font-medium text-black/25 hover:text-black transition-colors duration-300 cursor-pointer'
           >
             Get in touch &rarr;
           </motion.span>

@@ -98,27 +98,7 @@ body {
   50% { transform: translate(60px, -70px) scale(1.08); }
 }
 
-/* ── Glass ── */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.04),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass:hover {
-  background: var(--glass-bg-hover);
-  border-color: var(--glass-border-hover);
-  box-shadow:
-    0 16px 60px rgba(0, 0, 0, 0.07),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.9);
-}
-
+/* ── Glass (header only) ── */
 .glass-strong {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(60px) saturate(200%);
@@ -130,101 +110,60 @@ body {
     inset 0 0.5px 0 rgba(255, 255, 255, 0.9);
 }
 
-.glass-subtle {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  border-radius: 16px;
-}
-
 /* ── 3D ── */
 .perspective-container {
   perspective: 1000px;
 }
 
-/* ── Glass Image Card ── */
-.glass-image-card {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 24px;
+/* ── Image Card ── */
+.image-card {
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.05),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-image-card:hover {
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.1),
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.9);
+.image-card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
-/* ── Glass Input ── */
-.glass-input {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 16px;
-  padding: 16px 20px;
+/* ── Input ── */
+.clean-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 16px 0;
   color: #000;
   font-size: 1rem;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
+  border-radius: 0;
 }
 
-.glass-input::placeholder {
-  color: rgba(0, 0, 0, 0.25);
+.clean-input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
 }
 
-.glass-input:focus {
-  border-color: rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.03);
+.clean-input:focus {
+  border-bottom-color: rgba(0, 0, 0, 0.4);
 }
 
-/* ── Glass Pill ── */
-.glass-pill {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* ── Pill ── */
+.pill {
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 50px;
   padding: 8px 20px;
   font-size: 0.8rem;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.45);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
 }
 
-.glass-pill:hover {
+.pill:hover {
   background: #000;
   border-color: #000;
   color: #fff;
-}
-
-/* ── Shimmer ── */
-.glass-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.glass-shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  animation: shimmer 8s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { left: -50%; }
-  50% { left: 100%; }
 }
 
 /* ── Noise overlay ── */
@@ -238,11 +177,6 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
-}
-
-/* ── Text reveal util ── */
-.text-reveal {
-  clip-path: inset(0 0 0 0);
 }
 
 /* ── Legacy override ── */

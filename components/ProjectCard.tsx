@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -16,17 +16,13 @@ type CardProps = {
 
 function ProjectCard({ project }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const imgY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), {
-    stiffness: 200,
-    damping: 25,
-  });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), {
-    stiffness: 200,
-    damping: 25,
-  });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), { stiffness: 200, damping: 25 });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), { stiffness: 200, damping: 25 });
   const z = useSpring(0, { stiffness: 200, damping: 25 });
 
   const handleMouse = (e: React.MouseEvent) => {
@@ -52,18 +48,20 @@ function ProjectCard({ project }: CardProps) {
         style={{ rotateX, rotateY, translateZ: z, transformStyle: 'preserve-3d' }}
       >
         <Link href={`/work/${project.id}`}>
-          <article className='glass-image-card cursor-pointer group'>
+          <article className='image-card cursor-pointer group'>
             <figure className='relative w-full h-[16rem] md:h-[30rem] overflow-hidden'>
-              <div className='absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105'>
-                <Image
-                  layout='fill'
-                  objectFit='cover'
-                  src={project.coverSrc}
-                  alt={`${project.title}`}
-                  placeholder='blur'
-                  priority={true}
-                />
-              </div>
+              <motion.div className='absolute inset-[-20%]' style={{ y: imgY }}>
+                <div className='absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105'>
+                  <Image
+                    layout='fill'
+                    objectFit='cover'
+                    src={project.coverSrc}
+                    alt={project.title}
+                    placeholder='blur'
+                    priority={true}
+                  />
+                </div>
+              </motion.div>
             </figure>
           </article>
         </Link>
