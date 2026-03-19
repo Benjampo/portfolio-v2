@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Oops from './../assets/icons/oops.png';
 import Link from 'next/link';
 

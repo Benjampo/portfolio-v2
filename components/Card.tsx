@@ -4,13 +4,13 @@ function Card(props: any) {
     hidden: {
       opacity: 0,
       y: 25,
-      transition: { duration: 0.5, ease: 'easeInOut' },
+      transition: { duration: 0.5, ease: 'easeInOut' as const },
     },
 
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeInOut' },
+      transition: { duration: 0.5, ease: 'easeInOut' as const },
     },
   };
   return (

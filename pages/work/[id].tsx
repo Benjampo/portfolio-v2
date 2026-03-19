@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Router from 'next/router';
 import Projects from '../../data/projects';
 

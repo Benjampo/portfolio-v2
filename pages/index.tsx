@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import Projects from '../data/projects';
 import benjampo from './../assets/benjampo_gif.gif';

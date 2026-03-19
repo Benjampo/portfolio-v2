@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

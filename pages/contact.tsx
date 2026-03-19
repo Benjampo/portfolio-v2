@@ -1,6 +1,6 @@
 import { PaperAirplaneIcon } from '@heroicons/react/20/solid';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { useState } from 'react';
 import Socials from './../data/Socials';
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
@@ -13,7 +13,7 @@ function Footer() {
           className='absolute transition-all ml-auto mr-auto left-1/2 -translate-x-1/2 -translate-y-1/2 top-0 bg-black h-16 w-16 flex items-center justify-center rounded-3xl hover:rounded-full hove:ease-in'
           href='mailto:contact@benjampo.ch'
         >
-          <Image width={'24px'} height={'24px'} alt='Mail icon' src={mail} />
+          <Image width={24} height={24} alt='Mail icon' src={mail} />
         </motion.a>
         <nav>
           <ul className='h-full mt-5 flex flex-row items-center justify-center gap-5 '>
