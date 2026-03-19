@@ -14,17 +14,11 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang='en'>
         <Head>
           <meta
             name='description'
-            content="  Front-end Developer applications oriented . 23 years old, I am passionate
-                        about creating and implementing solutions that make users lives easier.{' '}
-                        I started my journey as a Front-end Developer
-                        in 2017, while studying at CPNV in Switzerland. In 2020 I did a bootcamp of
-                        coding to improve my backend skills.
-                        After that I started a new job at maven
-                        while doing little projects for other teams and clients."
+            content="Full-stack Developer specialized in front-end. Passionate about creating and implementing solutions that make users lives easier."
           />
           <link
             rel='apple-touch-icon'
@@ -58,17 +52,9 @@ class MyDocument extends Document {
             crossOrigin='anonymous'
           />
           <link
-            rel='preconnect'
-            href='https://fonts.gstatic.com'
-            crossOrigin='anonymous'
+            href='https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap'
+            rel='stylesheet'
           />
-
-          <noscript>
-            <link
-              href='https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap'
-              rel='stylesheet'
-            />
-          </noscript>
         </Head>
         <body>
           <Main />

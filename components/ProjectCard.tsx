@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from "next/legacy/image";
 import Link from 'next/link';
+import { useRef } from 'react';
+
 type CardProps = {
   span: string;
   row: string;
@@ -12,28 +14,61 @@ type CardProps = {
   };
 };
 
-function ProjectCard({ project, span, row }: CardProps) {
+function ProjectCard({ project }: CardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), {
+    stiffness: 200,
+    damping: 25,
+  });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), {
+    stiffness: 200,
+    damping: 25,
+  });
+  const z = useSpring(0, { stiffness: 200, damping: 25 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    mx.set((e.clientX - rect.left) / rect.width - 0.5);
+    my.set((e.clientY - rect.top) / rect.height - 0.5);
+    z.set(30);
+  };
+
+  const handleLeave = () => {
+    mx.set(0);
+    my.set(0);
+    z.set(0);
+  };
+
   return (
-    <motion.div whileHover={{ scale: 1.02 }}>
-      <Link key={project.id} href={`/work/${project.id}`}>
-        <article className='border-2 border-blue-200 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden my-shadow'>
-          <figure className='h-64 md:h-96'>
-            <Image
-              layout={'fill'}
-              objectFit={'cover'}
-              src={project.coverSrc}
-              alt={`${project.title} main image`}
-              placeholder='blur'
-              priority={true}
-            />
-          </figure>
-          <div className='py-3'>
-            <h1 className='font-medium text-base'>{project.title}</h1>
-            <span className='text-gray-400 text-base'>{project.subtitle}</span>
-          </div>
-        </article>
-      </Link>
-    </motion.div>
+    <div className='perspective-container'>
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouse}
+        onMouseLeave={handleLeave}
+        style={{ rotateX, rotateY, translateZ: z, transformStyle: 'preserve-3d' }}
+      >
+        <Link href={`/work/${project.id}`}>
+          <article className='glass-image-card cursor-pointer group'>
+            <figure className='relative w-full h-[16rem] md:h-[30rem] overflow-hidden'>
+              <div className='absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105'>
+                <Image
+                  layout='fill'
+                  objectFit='cover'
+                  src={project.coverSrc}
+                  alt={`${project.title}`}
+                  placeholder='blur'
+                  priority={true}
+                />
+              </div>
+            </figure>
+          </article>
+        </Link>
+      </motion.div>
+    </div>
   );
 }
 

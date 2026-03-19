@@ -4,46 +4,52 @@ import Link from 'next/link';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
 import mail from './../assets/images/mail.png';
+
 function Footer() {
   return (
-    <footer className='bg-white h-100 relative bottom-0 pt-12 pb-24 '>
-      <div className='md:max-w-screen-2xl md:mx-auto '>
-        <motion.a
-          whileHover={{ borderRadius: '50%' }}
-          className='absolute transition-all ml-auto mr-auto left-1/2 -translate-x-1/2 -translate-y-1/2 top-0 bg-black h-16 w-16 flex items-center justify-center rounded-3xl hover:rounded-full hove:ease-in'
-          href='mailto:contact@benjampo.ch'
-        >
-          <Image width={24} height={24} alt='Mail icon' src={mail} />
-        </motion.a>
+    <footer className='relative pt-20 pb-12 px-6'>
+      <div className='max-w-[1400px] mx-auto'>
+        <div className='flex justify-center mb-10'>
+          <motion.a
+            whileHover={{ scale: 1.1, rotate: -8 }}
+            whileTap={{ scale: 0.9 }}
+            className='w-14 h-14 bg-black rounded-2xl flex items-center justify-center cursor-pointer'
+            href='mailto:contact@benjampo.ch'
+          >
+            <Image width={18} height={18} alt='Mail' src={mail} />
+          </motion.a>
+        </div>
+
         <nav>
-          <ul className='h-full mt-5 flex flex-row items-center justify-center gap-5 '>
+          <ul className='flex items-center justify-center gap-8'>
             {MenuItems.map(item => (
-              <li key={item.label} className=''>
-                <Link href={item.url}>{item.label}</Link>
+              <li key={item.label}>
+                <Link href={item.url}>
+                  <span className='text-xs uppercase tracking-widest text-black/30 hover:text-black transition-colors duration-300 cursor-pointer'>
+                    {item.label}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div>
-          <ul className='flex flex-row justify-center gap-5 '>
+
+        <div className='mt-8'>
+          <ul className='flex justify-center gap-5'>
             {Socials.map((social, index) => (
               <motion.li
-                className='cursor-pointer'
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.2, y: -3 }}
                 key={index}
               >
                 <a href={social.url} target='_blank' rel='noreferrer'>
-                  <Image alt={social.label} src={social.icon} width={24} />
+                  <Image alt={social.label} src={social.icon} width={20} />
                 </a>
               </motion.li>
             ))}
           </ul>
-          <div className='text-center mx-6 text-gray-300 md:flex md:flex-row md:justify-between'>
-            <span className='block'>
-              designed and coded with ❤️ by me in 2022
-            </span>
-            <span className='block'>© 2025 Benjamin Porchet</span>
-          </div>
+          <p className='text-center mt-8 text-[11px] text-black/20 tracking-wide'>
+            2025 Benjamin Porchet
+          </p>
         </div>
       </div>
     </footer>

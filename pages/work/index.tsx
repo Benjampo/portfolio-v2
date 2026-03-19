@@ -2,65 +2,44 @@ import { motion } from 'framer-motion';
 import Head from 'next/head';
 import ProjectCard from '../../components/ProjectCard';
 import Projects from '../../data/projects';
-function Index() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
 
-      transition: {
-        delay: 0.25,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-  const item = {
-    hidden: { opacity: 0, y: 25 },
-    show: { opacity: 1, y: 0 },
-  };
+function Index() {
   return (
     <motion.section>
       <Head>
-        <title>Benjamin Porchet | Full-stack Developper</title>
+        <title>Benjamin Porchet | Work</title>
       </Head>
+
       <motion.h1
-        initial={{ opacity: 0 }}
-        transition={{ duration: 0.3, delay: 0.2, ease: 'easeInOut' }}
-        animate={{ opacity: 1 }}
-        className='font-bold text-6xl text-center grid-snap-2 my-6 xl:box xl:col-start-1 xl:col-end-3 xl:text-left xl:text-9xl'
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className='font-bold text-7xl md:text-[11rem] leading-none tracking-tight mb-16'
       >
         Work
       </motion.h1>
-      <motion.ul
-        variants={container}
-        initial='hidden'
-        animate='show'
-        className='grid  lg:grid-cols-2  lg:grid-rows-2 gap-12'
-      >
+
+      <motion.ul className='grid lg:grid-cols-2 gap-10'>
         {Projects.map((project: any, index: number) => (
           <motion.li
-            className='cursor-pointer'
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
+            key={project.id}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 0.2,
-              delay: 0.15 * index,
-              ease: 'easeInOut',
+              duration: 0.7,
+              delay: 0.08 * index,
+              ease: [0.16, 1, 0.3, 1],
             }}
           >
-            <h1 className='text-gray-400 text-base font-normal'>
-              {project.title}
-            </h1>
-            <h2 className='text-gray-300 text-base font-normal mb-4'>
-              {project.subtitle}
-            </h2>
-            <ProjectCard
-              row={''}
-              span={'box'}
-              key={project.id}
-              project={project}
-            />
+            <div className='mb-3'>
+              <span className='text-xs font-semibold uppercase tracking-wider text-black/30'>
+                {project.title}
+              </span>
+              <p className='text-[11px] text-black/20'>
+                {project.subtitle}
+              </p>
+            </div>
+            <ProjectCard row='' span='box' project={project} />
           </motion.li>
         ))}
       </motion.ul>

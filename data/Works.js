@@ -1,29 +1,48 @@
 const Works = [
   {
-    id: '3',
+    id: '5',
     title: 'Jobtrek',
     description:
-      'Working as a full-stack developer at jobtrek',
+      'Application developer building software for a foundation helping young people with professional integration.',
     year: '2026-present',
+    type: 'Part-time',
+    location: 'Lausanne',
   },
   {
-    id: '2',
+    id: '4',
     title: 'Quanthome',
     description:
-      'Building a data platform that parallels the innovation and intricacy seen in groundbreaking AI projects',
-    year: '2023-2025',
+      'Full-stack software engineer at an early-stage startup. Built features end to end, designed REST APIs, wrote reliable code in React, Node.js and FastAPI, containerized services with Docker, and helped set up CI/CD.',
+    year: '2023-2026',
+    type: 'Full-time',
+    location: 'Lausanne',
+  },
+  {
+    id: '3',
+    title: 'Université de Lausanne',
+    description:
+      'Civil service as assistant archivist. Worked on archival projects, structured inventories, and built a Python script to automate digital archival format handling.',
+    year: '2024',
+    type: 'Civil service',
+    location: 'Lausanne',
   },
   {
     id: '2',
-    title: 'Maven Sarl',
-    description: 'Building websites and web apps at maven',
-    year: '2022',
+    title: 'Maven Sàrl',
+    description:
+      'Frontend developer working on client projects. Built frontends with Vue.js, React and Twig, developed backends in PHP and Laravel, coordinated with clients and designers.',
+    year: '2021-2022',
+    type: 'Full-time',
+    location: 'Saint-Sulpice',
   },
   {
     id: '1',
     title: 'YantraConnection',
-    description: 'Managing E-commerce and website at YantraConnection',
-    year: '2020',
+    description:
+      'Internship creating and maintaining an e-commerce website from scratch, handling design, UX and development.',
+    year: '2020-2021',
+    type: 'Internship',
+    location: 'Montreux',
   },
 ];
 

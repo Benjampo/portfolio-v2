@@ -1,14 +1,16 @@
 const Studies = [
   {
-    id: '3',
+    id: '2',
     title: 'Le Wagon',
-    description: 'Learning Ruby on Rails at le wagon bootcamp',
-    year: '2020',
+    description:
+      'Fullstack web development bootcamp (Batch #580, Lausanne). Built production-ready apps with Ruby on Rails, JavaScript, and SQL. Practiced agile methodologies from ideation to deployment.',
+    year: '2021',
   },
   {
-    id: '4',
-    title: 'CFC Mediamatician',
-    description: 'Apprenticeship as Mediamatician at CPNV',
+    id: '1',
+    title: 'CPNV',
+    description:
+      'CFC Mediamatician with a focus on web development. Designed and developed websites using HTML, CSS, JavaScript, and PHP. Gained a solid foundation in both creative and technical skills.',
     year: '2017-2019',
   },
 ];

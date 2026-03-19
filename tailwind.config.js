@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Outfit', ...defaultTheme.fontFamily.sans],
+        sans: ['Sora', ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -1,149 +1,180 @@
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Router from 'next/router';
+import { useRef } from 'react';
 import Projects from '../../data/projects';
 
+function ParallaxImage({ src, alt, delay, className }: { src: any; alt: string; delay: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`glass-image-card ${className || ''}`}
+    >
+      <motion.figure className='relative w-full h-full overflow-hidden' style={{ y }}>
+        <Image
+          priority
+          layout='fill'
+          src={src}
+          objectFit='cover'
+          alt={alt}
+          placeholder='blur'
+        />
+      </motion.figure>
+    </motion.div>
+  );
+}
+
 export function Project({ data }: any) {
+  const project = data[0];
+
   return (
     <motion.section className='my-4'>
       <Head>
-        <title>Benjamin Porchet | Full-stack Developper</title>
+        <title>{project.title} | Benjamin Porchet</title>
       </Head>
-      <div className='mb-4 relative'>
-        <button
-          className='absolute w-7 top-0 left-0 cursor-pointer -translate-x-[200%]'
+
+      {/* Header */}
+      <div className='mb-10 relative'>
+        <motion.button
+          whileHover={{ scale: 1.15, x: -6 }}
+          whileTap={{ scale: 0.9 }}
+          className='absolute w-7 top-1 left-0 cursor-pointer -translate-x-[160%] text-black/30 hover:text-black transition-colors hidden md:block'
           onClick={() => Router.back()}
         >
-          <ArrowLeftIcon className='text-gray-400' />
-        </button>
-        <motion.h2 className='text-gray-400 text-xl font-medium'>
-          {data[0].subtitle}
-        </motion.h2>
-        <motion.h1 className='font-bold mb-2 text-4xl'>
-          {data[0].title}
+          <ArrowLeftIcon />
+        </motion.button>
+
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          className='mb-4 text-black/30 text-sm md:hidden'
+          onClick={() => Router.back()}
+        >
+          Back
+        </motion.button>
+
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'
+        >
+          {project.subtitle}
+        </motion.span>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className='font-bold text-4xl md:text-6xl tracking-tight mt-2 mb-4'
+        >
+          {project.title}
         </motion.h1>
-        <ul className='flex flex-wrap gap-1'>
-          {data[0].tech.map((tech: string, index: number) => (
-            <li
-              className='border rounded-full text-gray-300 px-3 w-fit pointer-events-none '
-              key={index}
-            >
+
+        <motion.ul
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className='flex flex-wrap gap-2'
+        >
+          {project.tech.map((tech: string, index: number) => (
+            <li className='glass-pill pointer-events-none text-xs' key={index}>
               {tech}
             </li>
           ))}
-        </ul>
-      </div>
-      <div className='grid grid-cols-4 gap-4'>
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='border-2 border-blue-200 col-span-4  relative w-full h-[15rem] md:h-[40rem] rounded-xl my-shadow overflow-hidden'
-        >
-          <figure className='absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full'>
-            <Image
-              loading='eager'
-              priority={true}
-              src={data[0].coverSrc}
-              alt={`Main image of ${data[0].title}`}
-              objectFit={'cover'}
-              layout={'fill'}
-              placeholder='blur'
-            />
-          </figure>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='border-2 border-blue-200 col-span-4 lg:col-span-2  relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden'
-        >
-          <figure className='absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full'>
-            <Image
-              priority={true}
-              layout={'fill'}
-              src={data[0].secSrc}
-              objectFit={'cover'}
-              alt={`Second media of ${data[0].title}`}
-              placeholder='blur'
-            />
-          </figure>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='border-2 border-blue-200 col-span-4 lg:col-span-2 relative w-full h-[15rem] md:h-[30rem] rounded-xl my-shadow overflow-hidden'
-        >
-          <figure className='absolute top-0 left-0 right-0 bottom-0 cursor-pointer w-full h-full'>
-            <Image
-              priority={true}
-              layout={'fill'}
-              src={data[0].thirdSrc}
-              objectFit={'cover'}
-              alt={`Third media of ${data[0].title}`}
-              placeholder='blur'
-            />
-          </figure>
-        </motion.div>
+        </motion.ul>
       </div>
 
-      <div className='md:flex my-5 '>
-        <div className='my-4  pr-7 md:w-1/2'>
-          <h3 className='font-medium text-gray-400 text-xl  mb-3'>
-            The context
-          </h3>
-          <p className='font-normal text-xl'>{data[0].context}</p>
-        </div>
-        <div className='my-4  md:w-1/2'>
-          <h3 className='font-medium text-gray-400 text-xl mb-3'>What I did</h3>
-          <ul className='list-disc'>
-            {data[0].tasks.map((task: string, index: number) => (
-              <li className='ml-6 font-normal text-xl' key={index}>
+      {/* Images */}
+      <div className='grid grid-cols-4 gap-4'>
+        <ParallaxImage
+          src={project.coverSrc}
+          alt={`Main image of ${project.title}`}
+          delay={0.3}
+          className='col-span-4 h-[16rem] md:h-[42rem]'
+        />
+        <ParallaxImage
+          src={project.secSrc}
+          alt={`Second image of ${project.title}`}
+          delay={0.4}
+          className='col-span-4 lg:col-span-2 h-[14rem] md:h-[30rem]'
+        />
+        <ParallaxImage
+          src={project.thirdSrc}
+          alt={`Third image of ${project.title}`}
+          delay={0.5}
+          className='col-span-4 lg:col-span-2 h-[14rem] md:h-[30rem]'
+        />
+      </div>
+
+      {/* Content */}
+      <div className='md:flex gap-4 mt-6'>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className='glass p-7 my-3 md:w-1/2'
+        >
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'>Context</span>
+          <p className='text-black/50 text-base leading-relaxed mt-4'>{project.context}</p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className='glass p-7 my-3 md:w-1/2'
+        >
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/25 font-semibold'>What I did</span>
+          <ul className='mt-4 space-y-3'>
+            {project.tasks.map((task: string, index: number) => (
+              <li className='flex items-start gap-3 text-black/50 text-base' key={index}>
+                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/20 flex-shrink-0' />
                 {task}
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       </div>
-      <div className='flex w-full  items-center justify-center'>
-        {data[0].url && (
-          <a
-            className='text-gray-400 my-12 md:mx-24  text-2xl underline underline-offset-4'
-            href={data[0].url}
+
+      {/* CTA */}
+      <div className='flex w-full items-center justify-center mt-12 mb-8'>
+        {project.url && (
+          <motion.a
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className='bg-black text-white text-sm font-medium px-8 py-4 rounded-full inline-block'
+            href={project.url}
             target='_blank'
             rel='noreferrer'
           >
-            Access website
-          </a>
+            Visit website
+          </motion.a>
         )}
-        {data[0].info && (
-          <span className='text-gray-300 mt-24 mb-24 text-2xl '>
-            {data[0].info}
-          </span>
+        {project.info && (
+          <span className='text-black/25 text-lg'>{project.info}</span>
         )}
       </div>
     </motion.section>
   );
 }
-export async function getStaticPaths() {
-  const paths = Projects.map(item => ({
-    params: { id: item.id },
-  }));
 
+export async function getStaticPaths() {
+  const paths = Projects.map(item => ({ params: { id: item.id } }));
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: any) {
-  const id = params.id;
-  const data = Projects.filter(item => {
-    if (item.id === id) {
-      return item;
-    }
-  });
-  // Pass post data to the page via props
+  const data = Projects.filter(item => item.id === params.id);
   return { props: { data } };
 }
+
 export default Project;

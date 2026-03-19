@@ -1,43 +1,31 @@
 const Techs = [
   {
-    label: 'HTML',
-    url: 'https://developer.mozilla.org/fr/docs/Web/HTML',
+    label: 'React',
+    url: 'https://reactjs.org/',
   },
   {
-    label: 'Twig',
-    url: 'https://twig.symfony.com/',
-  },
-  {
-    label: 'CSS',
-    url: 'https://developer.mozilla.org/fr/docs/Web/CSS',
-  },
-  {
-    label: 'SCSS',
-    url: 'https://sass-lang.com/',
-  },
-  {
-    label: 'TailwindCSS',
-    url: 'https://tailwindcss.com/',
-  },
-  {
-    label: 'Javascript',
-    url: 'https://developer.mozilla.org/fr/docs/Web/JavaScript',
+    label: 'Next.js',
+    url: 'https://nextjs.org/',
   },
   {
     label: 'TypeScript',
     url: 'https://www.typescriptlang.org/',
   },
   {
-    label: 'NodeJS',
+    label: 'Node.js',
     url: 'https://nodejs.org/en',
   },
   {
-    label: 'React',
-    url: 'https://reactjs.org/',
+    label: 'Python',
+    url: 'https://www.python.org/',
   },
   {
-    label: 'NextJs',
-    url: 'https://nextjs.org/',
+    label: 'FastAPI',
+    url: 'https://fastapi.tiangolo.com/',
+  },
+  {
+    label: 'JavaScript',
+    url: 'https://developer.mozilla.org/fr/docs/Web/JavaScript',
   },
   {
     label: 'PHP',
@@ -48,6 +36,26 @@ const Techs = [
     url: 'https://laravel.com/',
   },
   {
+    label: 'Vue.js',
+    url: 'https://vuejs.org/',
+  },
+  {
+    label: 'TailwindCSS',
+    url: 'https://tailwindcss.com/',
+  },
+  {
+    label: 'SCSS',
+    url: 'https://sass-lang.com/',
+  },
+  {
+    label: 'Docker',
+    url: 'https://www.docker.com/',
+  },
+  {
+    label: 'AWS',
+    url: 'https://aws.amazon.com/',
+  },
+  {
     label: 'SQL',
     url: 'https://www.postgresql.org/',
   },
@@ -56,16 +64,12 @@ const Techs = [
     url: 'https://git-scm.com/',
   },
   {
+    label: 'REST APIs',
+    url: 'https://restfulapi.net/',
+  },
+  {
     label: 'Figma',
     url: 'https://www.figma.com/',
-  },
-  {
-    label: 'Python',
-    url: 'https://www.python.org/',
-  },
-  {
-    label: 'Docker',
-    url: 'https://www.docker.com/',
   },
 ];
 export default Techs;

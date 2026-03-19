@@ -1,100 +1,94 @@
 import { ArrowLeftIcon, Bars3BottomLeftIcon } from '@heroicons/react/20/solid';
+import { motion } from 'framer-motion';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import logo from './../assets/images/logo.svg';
 import MenuItems from './../data/Menu';
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const router = useRouter();
-  const handleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const handleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className=' fixed z-50 top-0 w-full h-20 bg-white p-5 px-5 md:px-64 md:left-1/2 md:-translate-x-1/2'>
-      {/* mobile nav */}
-      <div className='md:max-w-screen-2xl md:mx-auto px-5'>
+    <header className='fixed z-50 top-5 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] md:w-auto'>
+      <motion.div
+        initial={{ opacity: 0, y: -30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className='glass-strong !rounded-full px-6 py-3'
+      >
+        {/* Mobile */}
         <nav className='flex relative justify-between w-full md:hidden items-center'>
-          <Bars3BottomLeftIcon className='w-10' onClick={handleMenu} />
+          <Bars3BottomLeftIcon className='w-7 cursor-pointer' onClick={handleMenu} />
           <Link href='/'>
-            <figure className='absolute right-0 cursor-pointer'>
-              <Image width={36} height={36} src={logo} alt='Benjampo Logo' />
+            <figure className='cursor-pointer'>
+              <Image width={28} height={28} src={logo} alt='Logo' />
             </figure>
           </Link>
 
-          <div
-            className={
-              'top-0  left-0 w-screen h-screen bg-white z-10 p-5 transform transition-transform ease-in-out ' +
-              (isMenuOpen ? 'fixed ' : 'fixed -translate-x-[100%] ')
-            }
+          <motion.div
+            initial={false}
+            animate={isMenuOpen ? { x: 0, opacity: 1 } : { x: '-100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 250 }}
+            className='fixed top-0 left-0 w-screen h-screen z-10 p-6'
+            style={{
+              background: 'rgba(245, 245, 245, 0.97)',
+              backdropFilter: 'blur(60px)',
+              WebkitBackdropFilter: 'blur(60px)',
+            }}
           >
-            <div className='flex justify-between'>
-              <ArrowLeftIcon className='w-10' onClick={handleMenu} />
-            </div>
-            <ul className='h-full flex flex-col items-center justify-center gap-5 '>
-              {MenuItems.map(item => (
-                <li
+            <ArrowLeftIcon className='w-7 cursor-pointer' onClick={handleMenu} />
+            <ul className='h-full flex flex-col items-center justify-center gap-10 -mt-20'>
+              {MenuItems.map((item, i) => (
+                <motion.li
                   key={item.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.05 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   onClick={handleMenu}
-                  className='text-center font-bold text-6xl'
                 >
                   <Link href={item.url}>
-                    <span className='py-2 px-4 block cursor-pointer'>
+                    <span className='text-6xl font-bold cursor-pointer hover:opacity-40 transition-opacity duration-300'>
                       {item.label}
                     </span>
                   </Link>
-                </li>
+                </motion.li>
               ))}
             </ul>
-            {/* <ul className="flex flex-col gap-1 justify-center">
-                            <li>Français</li>
-                            <li>Anglais</li>
-                        </ul> */}
-          </div>
+          </motion.div>
         </nav>
 
-        {/* desktop nav */}
-        <nav
-          className={
-            'hidden md:flex relative top-0 md:max-w-screen-2xl md:w-screen-2xl justify-center  md:mx-auto'
-          }
-        >
+        {/* Desktop */}
+        <nav className='hidden md:flex items-center gap-8'>
           <Link href='/'>
-            <figure className='cursor-pointer '>
-              <Image width={36} height={36} src={logo} alt='Benjampo Logo' />
+            <figure className='cursor-pointer'>
+              <Image width={28} height={28} src={logo} alt='Logo' />
             </figure>
           </Link>
-          <ul
-            className={
-              'flex flex-row justify-evenly items-center gap-5 ml-auto mr-auto'
-            }
-          >
-            {MenuItems.filter(item => {
-              return item.label !== 'Home';
-            }).map(filtered => (
-              <li key={filtered.label}>
-                <Link href={filtered.url}>
-                  <span
-                    className={`py-2 px-4 rounded-full hover:bg-gray-200 hover:text-black cursor-pointer transition-colors block ${
-                      router.asPath.includes(filtered.url)
+          <ul className='flex items-center gap-1 mx-auto'>
+            {MenuItems.filter(i => i.label !== 'Home').map(item => (
+              <li key={item.label}>
+                <Link href={item.url}>
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.92 }}
+                    className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
+                      router.asPath.includes(item.url)
                         ? 'bg-black text-white'
-                        : 'text-black'
+                        : 'text-black/50 hover:text-black hover:bg-black/5'
                     }`}
                   >
-                    {filtered.label}
-                  </span>
+                    {item.label}
+                  </motion.span>
                 </Link>
               </li>
             ))}
           </ul>
-          {/*<ul className='flex flex-col gap-1 justify-center'>
-                    <li>Français</li>
-                    <li>Anglais</li>
-                </ul>*/}
         </nav>
-      </div>
+      </motion.div>
     </header>
   );
 }
