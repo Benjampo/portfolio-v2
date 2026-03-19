@@ -100,7 +100,7 @@ function About() {
             backend skills.
             <span className='block mb-2' /> After that I started a new job at
             maven while doing little projects for other teams and clients. I am
-            now working at quanthome, a startup in the real estate field
+            now working at jobtrek
           </p>
         </div>
       </Card>
@@ -109,11 +109,11 @@ function About() {
           <h2 className='text-xl font-medium xl:text-3xl'>Currently working</h2>
           <a
             className='text-gray-300 font-bold hover:text-blue-400 text-6xl xl:text-8xl transition-all hover:font-black'
-            href='https://www.quanthome.ch/'
+            href='https://www.jobtrek.ch/'
             target='_blank'
             rel='noreferrer'
           >
-            @quanthome
+            @jobtrek
           </a>
         </div>
       </Card>

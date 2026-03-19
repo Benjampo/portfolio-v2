@@ -1,5 +1,12 @@
 const Works = [
   {
+    id: '3',
+    title: 'Jobtrek',
+    description:
+      'Working as a full-stack developer at jobtrek',
+    year: '2026-present',
+  },
+  {
     id: '2',
     title: 'Quanthome',
     description:
