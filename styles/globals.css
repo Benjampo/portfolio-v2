@@ -259,6 +259,68 @@ body {
   background-size: 256px 256px;
 }
 
+/* ── Editorial Work Section ── */
+.editorial-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.editorial-card .card-image {
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover .card-image {
+  transform: scale(1.06);
+}
+
+.editorial-card .card-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(10, 10, 25, 0.75) 0%,
+    rgba(10, 10, 25, 0.25) 40%,
+    transparent 70%
+  );
+}
+
+.editorial-card .card-index {
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.12);
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+
+.editorial-card .card-title {
+  font-weight: 700;
+}
+
+.editorial-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.section-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(26, 26, 46, 0.15) 20%,
+    rgba(26, 26, 46, 0.15) 80%,
+    transparent 100%
+  );
+}
+
 /* ── Legacy override ── */
 .my-shadow { box-shadow: none; }
 .my-shadow:hover { box-shadow: none; }

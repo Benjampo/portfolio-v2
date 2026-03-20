@@ -58,80 +58,82 @@ function HeroImage() {
   );
 }
 
-function ProjectItem({ project, index }: { project: any; index: number }) {
-  const ref = useRef<HTMLLIElement>(null);
+function EditorialCard({
+  project,
+  index,
+  height = 'h-[22rem] md:h-[38rem]',
+  showIndex = true,
+}: {
+  project: any;
+  index: number;
+  height?: string;
+  showIndex?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const containerScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1, 0.98]);
-
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [4, -4]), { stiffness: 200, damping: 25 });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-4, 4]), { stiffness: 200, damping: 25 });
-
-  const handleMouse = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
+  const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <motion.li ref={ref} style={{ scale: containerScale }}>
-      <Link href={`/work/${project.id}`}>
-        <article className='group flex flex-col gap-4'>
-          <div className='flex items-baseline gap-4'>
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-              className='text-sm font-semibold text-[#1a1a2e]/80'
-            >
-              {project.title}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              viewport={{ once: true }}
-              className='text-xs text-[#1a1a2e]/50'
-            >
-              {project.subtitle}
-            </motion.span>
+    <Link href={`/work/${project.id}`}>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true, margin: '-80px' }}
+        className={`editorial-card group relative ${height} w-full`}
+      >
+        {/* Image */}
+        <motion.div className='absolute inset-0' style={{ y: imgY }}>
+          <div className='absolute inset-[-15%] card-image'>
+            <Image
+              layout='fill'
+              objectFit='cover'
+              src={project.coverSrc}
+              priority={index === 0}
+              alt={project.title}
+              placeholder='blur'
+            />
           </div>
-          <div className='perspective-container w-full'>
-            <motion.div
-              ref={cardRef}
-              onMouseMove={handleMouse}
-              onMouseLeave={() => { mx.set(0); my.set(0); }}
-              style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: '-100px' }}
-              className='image-card cursor-pointer'
-            >
-              <figure className='relative w-full h-[16rem] md:h-[42rem] overflow-hidden'>
-                <motion.div className='absolute inset-0' style={{ y: imgY }}>
-                  <div className='absolute inset-[-20%] transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]'>
-                    <Image
-                      layout='fill'
-                      objectFit='cover'
-                      src={project.coverSrc}
-                      priority={index === 0}
-                      alt={project.title}
-                      placeholder='blur'
-                    />
-                  </div>
-                </motion.div>
-              </figure>
-            </motion.div>
+        </motion.div>
+
+        {/* Overlay */}
+        <div className='card-overlay absolute inset-0 z-10' />
+
+        {/* Large index number */}
+        {showIndex && (
+          <span className='card-index absolute top-4 right-6 md:top-6 md:right-10 text-[5rem] md:text-[8rem] z-10'>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        )}
+
+        {/* Content */}
+        <div className='absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 flex flex-col gap-3'>
+          <div className='flex items-center gap-2'>
+            <span className='editorial-tag'>{project.subtitle}</span>
+            {project.tech?.slice(0, 2).map((t: string) => (
+              <span key={t} className='editorial-tag hidden md:inline-block'>{t}</span>
+            ))}
           </div>
-        </article>
-      </Link>
-    </motion.li>
+          <h3 className='card-title text-white text-3xl md:text-5xl tracking-tight'>
+            {project.title}
+          </h3>
+          <p className='text-white/50 text-sm md:text-base max-w-lg leading-relaxed line-clamp-2'>
+            {project.context}
+          </p>
+
+          {/* Hover arrow */}
+          <motion.div
+            className='flex items-center gap-2 text-white/0 group-hover:text-white/70 transition-colors duration-500 mt-1'
+          >
+            <span className='text-xs uppercase tracking-widest font-medium'>View project</span>
+            <svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='translate-x-0 group-hover:translate-x-1 transition-transform duration-500'>
+              <path d='M3 8h10M9 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
+            </svg>
+          </motion.div>
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -173,36 +175,81 @@ const Home: NextPage = () => {
         </motion.div>
       </section>
 
-      {/* Projects Section */}
+      {/* Selected Work — Editorial Layout */}
       <section className='mt-8'>
-        <motion.h2
+        {/* Section Header */}
+        <div className='mb-6'>
+          <motion.h2
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className='text-4xl md:text-6xl tracking-tight font-bold'
+          >
+            Selected Work
+          </motion.h2>
+        </div>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className='section-rule mb-12 origin-left'
+        />
+
+        {/* Row 1 — Featured hero card */}
+        <EditorialCard
+          project={Projects[0]}
+          index={0}
+          height='h-[24rem] md:h-[44rem]'
+        />
+
+        {/* Row 2 — Asymmetric duo */}
+        <div className='grid md:grid-cols-5 gap-4 mt-4'>
+          <div className='md:col-span-3'>
+            <EditorialCard
+              project={Projects[1]}
+              index={1}
+              height='h-[20rem] md:h-[34rem]'
+            />
+          </div>
+          <div className='md:col-span-2'>
+            <EditorialCard
+              project={Projects[2]}
+              index={2}
+              height='h-[20rem] md:h-[34rem]'
+            />
+          </div>
+        </div>
+
+        {/* Row 3 — Wide card */}
+        <div className='mt-4'>
+          <EditorialCard
+            project={Projects[3]}
+            index={3}
+            height='h-[20rem] md:h-[30rem]'
+          />
+        </div>
+
+        {/* CTA */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className='text-sm font-semibold uppercase tracking-wide text-[#1a1a2e]/70 mb-16'
-        >
-          Selected Work
-        </motion.h2>
-        <ul className='flex flex-col gap-24'>
-          {Projects.filter((_, i) => i < 4).map((project: any, index) => (
-            <ProjectItem key={project.id} project={project} index={index} />
-          ))}
-        </ul>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className='flex justify-center mt-20'
+          className='flex justify-center mt-16'
         >
           <Link href='/work'>
             <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className='inline-block glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className='inline-flex items-center gap-3 glass-card text-[#1a1a2e] text-sm font-medium px-10 py-4 rounded-full cursor-pointer'
             >
               View all projects
+              <svg width='14' height='14' viewBox='0 0 16 16' fill='none'>
+                <path d='M3 8h10M9 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
+              </svg>
             </motion.span>
           </Link>
         </motion.div>
