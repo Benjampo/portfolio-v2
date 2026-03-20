@@ -77,7 +77,7 @@ function Index() {
                 <div
                   onMouseEnter={() => setHoveredProject(project)}
                   onMouseLeave={() => setHoveredProject(null)}
-                  className='group flex items-center justify-between py-6 md:py-8 border-b border-[#1a1a2e]/[0.06] cursor-pointer transition-colors duration-300 hover:border-[#1a1a2e]/20'
+                  className={`group flex items-center justify-between py-6 md:py-8 cursor-pointer transition-colors duration-300 ${index < Projects.length - 1 ? 'border-b border-[#1a1a2e]/[0.06] hover:border-[#1a1a2e]/20' : ''}`}
                 >
                   <div className='flex items-baseline gap-4 md:gap-6'>
                     <span className='text-xs text-[#1a1a2e]/25 font-medium tabular-nums w-6'>

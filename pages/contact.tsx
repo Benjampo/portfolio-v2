@@ -34,11 +34,15 @@ function FloatingLabel({ children, active }: { children: string; active: boolean
 function AnimatedLine({ active }: { active: boolean }) {
   return (
     <motion.div
-      className='absolute bottom-0 left-0 h-[2px] bg-[#1a1a2e]'
+      className='absolute bottom-0 left-0 h-[2px]'
       initial={{ scaleX: 0 }}
       animate={{ scaleX: active ? 1 : 0 }}
       transition={{ duration: 0.5, ease }}
-      style={{ transformOrigin: 'left', width: '100%' }}
+      style={{
+        transformOrigin: 'left',
+        width: '100%',
+        background: 'linear-gradient(90deg, #1a1a2e, rgba(100, 160, 240, 0.6))',
+      }}
     />
   );
 }
@@ -83,7 +87,7 @@ function FormField({
         style={{ minHeight: isTextarea ? '100px' : undefined }}
         rows={isTextarea ? 4 : undefined}
       />
-      <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-[#1a1a2e]/[0.08]' />
+      <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-[#1a1a2e]/[0.06]' />
       <AnimatedLine active={active} />
     </motion.div>
   );
@@ -113,7 +117,7 @@ function GlassFormCard({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0, y: 60, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.9, ease }}
-        className='glass-card p-8 md:p-10'
+        className='glass-form p-8 md:p-12'
       >
         {children}
       </motion.div>
@@ -214,7 +218,7 @@ function Contact() {
               work
             </motion.h1>
           </div>
-          <div className='overflow-hidden'>
+          <div className='overflow-hidden pb-3'>
             <motion.h1
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
@@ -382,7 +386,7 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    className='group bg-[#1a1a2e] text-white text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer transition-shadow duration-300 hover:shadow-[0_8px_30px_rgba(26,26,46,0.25)]'
+                    className='group bg-[#1a1a2e]/90 backdrop-blur-sm text-white text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer transition-all duration-300 hover:bg-[#1a1a2e] hover:shadow-[0_8px_30px_rgba(26,26,46,0.3),_0_0_0_1px_rgba(255,255,255,0.1)_inset]'
                   >
                     {buttonText}
                     <motion.span

@@ -159,6 +159,71 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+/* ── Glassmorphism Form Card ── */
+.glass-form {
+  position: relative;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(60px) saturate(200%);
+  -webkit-backdrop-filter: blur(60px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 32px;
+  box-shadow:
+    0 8px 60px rgba(100, 160, 240, 0.1),
+    0 2px 20px rgba(100, 160, 240, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top highlight edge — mimics light hitting the glass */
+.glass-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9) 30%,
+    rgba(200, 220, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.9) 70%,
+    transparent
+  );
+  z-index: 1;
+}
+
+/* Iridescent refraction overlay */
+.glass-form::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(160, 200, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(180, 160, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 30%, rgba(120, 220, 255, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-form > * {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-form:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 12px 70px rgba(100, 160, 240, 0.14),
+    0 4px 30px rgba(100, 160, 240, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+
 /* ── Glass Header (stronger blur) ── */
 .glass-strong {
   background: rgba(255, 255, 255, 0.55);
