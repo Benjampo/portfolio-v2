@@ -273,7 +273,7 @@ function Contact() {
                     whileHover={{ y: -3 }}
                     className='opacity-30 hover:opacity-100 transition-opacity duration-300 block invert'
                   >
-                    <Image src={social.icon} alt={social.label} height={18} width={18} />
+                    <Image src={social.icon} alt={social.label} height={32} width={32} />
                   </motion.a>
                 </motion.li>
               ))}

@@ -23,7 +23,7 @@ function Footer() {
               className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer'
               href='mailto:contact@benjampo.ch'
             >
-              <span className='invert'><Image src={mailIcon} alt='Email' width={20} height={20} /></span>
+              <span className='invert flex items-center justify-center'><Image src={mailIcon} alt='Email' width={20} height={20} /></span>
             </motion.a>
           </div>
 
@@ -53,7 +53,7 @@ function Footer() {
                   rel='noreferrer'
                   className='opacity-40 hover:opacity-70 transition-opacity duration-300 invert'
                 >
-                  <Image alt={social.label} src={social.icon} width={18} height={18} />
+                  <Image alt={social.label} src={social.icon} width={32} height={32} />
                 </motion.a>
               ))}
             </div>
