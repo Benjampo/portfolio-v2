@@ -1,6 +1,5 @@
-import Instagram from './../assets/icons/instagram.svg';
-import LinkedIn from './../assets/icons/linkedin.svg';
-import Github from './../assets/icons/github.svg';
+import LinkedIn from './../assets/icons/linkedin.png';
+import Github from './../assets/icons/github.png';
 
 const Socials = [
   {
