@@ -71,7 +71,7 @@ function EditorialCard({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const { t, locale } = useTranslation();
+  const { t, renderLocale: locale } = useTranslation();
 
   const context = locale === 'fr' && project.context_fr ? project.context_fr : project.context;
   const subtitle = locale === 'fr' && project.subtitle_fr ? project.subtitle_fr : project.subtitle;

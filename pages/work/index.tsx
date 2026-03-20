@@ -13,7 +13,7 @@ function Index() {
   const imgX = useSpring(mouseX, { stiffness: 150, damping: 20 });
   const imgY = useSpring(mouseY, { stiffness: 150, damping: 20 });
   const [hoveredProject, setHoveredProject] = useState<any>(null);
-  const { t, locale } = useTranslation();
+  const { t, renderLocale: locale } = useTranslation();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;

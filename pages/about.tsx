@@ -76,7 +76,7 @@ function About() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: scrollRef, offset: ['start start', 'end end'] });
   const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
-  const { t, locale } = useTranslation();
+  const { t, renderLocale: locale } = useTranslation();
 
   return (
     <motion.section

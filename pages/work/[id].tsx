@@ -92,7 +92,7 @@ function ProjectNav({ project }: { project: any }) {
 
 export function Project({ data }: any) {
   const project = data[0];
-  const { t, locale } = useTranslation();
+  const { t, renderLocale: locale } = useTranslation();
 
   const context = locale === 'fr' && project.context_fr ? project.context_fr : project.context;
   const subtitle = locale === 'fr' && project.subtitle_fr ? project.subtitle_fr : project.subtitle;

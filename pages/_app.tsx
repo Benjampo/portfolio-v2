@@ -73,7 +73,7 @@ function MeshBackground() {
 }
 
 function AppContent({ Component, pageProps, router }: AppProps) {
-  const { locale } = useTranslation();
+  const { locale, commitLocale } = useTranslation();
 
   return (
     <div className='noise-overlay'>
@@ -84,7 +84,10 @@ function AppContent({ Component, pageProps, router }: AppProps) {
         <AnimatePresence
           mode='wait'
           initial={true}
-          onExitComplete={() => window.scrollTo(0, 0)}
+          onExitComplete={() => {
+            commitLocale();
+            window.scrollTo(0, 0);
+          }}
         >
           <motion.main
             key={`${router.route}-${locale}`}
