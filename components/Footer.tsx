@@ -11,8 +11,8 @@ function Footer() {
       <div className='max-w-[1400px] mx-auto'>
         <div className='flex justify-center mb-10'>
           <motion.a
-            whileHover={{ scale: 1.1, rotate: -8 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
             className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer'
             href='mailto:contact@benjampo.ch'
           >
