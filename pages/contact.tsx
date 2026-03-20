@@ -271,7 +271,7 @@ function Contact() {
                     target='_blank'
                     rel='noreferrer'
                     whileHover={{ y: -3 }}
-                    className='opacity-30 hover:opacity-100 transition-opacity duration-300 block'
+                    className='opacity-30 hover:opacity-100 transition-opacity duration-300 block invert'
                   >
                     <Image src={social.icon} alt={social.label} height={18} width={18} />
                   </motion.a>

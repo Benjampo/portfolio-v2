@@ -1,6 +1,6 @@
-import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Image from "next/legacy/image";
+import mailIcon from '../assets/icons/mail.png';
 import Link from 'next/link';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
@@ -23,7 +23,7 @@ function Footer() {
               className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer'
               href='mailto:contact@benjampo.ch'
             >
-              <EnvelopeIcon className='w-5 h-5 text-[#1a1a2e]' />
+              <span className='invert'><Image src={mailIcon} alt='Email' width={20} height={20} /></span>
             </motion.a>
           </div>
 
@@ -51,7 +51,7 @@ function Footer() {
                   href={social.url}
                   target='_blank'
                   rel='noreferrer'
-                  className='opacity-40 hover:opacity-70 transition-opacity duration-300'
+                  className='opacity-40 hover:opacity-70 transition-opacity duration-300 invert'
                 >
                   <Image alt={social.label} src={social.icon} width={18} height={18} />
                 </motion.a>
