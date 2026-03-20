@@ -1,81 +1,24 @@
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Projects from '../../data/projects';
 
-function WorkCard({ project, index, featured = false }: { project: any; index: number; featured?: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const rawY = useTransform(scrollYProgress, [0, 1], [featured ? 120 : 80, featured ? -120 : -80]);
-  const imgY = useSpring(rawY, { stiffness: 100, damping: 25, mass: 0.6 });
-  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: Math.min(index * 0.06, 0.5), ease: [0.16, 1, 0.3, 1] }}
-    >
-      <Link href={`/work/${project.id}`}>
-        <article className='group cursor-pointer'>
-          <div
-            ref={ref}
-            className='relative image-card overflow-hidden'
-          >
-            <figure className={`relative w-full overflow-hidden ${featured ? 'h-[20rem] md:h-[44rem]' : 'h-[14rem] md:h-[28rem]'}`}>
-              <motion.div className='absolute inset-[-20%]' style={{ y: imgY, scale: imgScale }}>
-                <div className='absolute inset-0 transition-transform duration-[1s] ease-out group-hover:scale-[1.03]'>
-                    <Image
-                      layout='fill'
-                      objectFit='cover'
-                      src={project.coverSrc}
-                      alt={project.title}
-                      placeholder='blur'
-                      priority={index < 3}
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Overlay on hover */}
-                <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10' />
-
-                {/* Info on hover */}
-                <div className='absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out'>
-                  <div className='flex flex-wrap gap-2 mb-3'>
-                    {project.tech?.slice(0, 4).map((t: string) => (
-                      <span key={t} className='text-[10px] uppercase tracking-wider text-white/70 bg-white/10 backdrop-blur-sm rounded-full px-2.5 py-0.5'>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className={`font-semibold text-white ${featured ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'}`}>
-                    {project.title}
-                  </h3>
-                  <p className='text-sm text-white/60 mt-1'>{project.subtitle}</p>
-                </div>
-              </figure>
-          </div>
-
-          {/* Title always visible below card */}
-          <div className='mt-4 flex items-baseline justify-between'>
-            <h3 className='text-sm font-semibold text-[#1a1a2e]/80 group-hover:text-[#1a1a2e] transition-colors duration-300'>
-              {project.title}
-            </h3>
-            <span className='text-xs text-[#1a1a2e]/40'>
-              {project.subtitle}
-            </span>
-          </div>
-        </article>
-      </Link>
-    </motion.div>
-  );
-}
-
 function Index() {
-  const featured = Projects[0];
-  const rest = Projects.slice(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const imgX = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const imgY = useSpring(mouseY, { stiffness: 150, damping: 20 });
+  const [hoveredProject, setHoveredProject] = useState<any>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left + 24);
+    mouseY.set(e.clientY - rect.top - 140);
+  };
 
   return (
     <motion.section>
@@ -102,16 +45,68 @@ function Index() {
         </motion.span>
       </div>
 
-      {/* Featured project — full width */}
-      <div className='mb-12'>
-        <WorkCard project={featured} index={0} featured />
-      </div>
+      <div ref={containerRef} onMouseMove={handleMouseMove} className='relative'>
+        {/* Floating image preview */}
+        <motion.div
+          style={{ x: imgX, y: imgY }}
+          animate={{ opacity: hoveredProject ? 1 : 0, scale: hoveredProject ? 1 : 0.9 }}
+          transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
+          className='absolute z-30 w-[280px] md:w-[360px] h-[180px] md:h-[220px] rounded-2xl overflow-hidden shadow-2xl pointer-events-none hidden md:block'
+        >
+          {hoveredProject && (
+            <Image
+              layout='fill'
+              objectFit='cover'
+              src={hoveredProject.coverSrc}
+              alt={hoveredProject.title}
+              placeholder='blur'
+            />
+          )}
+        </motion.div>
 
-      {/* Rest — 2-column grid */}
-      <div className='grid md:grid-cols-2 gap-8'>
-        {rest.map((project: any, index: number) => (
-          <WorkCard key={project.id} project={project} index={index + 1} />
-        ))}
+        {/* Project list */}
+        <ul className='flex flex-col'>
+          {Projects.map((project: any, index) => (
+            <motion.li
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.5), ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link href={`/work/${project.id}`}>
+                <div
+                  onMouseEnter={() => setHoveredProject(project)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                  className='group flex items-center justify-between py-6 md:py-8 border-b border-[#1a1a2e]/[0.06] cursor-pointer transition-colors duration-300 hover:border-[#1a1a2e]/20'
+                >
+                  <div className='flex items-baseline gap-4 md:gap-6'>
+                    <span className='text-xs text-[#1a1a2e]/25 font-medium tabular-nums w-6'>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className='text-xl md:text-3xl font-semibold text-[#1a1a2e]/80 group-hover:text-[#1a1a2e] transition-colors duration-300'>
+                      {project.title}
+                    </span>
+                    <span className='text-xs uppercase tracking-[0.15em] text-[#1a1a2e]/30 hidden md:inline'>
+                      {project.subtitle}
+                    </span>
+                  </div>
+                  <div className='flex items-center gap-4'>
+                    <div className='hidden md:flex gap-2'>
+                      {project.tech.slice(0, 3).map((t: string) => (
+                        <span key={t} className='text-[0.6rem] uppercase tracking-wider text-[#1a1a2e]/25 group-hover:text-[#1a1a2e]/50 transition-colors duration-300'>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <svg className='w-4 h-4 text-[#1a1a2e]/20 group-hover:text-[#1a1a2e]/60 transform group-hover:translate-x-1 transition-all duration-300' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={1.5}>
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M17 8l4 4m0 0l-4 4m4-4H3' />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </motion.section>
   );
