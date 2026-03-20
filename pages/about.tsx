@@ -115,7 +115,7 @@ function About() {
               transition={{ delay: 0.6, duration: 0.6 }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              href='/static/BenjaminPorchet_CV_EN.pdf'
+              href={`/static/BenjaminPorchet_CV_${locale === 'fr' ? 'FR' : 'EN'}.pdf`}
               download
               className='inline-flex items-center gap-2 text-xs text-foreground/40 hover:text-foreground transition-colors duration-300 mt-2 cursor-pointer'
             >
