@@ -1,18 +1,51 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion';
 import type { AppProps } from 'next/app';
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../styles/globals.css';
 
+const springConfig = { stiffness: 30, damping: 40, mass: 1.5 };
+
 function MeshBackground() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const x1 = useSpring(useMotionValue(0), springConfig);
+  const y1 = useSpring(useMotionValue(0), springConfig);
+  const x2 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 20 });
+  const y2 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 20 });
+  const x3 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 25 });
+  const y3 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 25 });
+  const x4 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 15 });
+  const y4 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 15 });
+  const x5 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 22 });
+  const y5 = useSpring(useMotionValue(0), { ...springConfig, stiffness: 22 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+      mouseX.set(cx);
+      mouseY.set(cy);
+      x1.set(cx * 40);  y1.set(cy * 30);
+      x2.set(cx * -35); y2.set(cy * 45);
+      x3.set(cx * 50);  y3.set(cy * -25);
+      x4.set(cx * -30); y4.set(cy * -40);
+      x5.set(cx * 25);  y5.set(cy * 35);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5]);
+
   return (
     <div className='mesh-bg'>
-      <div className='mesh-orb mesh-orb-1' />
-      <div className='mesh-orb mesh-orb-2' />
-      <div className='mesh-orb mesh-orb-3' />
-      <div className='mesh-orb mesh-orb-4' />
-      <div className='mesh-orb mesh-orb-5' />
+      <motion.div className='mesh-orb mesh-orb-1' style={{ x: x1, y: y1 }} />
+      <motion.div className='mesh-orb mesh-orb-2' style={{ x: x2, y: y2 }} />
+      <motion.div className='mesh-orb mesh-orb-3' style={{ x: x3, y: y3 }} />
+      <motion.div className='mesh-orb mesh-orb-4' style={{ x: x4, y: y4 }} />
+      <motion.div className='mesh-orb mesh-orb-5' style={{ x: x5, y: y5 }} />
     </div>
   );
 }

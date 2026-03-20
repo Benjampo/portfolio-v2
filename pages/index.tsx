@@ -1,13 +1,11 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import type { NextPage } from 'next';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRef } from 'react';
 import Projects from '../data/projects';
-
-const Room3D = dynamic(() => import('../components/Room3D'), { ssr: false });
+import benjampo from './../assets/benjampo_gif.gif';
 
 function SplitText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
@@ -146,7 +144,7 @@ const Home: NextPage = () => {
 
       {/* Hero */}
       <section className='min-h-[65vh] flex flex-col justify-center items-center gap-8 mb-16'>
-        <Room3D />
+        <HeroImage />
         <div className='text-center overflow-hidden'>
           <h1 className='font-bold text-6xl md:text-8xl tracking-tight'>
             <SplitText text='Hello' delay={0.4} />
