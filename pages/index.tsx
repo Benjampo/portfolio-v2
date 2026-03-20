@@ -200,7 +200,7 @@ const Home: NextPage = () => {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className='inline-block bg-[#1a1a2e] text-white text-sm font-medium px-8 py-4 rounded-full cursor-pointer shadow-lg shadow-blue-200/20'
+              className='inline-block glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
             >
               View all projects
             </motion.span>

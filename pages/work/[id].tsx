@@ -144,7 +144,7 @@ export function Project({ data }: any) {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='bg-black text-white text-sm font-medium px-8 py-4 rounded-full inline-block'
+            className='glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full inline-block'
             href={project.url}
             target='_blank'
             rel='noreferrer'

@@ -166,7 +166,7 @@ function Contact() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.94 }}
               type='submit'
-              className='bg-black text-white text-sm font-medium px-8 py-4 rounded-full flex items-center gap-2 cursor-pointer'
+              className='glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full flex items-center gap-2 cursor-pointer'
             >
               {buttonText}
               <PaperAirplaneIcon className='h-4 w-4' />
