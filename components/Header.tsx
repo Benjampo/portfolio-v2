@@ -77,7 +77,7 @@ function Header() {
                       className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
                         isActive(item.url)
                           ? 'bg-white/30 text-[#1a1a2e] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] backdrop-blur-sm border border-white/30'
-                          : 'text-black/50 hover:text-black hover:bg-white/20 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]'
+                          : 'text-black/50 hover:text-black hover:bg-white/20 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
                       }`}
                     >
                       {item.label}
@@ -186,7 +186,7 @@ function Header() {
                     href='https://github.com/benjaminporchet'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-[10px] tracking-[0.15em] uppercase text-black/30 hover:text-black/60 transition-colors duration-300'
+                    className='text-[10px] tracking-[0.15em] uppercase text-black/60 hover:text-black/90 transition-colors duration-300'
                   >
                     Github
                   </a>
@@ -194,7 +194,7 @@ function Header() {
                     href='https://linkedin.com/in/benjaminporchet'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-[10px] tracking-[0.15em] uppercase text-black/30 hover:text-black/60 transition-colors duration-300'
+                    className='text-[10px] tracking-[0.15em] uppercase text-black/60 hover:text-black/90 transition-colors duration-300'
                   >
                     LinkedIn
                   </a>

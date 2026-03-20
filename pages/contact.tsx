@@ -389,13 +389,6 @@ function Contact() {
                     className='group glass-btn text-[#1a1a2e] text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer'
                   >
                     {buttonText}
-                    <motion.span
-                      className='inline-block'
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                      <ArrowUpRightIcon className='h-4 w-4' />
-                    </motion.span>
                   </motion.button>
                 </motion.div>
               </form>
