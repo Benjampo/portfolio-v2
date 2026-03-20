@@ -217,7 +217,7 @@ export function Project({ data }: any) {
             rel='noreferrer'
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='inline-block glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
+            className='inline-block glass-btn text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
           >
             Visit website
           </motion.a>

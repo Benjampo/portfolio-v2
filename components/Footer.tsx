@@ -1,9 +1,9 @@
+import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
-import mail from './../assets/images/mail.png';
 
 function Footer() {
   return (
@@ -13,10 +13,10 @@ function Footer() {
           <motion.a
             whileHover={{ scale: 1.1, rotate: -8 }}
             whileTap={{ scale: 0.9 }}
-            className='w-14 h-14 bg-black rounded-2xl flex items-center justify-center cursor-pointer'
+            className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer'
             href='mailto:contact@benjampo.ch'
           >
-            <Image width={18} height={18} alt='Mail' src={mail} />
+            <EnvelopeIcon className='w-5 h-5 text-[#1a1a2e]' />
           </motion.a>
         </div>
 

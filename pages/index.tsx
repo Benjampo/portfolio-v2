@@ -230,7 +230,7 @@ const Home: NextPage = () => {
             <motion.span
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className='inline-flex items-center gap-3 glass-card text-[#1a1a2e] text-sm font-medium px-10 py-4 rounded-full cursor-pointer'
+              className='inline-flex items-center gap-3 glass-btn text-[#1a1a2e] text-sm font-medium px-10 py-4 rounded-full cursor-pointer'
             >
               View all projects
               <svg width='14' height='14' viewBox='0 0 16 16' fill='none'>

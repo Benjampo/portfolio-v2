@@ -70,8 +70,8 @@ function Header() {
                       whileTap={{ scale: 0.92 }}
                       className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
                         isActive(item.url)
-                          ? 'bg-black text-white'
-                          : 'text-black/50 hover:text-black hover:bg-black/5'
+                          ? 'bg-white/30 text-[#1a1a2e] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] backdrop-blur-sm border border-white/30'
+                          : 'text-black/50 hover:text-black hover:bg-white/20 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]'
                       }`}
                     >
                       {item.label}
@@ -131,13 +131,7 @@ function Header() {
                     }}
                   >
                     <Link href={item.url} onClick={handleMenu}>
-                      <div className='group flex items-center gap-5 py-4 cursor-pointer'>
-                        {/* Index number */}
-                        <span className='text-xs font-light tracking-widest text-black/20 w-6 tabular-nums'>
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-
-                        {/* Label */}
+                      <div className='group flex items-center py-5 cursor-pointer'>
                         <span
                           className={`text-[2.5rem] leading-none tracking-tight transition-all duration-500 ${
                             isActive(item.url)
@@ -148,25 +142,15 @@ function Header() {
                           {item.label}
                         </span>
 
-                        {/* Active indicator */}
                         {isActive(item.url) && (
                           <motion.div
                             layoutId='mobile-active-dot'
-                            className='w-1.5 h-1.5 rounded-full bg-[rgba(100,160,240,0.6)] ml-1'
+                            className='w-1.5 h-1.5 rounded-full bg-[rgba(100,160,240,0.6)] ml-3'
                             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                           />
                         )}
                       </div>
                     </Link>
-
-                    {/* Separator */}
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ delay: 0.2 + i * 0.07, duration: 0.6, ease }}
-                      className='h-px origin-left'
-                      style={{ background: 'rgba(26,26,46,0.06)' }}
-                    />
                   </motion.li>
                 ))}
               </ul>

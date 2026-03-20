@@ -40,7 +40,7 @@ function Custom404() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className='glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full inline-block cursor-pointer'
+              className='glass-btn text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full inline-block cursor-pointer'
             >
               Go home
             </motion.span>

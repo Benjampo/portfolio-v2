@@ -386,7 +386,7 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    className='group bg-[#1a1a2e]/90 backdrop-blur-sm text-white text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer transition-all duration-300 hover:bg-[#1a1a2e] hover:shadow-[0_8px_30px_rgba(26,26,46,0.3),_0_0_0_1px_rgba(255,255,255,0.1)_inset]'
+                    className='group glass-btn text-[#1a1a2e] text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer'
                   >
                     {buttonText}
                     <motion.span
