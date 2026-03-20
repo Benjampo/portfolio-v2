@@ -20,9 +20,9 @@ function Header() {
     <>
       <header className='fixed z-50 top-5 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] md:w-auto'>
         <motion.div
-          initial={{ opacity: 0, y: -30, scale: 0.95 }}
+          initial={{ opacity: 0, y: -50, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, ease }}
+          transition={{ duration: 0.55, ease: [0, 0, 0.58, 1] }}
           className='glass-strong !rounded-full px-6 py-3'
         >
           {/* Mobile */}

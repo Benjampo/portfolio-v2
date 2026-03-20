@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Projects from '../data/projects';
 import benjampo from './../assets/benjampo_gif.gif';
 
@@ -130,8 +130,14 @@ function EditorialCard({
 }
 
 const Home: NextPage = () => {
+  const [animKey, setAnimKey] = useState(0);
+
+  useEffect(() => {
+    setAnimKey((k) => k + 1);
+  }, []);
+
   return (
-    <motion.section className='flex flex-col'>
+    <motion.section key={animKey} className='flex flex-col'>
       <Head>
         <title>Benjamin Porchet | Full-stack Developer</title>
       </Head>

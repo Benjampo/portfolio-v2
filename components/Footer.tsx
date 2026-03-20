@@ -8,13 +8,15 @@ import Socials from '../data/Socials';
 function Footer() {
   return (
     <footer className='relative mt-24'>
-      {/* Gradient divider */}
-      <div className='section-rule' />
+      {/* Gradient divider — fades out in center for button overlap */}
+      <div className='h-px' style={{
+        background: 'linear-gradient(90deg, transparent 0%, rgba(26,26,46,0.15) 15%, rgba(26,26,46,0.15) 38%, transparent 48%, transparent 52%, rgba(26,26,46,0.15) 62%, rgba(26,26,46,0.15) 85%, transparent 100%)'
+      }} />
 
       <div className='footer-glass py-16 px-6'>
         <div className='max-w-[1400px] mx-auto'>
-          {/* Email icon */}
-          <div className='flex justify-center mb-10'>
+          {/* Email icon — overlaps top border */}
+          <div className='absolute left-1/2 -translate-x-1/2 -top-7 z-10'>
             <motion.a
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
@@ -57,10 +59,10 @@ function Footer() {
             </div>
           </div>
 
-          {/* Bottom line */}
-          <div className='mt-10 pt-6 border-t border-[#1a1a2e]/[0.06]'>
+          {/* Copyright */}
+          <div className='mt-10'>
             <p className='text-center text-[10px] text-[#1a1a2e]/30 tracking-[0.15em] uppercase'>
-              &copy; 2025 Benjamin Porchet &mdash; Designed & built by hand
+              &copy; 2026 Benjamin Porchet &mdash; Designed & built by hand
             </p>
           </div>
         </div>
