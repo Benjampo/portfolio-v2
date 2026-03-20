@@ -20,10 +20,10 @@ function Footer() {
             <motion.a
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer'
+              className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer invert'
               href='mailto:contact@benjampo.ch'
             >
-              <span className='invert flex items-center justify-center'><Image src={mailIcon} alt='Email' width={20} height={20} /></span>
+              <Image src={mailIcon} alt='Email' width={20} height={20} />
             </motion.a>
           </div>
 
