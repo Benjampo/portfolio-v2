@@ -87,7 +87,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className='text-xs font-semibold uppercase tracking-wider text-[#1a1a2e]/50'
+              className='text-sm font-semibold text-[#1a1a2e]/80'
             >
               {project.title}
             </motion.span>
@@ -96,7 +96,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className='text-xs text-[#1a1a2e]/40'
+              className='text-xs text-[#1a1a2e]/50'
             >
               {project.subtitle}
             </motion.span>
@@ -175,15 +175,15 @@ const Home: NextPage = () => {
 
       {/* Projects Section */}
       <section className='mt-8'>
-        <motion.span
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className='text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/45 block mb-16'
+          className='text-sm font-semibold uppercase tracking-wide text-[#1a1a2e]/70 mb-16'
         >
           Selected Work
-        </motion.span>
+        </motion.h2>
         <ul className='flex flex-col gap-24'>
           {Projects.filter((_, i) => i < 4).map((project: any, index) => (
             <ProjectItem key={project.id} project={project} index={index} />

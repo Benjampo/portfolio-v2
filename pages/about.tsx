@@ -1,9 +1,7 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from "next/legacy/image";
-import Link from 'next/link';
 import { useRef } from 'react';
 
-import Socials from '../data/Socials';
 import Studies from './../data/Studies';
 import Techs from './../data/Techs';
 import Works from './../data/Works';
@@ -109,6 +107,21 @@ function About() {
               <span className='w-1 h-1 rounded-full bg-black/20' />
               <span>Lausanne, Switzerland</span>
             </motion.div>
+            <motion.a
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href='/static/BenjaminPorchet_CV_EN.pdf'
+              download
+              className='inline-flex items-center gap-2 text-xs text-black/40 hover:text-black transition-colors duration-300 mt-2 cursor-pointer'
+            >
+              Download resume
+              <svg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /><polyline points='7 10 12 15 17 10' /><line x1='12' y1='15' x2='12' y2='3' />
+              </svg>
+            </motion.a>
           </div>
         </motion.div>
 
@@ -269,48 +282,6 @@ function About() {
         </div>
       </div>
 
-      {/* ── Bottom ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className='flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-black/[0.06]'
-      >
-        <motion.a
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          target='_blank'
-          href='/static/BenjaminPorchet_CV_EN.pdf'
-          download
-          className='bg-black text-white text-sm font-medium px-7 py-3.5 rounded-full inline-flex items-center gap-2'
-        >
-          Download resume
-          <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-            <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /><polyline points='7 10 12 15 17 10' /><line x1='12' y1='15' x2='12' y2='3' />
-          </svg>
-        </motion.a>
-
-        <ul className='flex items-center gap-6'>
-          {Socials.map((social, index) => (
-            <motion.li whileHover={{ scale: 1.2, y: -3 }} key={index}>
-              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-25 hover:opacity-100 transition-opacity duration-300'>
-                <Image alt={social.label} src={social.icon} width={22} />
-              </a>
-            </motion.li>
-          ))}
-        </ul>
-
-        <Link href='/contact'>
-          <motion.span
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className='text-sm font-medium text-black/45 hover:text-black transition-colors duration-300 cursor-pointer'
-          >
-            Get in touch &rarr;
-          </motion.span>
-        </Link>
-      </motion.div>
     </motion.section>
   );
 }
