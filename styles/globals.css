@@ -51,6 +51,8 @@ body {
 
 /* ── Animated Mesh Background ── */
 .mesh-bg {
+  --mx: 0;
+  --my: 0;
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -64,95 +66,102 @@ body {
   position: absolute;
   inset: -200px;
   z-index: 0;
-  filter: url(#goo) blur(50px);
-  opacity: 0.18;
+  filter: url(#goo) blur(60px);
+  opacity: 0.12;
 }
 
 .meta-blob {
   position: absolute;
   border-radius: 50%;
   will-change: transform;
-  background: rgba(100, 150, 220, 0.9);
+  background: rgba(130, 170, 230, 0.8);
 }
 
+/* Each blob moves in a different direction relative to --mx/--my */
 .meta-blob-1 {
-  width: 500px;
-  height: 480px;
+  width: 420px;
+  height: 400px;
   top: 15%;
   left: 20%;
+  transform: translate(calc(var(--mx) * 120px), calc(var(--my) * 90px));
   animation: blob-drift-1 22s ease-in-out infinite;
 }
 
 .meta-blob-2 {
-  width: 450px;
-  height: 460px;
+  width: 380px;
+  height: 390px;
   top: 30%;
   left: 35%;
+  transform: translate(calc(var(--mx) * -100px), calc(var(--my) * 130px));
   animation: blob-drift-2 28s ease-in-out infinite;
 }
 
 .meta-blob-3 {
-  width: 400px;
-  height: 420px;
+  width: 340px;
+  height: 360px;
   top: 20%;
   left: 50%;
+  transform: translate(calc(var(--mx) * 80px), calc(var(--my) * -110px));
   animation: blob-drift-3 25s ease-in-out infinite;
 }
 
 .meta-blob-4 {
-  width: 380px;
-  height: 400px;
+  width: 320px;
+  height: 340px;
   top: 40%;
   left: 25%;
+  transform: translate(calc(var(--mx) * -140px), calc(var(--my) * -70px));
   animation: blob-drift-4 30s ease-in-out infinite;
 }
 
 .meta-blob-5 {
-  width: 420px;
-  height: 440px;
+  width: 360px;
+  height: 370px;
   top: 35%;
   left: 10%;
+  transform: translate(calc(var(--mx) * 60px), calc(var(--my) * 100px));
   animation: blob-drift-5 26s ease-in-out infinite;
 }
 
 .meta-blob-6 {
-  width: 360px;
-  height: 380px;
+  width: 300px;
+  height: 320px;
   top: 25%;
   left: 55%;
+  transform: translate(calc(var(--mx) * -90px), calc(var(--my) * -120px));
   animation: blob-drift-6 24s ease-in-out infinite;
 }
 
 @keyframes blob-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(180px, 60px) scale(1.3) rotate(40deg); }
-  50% { transform: translate(-40px, 200px) scale(0.85) rotate(-20deg); }
-  75% { transform: translate(100px, -80px) scale(1.15) rotate(25deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  25% { translate: 180px 60px; scale: 1.3; rotate: 40deg; }
+  50% { translate: -40px 200px; scale: 0.85; rotate: -20deg; }
+  75% { translate: 100px -80px; scale: 1.15; rotate: 25deg; }
 }
 @keyframes blob-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  33% { transform: translate(-200px, -100px) scale(1.25) rotate(-45deg); }
-  66% { transform: translate(60px, 160px) scale(0.9) rotate(30deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  33% { translate: -200px -100px; scale: 1.25; rotate: -45deg; }
+  66% { translate: 60px 160px; scale: 0.9; rotate: 30deg; }
 }
 @keyframes blob-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(120px, -150px) scale(1.2) rotate(35deg); }
-  50% { transform: translate(-100px, -60px) scale(0.95) rotate(-15deg); }
-  75% { transform: translate(60px, 100px) scale(1.1) rotate(-40deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  25% { translate: 120px -150px; scale: 1.2; rotate: 35deg; }
+  50% { translate: -100px -60px; scale: 0.95; rotate: -15deg; }
+  75% { translate: 60px 100px; scale: 1.1; rotate: -40deg; }
 }
 @keyframes blob-drift-4 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(-160px, 180px) scale(1.35) rotate(50deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  50% { translate: -160px 180px; scale: 1.35; rotate: 50deg; }
 }
 @keyframes blob-drift-5 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  33% { transform: translate(140px, -120px) scale(1.2) rotate(-35deg); }
-  66% { transform: translate(-80px, 140px) scale(0.88) rotate(20deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  33% { translate: 140px -120px; scale: 1.2; rotate: -35deg; }
+  66% { translate: -80px 140px; scale: 0.88; rotate: 20deg; }
 }
 @keyframes blob-drift-6 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  25% { transform: translate(-120px, -80px) scale(1.15) rotate(30deg); }
-  75% { transform: translate(100px, 60px) scale(0.9) rotate(-25deg); }
+  0%, 100% { translate: 0 0; scale: 1; rotate: 0deg; }
+  25% { translate: -120px -80px; scale: 1.15; rotate: 30deg; }
+  75% { translate: 100px 60px; scale: 0.9; rotate: -25deg; }
 }
 
 .mesh-orb {
@@ -161,6 +170,7 @@ body {
   will-change: transform;
 }
 
+/* Orbs also react to mouse via --mx/--my */
 .mesh-orb-1 {
   width: 900px;
   height: 900px;
@@ -168,6 +178,7 @@ body {
   filter: blur(80px);
   top: -18%;
   left: -12%;
+  transform: translate(calc(var(--mx) * 60px), calc(var(--my) * 45px));
   animation: drift-1 26s ease-in-out infinite;
 }
 
@@ -178,6 +189,7 @@ body {
   filter: blur(90px);
   top: 35%;
   right: -18%;
+  transform: translate(calc(var(--mx) * -50px), calc(var(--my) * 60px));
   animation: drift-2 32s ease-in-out infinite;
 }
 
@@ -188,6 +200,7 @@ body {
   filter: blur(100px);
   bottom: -20%;
   left: 20%;
+  transform: translate(calc(var(--mx) * 70px), calc(var(--my) * -35px));
   animation: drift-3 28s ease-in-out infinite;
 }
 
@@ -198,6 +211,7 @@ body {
   filter: blur(110px);
   top: 10%;
   right: 15%;
+  transform: translate(calc(var(--mx) * -45px), calc(var(--my) * -55px));
   animation: drift-4 34s ease-in-out infinite;
 }
 
@@ -208,31 +222,33 @@ body {
   filter: blur(95px);
   bottom: 10%;
   right: -5%;
+  transform: translate(calc(var(--mx) * 35px), calc(var(--my) * 50px));
   animation: drift-5 30s ease-in-out infinite;
 }
 
+/* Orb drift uses translate/scale (separate from transform for mouse) */
 @keyframes drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(160px, 100px) scale(1.22); }
-  66% { transform: translate(-60px, 150px) scale(1.08); }
+  0%, 100% { translate: 0 0; scale: 1; }
+  33% { translate: 160px 100px; scale: 1.22; }
+  66% { translate: -60px 150px; scale: 1.08; }
 }
 @keyframes drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-130px, -90px) scale(1.15); }
-  66% { transform: translate(70px, -50px) scale(0.92); }
+  0%, 100% { translate: 0 0; scale: 1; }
+  33% { translate: -130px -90px; scale: 1.15; }
+  66% { translate: 70px -50px; scale: 0.92; }
 }
 @keyframes drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(100px, -120px) scale(1.14); }
-  66% { transform: translate(-80px, -40px) scale(1.06); }
+  0%, 100% { translate: 0 0; scale: 1; }
+  33% { translate: 100px -120px; scale: 1.14; }
+  66% { translate: -80px -40px; scale: 1.06; }
 }
 @keyframes drift-4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-90px, 130px) scale(1.18); }
+  0%, 100% { translate: 0 0; scale: 1; }
+  50% { translate: -90px 130px; scale: 1.18; }
 }
 @keyframes drift-5 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(80px, -100px) scale(1.12); }
+  0%, 100% { translate: 0 0; scale: 1; }
+  50% { translate: 80px -100px; scale: 1.12; }
 }
 
 /* ── Glass Card ── */

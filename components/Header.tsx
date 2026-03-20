@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -20,9 +20,9 @@ function Header() {
     <>
       <header className='fixed z-50 top-5 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] md:w-auto'>
         <motion.div
-          initial={{ opacity: 0, y: -50, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.55, ease: [0, 0, 0.58, 1] }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15, ease: [0.42, 0, 0.58, 1] }}
           className='glass-strong !rounded-full px-6 py-3'
         >
           {/* Mobile */}
@@ -33,12 +33,16 @@ function Header() {
               aria-label='Open menu'
             >
               <motion.span
-                animate={isMenuOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
+                animate={
+                  isMenuOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }
+                }
                 transition={{ duration: 0.4, ease }}
                 className='block w-5 h-[1.5px] bg-[#1a1a2e] origin-center'
               />
               <motion.span
-                animate={isMenuOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
+                animate={
+                  isMenuOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }
+                }
                 transition={{ duration: 0.4, ease }}
                 className='block w-5 h-[1.5px] bg-[#1a1a2e] origin-center'
               />
@@ -62,7 +66,9 @@ function Header() {
               </figure>
             </Link>
             <ul className='flex items-center gap-1 mx-auto'>
-              {MenuItems.filter((i: { label: string }) => i.label !== 'Home').map((item: { label: string; url: string }) => (
+              {MenuItems.filter(
+                (i: { label: string }) => i.label !== 'Home'
+              ).map((item: { label: string; url: string }) => (
                 <li key={item.label}>
                   <Link href={item.url}>
                     <motion.span
@@ -111,48 +117,57 @@ function Header() {
               exit={{ scaleX: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease }}
               className='absolute top-24 left-8 right-8 h-px origin-left'
-              style={{ background: 'linear-gradient(90deg, rgba(26,26,46,0.12), rgba(100,160,240,0.15), transparent)' }}
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(26,26,46,0.12), rgba(100,160,240,0.15), transparent)',
+              }}
             />
 
             {/* Menu content */}
             <div className='relative h-full flex flex-col justify-between px-8 pt-28 pb-12'>
               {/* Navigation items */}
               <ul className='flex flex-col gap-1'>
-                {MenuItems.map((item: { label: string; url: string }, i: number) => (
-                  <motion.li
-                    key={item.label}
-                    initial={{ opacity: 0, x: -40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{
-                      delay: 0.1 + i * 0.07,
-                      duration: 0.6,
-                      ease,
-                    }}
-                  >
-                    <Link href={item.url} onClick={handleMenu}>
-                      <div className='group flex items-center py-5 cursor-pointer'>
-                        <span
-                          className={`text-[2.5rem] leading-none tracking-tight transition-all duration-500 ${
-                            isActive(item.url)
-                              ? 'font-semibold text-[#1a1a2e]'
-                              : 'font-light text-[#1a1a2e]/60 group-hover:text-[#1a1a2e] group-hover:translate-x-2'
-                          }`}
-                        >
-                          {item.label}
-                        </span>
+                {MenuItems.map(
+                  (item: { label: string; url: string }, i: number) => (
+                    <motion.li
+                      key={item.label}
+                      initial={{ opacity: 0, x: -40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{
+                        delay: 0.1 + i * 0.07,
+                        duration: 0.6,
+                        ease,
+                      }}
+                    >
+                      <Link href={item.url} onClick={handleMenu}>
+                        <div className='group flex items-center py-5 cursor-pointer'>
+                          <span
+                            className={`text-[2.5rem] leading-none tracking-tight transition-all duration-500 ${
+                              isActive(item.url)
+                                ? 'font-semibold text-[#1a1a2e]'
+                                : 'font-light text-[#1a1a2e]/60 group-hover:text-[#1a1a2e] group-hover:translate-x-2'
+                            }`}
+                          >
+                            {item.label}
+                          </span>
 
-                        {isActive(item.url) && (
-                          <motion.div
-                            layoutId='mobile-active-dot'
-                            className='w-1.5 h-1.5 rounded-full bg-[rgba(100,160,240,0.6)] ml-3'
-                            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                          />
-                        )}
-                      </div>
-                    </Link>
-                  </motion.li>
-                ))}
+                          {isActive(item.url) && (
+                            <motion.div
+                              layoutId='mobile-active-dot'
+                              className='w-1.5 h-1.5 rounded-full bg-[rgba(100,160,240,0.6)] ml-3'
+                              transition={{
+                                type: 'spring',
+                                stiffness: 300,
+                                damping: 25,
+                              }}
+                            />
+                          )}
+                        </div>
+                      </Link>
+                    </motion.li>
+                  )
+                )}
               </ul>
 
               {/* Bottom section */}
