@@ -27,7 +27,7 @@ function Custom404() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
-          className='text-black/25 text-sm mb-10'
+          className='text-black/50 text-sm mb-10'
         >
           This page doesn't exist.
         </motion.p>

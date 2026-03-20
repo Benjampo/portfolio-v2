@@ -32,10 +32,10 @@ function Index() {
             }}
           >
             <div className='mb-3'>
-              <span className='text-xs font-semibold uppercase tracking-wider text-black/30'>
+              <span className='text-xs font-semibold uppercase tracking-wider text-black/50'>
                 {project.title}
               </span>
-              <p className='text-[11px] text-black/20'>
+              <p className='text-[11px] text-black/40'>
                 {project.subtitle}
               </p>
             </div>

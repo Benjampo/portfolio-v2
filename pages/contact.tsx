@@ -79,7 +79,7 @@ function Contact() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className='text-center text-black/25 text-sm mb-16'
+        className='text-center text-black/50 text-sm mb-16'
       >
         Have a project in mind or just want to say hello?
       </motion.p>
@@ -110,7 +110,7 @@ function Contact() {
           onSubmit={handleSubmit}
           className='flex flex-col'
         >
-          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Name</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/45 mt-10'>Name</label>
           <input
             type='text'
             value={fullname}
@@ -120,7 +120,7 @@ function Contact() {
             placeholder='Your name'
           />
 
-          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Email</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/45 mt-10'>Email</label>
           <input
             type='email'
             name='email'
@@ -142,7 +142,7 @@ function Contact() {
             aria-hidden='true'
           />
 
-          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Subject</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/45 mt-10'>Subject</label>
           <input
             type='text'
             name='subject'
@@ -152,7 +152,7 @@ function Contact() {
             placeholder='What is this about?'
           />
 
-          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/20 mt-10'>Message</label>
+          <label className='text-[11px] font-semibold uppercase tracking-[0.15em] text-black/45 mt-10'>Message</label>
           <textarea
             name='message'
             value={message}
@@ -197,7 +197,7 @@ function Contact() {
       >
         <motion.a
           whileHover={{ scale: 1.02 }}
-          className='text-xl md:text-2xl font-light text-black/20 hover:text-black transition-colors duration-500 cursor-pointer'
+          className='text-xl md:text-2xl font-light text-black/40 hover:text-black transition-colors duration-500 cursor-pointer'
           href='mailto:contact@benjampo.ch'
         >
           contact@benjampo.ch
@@ -206,7 +206,7 @@ function Contact() {
         <ul className='flex justify-center gap-6 mt-8'>
           {Socials.map(social => (
             <motion.li key={social.label} whileHover={{ scale: 1.2, y: -3 }}>
-              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-20 hover:opacity-100 transition-opacity duration-300'>
+              <a href={social.url} target='_blank' rel='noreferrer' className='opacity-40 hover:opacity-100 transition-opacity duration-300'>
                 <Image src={social.icon} alt={social.label} height={22} width={22} />
               </a>
             </motion.li>

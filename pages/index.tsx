@@ -1,11 +1,13 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRef } from 'react';
 import Projects from '../data/projects';
-import benjampo from './../assets/benjampo_gif.gif';
+
+const Room3D = dynamic(() => import('../components/Room3D'), { ssr: false });
 
 function SplitText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
@@ -87,7 +89,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className='text-xs font-semibold uppercase tracking-wider text-[#1a1a2e]/30'
+              className='text-xs font-semibold uppercase tracking-wider text-[#1a1a2e]/50'
             >
               {project.title}
             </motion.span>
@@ -96,7 +98,7 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className='text-xs text-[#1a1a2e]/20'
+              className='text-xs text-[#1a1a2e]/40'
             >
               {project.subtitle}
             </motion.span>
@@ -144,7 +146,7 @@ const Home: NextPage = () => {
 
       {/* Hero */}
       <section className='min-h-[65vh] flex flex-col justify-center items-center gap-8 mb-16'>
-        <HeroImage />
+        <Room3D />
         <div className='text-center overflow-hidden'>
           <h1 className='font-bold text-6xl md:text-8xl tracking-tight'>
             <SplitText text='Hello' delay={0.4} />
@@ -153,7 +155,7 @@ const Home: NextPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className='mt-4 text-lg md:text-xl text-[#1a1a2e]/40 font-light'
+            className='mt-4 text-lg md:text-xl text-[#1a1a2e]/60 font-light'
           >
             I'm Benjamin, Full-Stack developer
           </motion.p>
@@ -180,7 +182,7 @@ const Home: NextPage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className='text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/25 block mb-16'
+          className='text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/45 block mb-16'
         >
           Selected Work
         </motion.span>

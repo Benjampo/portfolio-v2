@@ -44,29 +44,23 @@ export function Project({ data }: any) {
         <title>{project.title} | Benjamin Porchet</title>
       </Head>
 
-      <div className='mb-10 relative'>
-        <motion.button
-          whileHover={{ scale: 1.15, x: -6 }}
-          whileTap={{ scale: 0.9 }}
-          className='absolute w-7 top-1 left-0 cursor-pointer -translate-x-[160%] text-black/30 hover:text-black transition-colors hidden md:block'
-          onClick={() => Router.back()}
-        >
-          <ArrowLeftIcon />
-        </motion.button>
+      <motion.button
+        whileHover={{ scale: 1.05, x: -3 }}
+        whileTap={{ scale: 0.9 }}
+        className='mb-6 text-black/30 hover:text-black transition-colors cursor-pointer flex items-center gap-2 text-sm'
+        onClick={() => Router.back()}
+      >
+        <ArrowLeftIcon className='w-4 h-4' />
+        <span>Back</span>
+      </motion.button>
 
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          className='mb-4 text-black/30 text-sm md:hidden'
-          onClick={() => Router.back()}
-        >
-          Back
-        </motion.button>
+      <div className='mb-10'>
 
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className='text-[11px] uppercase tracking-[0.2em] text-black/20 font-semibold'
+          className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'
         >
           {project.subtitle}
         </motion.span>
@@ -123,8 +117,8 @@ export function Project({ data }: any) {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className='md:w-1/2 mb-10'
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/15 font-semibold'>Context</span>
-          <p className='text-black/40 text-lg leading-relaxed mt-4'>{project.context}</p>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>Context</span>
+          <p className='text-black/60 text-lg leading-relaxed mt-4'>{project.context}</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -133,11 +127,11 @@ export function Project({ data }: any) {
           transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className='md:w-1/2 mb-10'
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/15 font-semibold'>What I did</span>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>What I did</span>
           <ul className='mt-4 space-y-3'>
             {project.tasks.map((task: string, index: number) => (
-              <li className='flex items-start gap-3 text-black/40 text-lg' key={index}>
-                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/15 flex-shrink-0' />
+              <li className='flex items-start gap-3 text-black/60 text-lg' key={index}>
+                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/30 flex-shrink-0' />
                 {task}
               </li>
             ))}
@@ -159,7 +153,7 @@ export function Project({ data }: any) {
           </motion.a>
         )}
         {project.info && (
-          <span className='text-black/20 text-lg'>{project.info}</span>
+          <span className='text-black/45 text-lg'>{project.info}</span>
         )}
       </div>
     </motion.section>

@@ -47,7 +47,7 @@ function Footer() {
               </motion.li>
             ))}
           </ul>
-          <p className='text-center mt-8 text-[11px] text-black/20 tracking-wide'>
+          <p className='text-center mt-8 text-[11px] text-black/40 tracking-wide'>
             2025 Benjamin Porchet
           </p>
         </div>

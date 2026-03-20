@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@sendgrid/mail": "^7.7.0",
+    "@types/three": "^0.183.1",
     "base64-js": "^1.5.1",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
@@ -23,7 +26,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hot-toast": "^2.6.0",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@types/js-base64": "^3.0.0",

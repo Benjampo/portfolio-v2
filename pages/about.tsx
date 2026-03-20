@@ -57,18 +57,18 @@ function TimelineItem({ year, title, description, type, location, index }: {
       {/* Dot */}
       <div className='absolute left-0 top-1 -translate-x-1/2 w-2 h-2 rounded-full bg-black/10 group-hover:bg-black group-hover:scale-150 transition-all duration-500' />
       <div className='flex items-center gap-3 flex-wrap'>
-        <span className='text-[11px] font-semibold text-black/20 tabular-nums tracking-wider'>{year}</span>
+        <span className='text-[11px] font-semibold text-black/40 tabular-nums tracking-wider'>{year}</span>
         {type && (
-          <span className='text-[10px] uppercase tracking-wider text-black/20 border border-black/[0.06] rounded-full px-2.5 py-0.5'>
+          <span className='text-[10px] uppercase tracking-wider text-black/40 border border-black/[0.06] rounded-full px-2.5 py-0.5'>
             {type}
           </span>
         )}
         {location && (
-          <span className='text-[10px] text-black/15'>{location}</span>
+          <span className='text-[10px] text-black/35'>{location}</span>
         )}
       </div>
       <h3 className='text-xl font-semibold mt-2'>{title}</h3>
-      <p className='text-sm text-black/35 mt-2 leading-relaxed max-w-lg'>{description}</p>
+      <p className='text-sm text-black/50 mt-2 leading-relaxed max-w-lg'>{description}</p>
     </motion.div>
   );
 }
@@ -90,84 +90,91 @@ function About() {
       </Head>
 
       {/* ── Hero ── */}
-      <div className='min-h-[50vh] flex flex-col justify-center items-center text-center mb-24'>
-        <ProfileImage />
-
-        <motion.h1
-          style={{ y: titleY }}
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className='font-bold text-7xl md:text-[10rem] leading-none tracking-tight mt-6'
-        >
-          About
-        </motion.h1>
-
+      <div className='mb-20'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='mt-4 flex items-center gap-3 flex-wrap justify-center'
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className='flex items-center gap-5 mb-8'
         >
-          <span className='text-base text-black/35 font-light'>Software Developer</span>
-          <span className='w-1 h-1 rounded-full bg-black/10' />
-          <span className='text-base text-black/35 font-light'>Lausanne, Switzerland</span>
+          <ProfileImage />
+          <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className='flex items-center gap-2.5 text-sm text-black/50'
+            >
+              <span>Software Developer</span>
+              <span className='w-1 h-1 rounded-full bg-black/20' />
+              <span>Lausanne, Switzerland</span>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        <motion.h1
+          style={{ y: titleY }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className='font-bold text-5xl md:text-7xl leading-none tracking-tight'
+        >
+          About
+        </motion.h1>
+      </div>
+
+      {/* ── Bio + Currently at ── */}
+      <div className='grid md:grid-cols-[2fr_1fr] gap-16 mb-24'>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Background</span>
+          <p className='text-base md:text-lg text-black/65 leading-[1.8]'>
+            Graduated in Software Development from the Centre professionnel du Nord vaudois,
+            I am currently working as a software developer at Jobtrek, where I contribute to building
+            tools that support young people in their professional integration.
+          </p>
+          <p className='text-base md:text-lg text-black/65 leading-[1.8] mt-5'>
+            Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome,
+            I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French
+            and English, I am committed to creating innovative technological solutions tailored to users' needs.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Currently at</span>
+          <motion.a
+            whileHover={{ opacity: 0.5 }}
+            className='block font-bold text-3xl md:text-4xl tracking-tight cursor-pointer transition-opacity duration-300'
+            href='https://www.jobtrek.ch/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            jobtrek
+          </motion.a>
+          <p className='text-sm text-black/50 mt-3 leading-relaxed'>
+            A foundation helping young people in difficulty find their path through professional integration.
+          </p>
         </motion.div>
       </div>
 
-      {/* ── Bio ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='max-w-2xl mx-auto mb-32'
-      >
-        <p className='text-lg md:text-xl text-black/40 leading-[1.9] font-light'>
-          Graduated in Software Development from the Centre professionnel du Nord vaudois,
-          I am currently working as a software developer at Jobtrek, where I contribute to building
-          tools that support young people in their professional integration.
-        </p>
-        <p className='text-lg md:text-xl text-black/40 leading-[1.9] font-light mt-6'>
-          Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome,
-          I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French
-          and English, I am committed to creating innovative technological solutions tailored to users' needs.
-        </p>
-      </motion.div>
-
-      {/* ── Currently at ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='text-center mb-32'
-      >
-        <span className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold'>Currently at</span>
-        <motion.a
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className='block font-bold text-7xl md:text-9xl mt-4 hover:opacity-25 transition-opacity duration-500 cursor-pointer tracking-tight'
-          href='https://www.jobtrek.ch/'
-          target='_blank'
-          rel='noreferrer'
-        >
-          jobtrek
-        </motion.a>
-        <p className='text-sm text-black/20 mt-4 max-w-sm mx-auto leading-relaxed'>
-          A foundation helping young people in difficulty find their path through professional integration.
-        </p>
-      </motion.div>
-
       {/* ── Stack ── */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className='mb-32'
+        className='mb-24'
       >
-        <span className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-8'>Stack</span>
+        <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Stack</span>
         <ul className='flex flex-wrap gap-2.5'>
           {Techs.map((tech, index) => (
             <motion.li
@@ -188,16 +195,16 @@ function About() {
       </motion.div>
 
       {/* ── Divider ── */}
-      <div className='w-12 h-[1px] bg-black/[0.06] mx-auto mb-32' />
+      <div className='w-12 h-[1px] bg-black/[0.08] mb-24' />
 
       {/* ── Timeline ── */}
-      <div className='grid md:grid-cols-2 gap-x-20 gap-y-0 mb-32'>
+      <div className='grid md:grid-cols-2 gap-x-16 gap-y-0 mb-24'>
         <div>
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-10'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-8'
           >
             Experience
           </motion.span>
@@ -219,7 +226,7 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mb-10'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-8'
           >
             Education
           </motion.span>
@@ -237,7 +244,7 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/15 font-semibold block mt-6 mb-8'
+            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mt-6 mb-6'
           >
             Languages
           </motion.span>
@@ -255,7 +262,7 @@ function About() {
                 transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className='text-sm font-semibold block'>{item.lang}</span>
-                <span className='text-[11px] text-black/20'>{item.level}</span>
+                <span className='text-[11px] text-black/40'>{item.level}</span>
               </motion.div>
             ))}
           </div>
@@ -298,7 +305,7 @@ function About() {
           <motion.span
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className='text-sm font-medium text-black/25 hover:text-black transition-colors duration-300 cursor-pointer'
+            className='text-sm font-medium text-black/45 hover:text-black transition-colors duration-300 cursor-pointer'
           >
             Get in touch &rarr;
           </motion.span>
