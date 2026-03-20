@@ -1,26 +1,37 @@
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Head from 'next/head';
 import Image from "next/legacy/image";
+import Link from 'next/link';
 import Router from 'next/router';
 import { useRef } from 'react';
 import Projects from '../../data/projects';
 
-function ParallaxImage({ src, alt, delay, className }: { src: any; alt: string; delay: number; className?: string }) {
+function ParallaxImage({ src, alt, className, speed = 0.15 }: { src: any; alt: string; className?: string; speed?: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  const rawY = useTransform(scrollYProgress, [0, 1], [speed * -200, speed * 200]);
+  const y = useSpring(rawY, { stiffness: 100, damping: 25, mass: 0.6 });
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1, 1.12]);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`image-card ${className || ''}`}
+    <div ref={ref} className={`rounded-[22px] overflow-hidden ${className || ''}`}
+      style={{ boxShadow: '0 8px 40px rgba(100,160,220,0.1), 0 0 0 1px rgba(255,255,255,0.5)' }}
     >
-      <figure className='relative w-full h-full overflow-hidden'>
-        <motion.div className='absolute inset-[-20%]' style={{ y }}>
+      <div className='relative w-full h-full overflow-hidden'>
+        <motion.div
+          className='absolute'
+          style={{
+            top: '-20%', left: '-5%', right: '-5%', bottom: '-20%',
+            y,
+            scale,
+            willChange: 'transform',
+          }}
+        >
           <Image
             priority
             layout='fill'
@@ -30,7 +41,49 @@ function ParallaxImage({ src, alt, delay, className }: { src: any; alt: string; 
             placeholder='blur'
           />
         </motion.div>
-      </figure>
+      </div>
+    </div>
+  );
+}
+
+function ProjectNav({ project }: { project: any }) {
+  const currentIndex = Projects.findIndex((p: any) => p.id === project.id);
+  const prevProject = currentIndex > 0 ? Projects[currentIndex - 1] : null;
+  const nextProject = currentIndex < Projects.length - 1 ? Projects[currentIndex + 1] : null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className='border-t border-black/[0.06] pt-12 mt-20'
+    >
+      <span className='text-[11px] uppercase tracking-[0.2em] text-black/40 font-semibold block mb-6'>More work</span>
+      <div className='flex justify-between items-center'>
+        {prevProject ? (
+          <Link href={`/work/${prevProject.id}`}>
+            <motion.span
+              whileHover={{ x: -4 }}
+              className='text-lg font-semibold text-[#1a1a2e]/60 hover:text-[#1a1a2e] transition-colors duration-300 cursor-pointer flex items-center gap-3'
+            >
+              <ArrowLeftIcon className='w-4 h-4' />
+              {prevProject.title}
+            </motion.span>
+          </Link>
+        ) : <div />}
+        {nextProject ? (
+          <Link href={`/work/${nextProject.id}`}>
+            <motion.span
+              whileHover={{ x: 4 }}
+              className='text-lg font-semibold text-[#1a1a2e]/60 hover:text-[#1a1a2e] transition-colors duration-300 cursor-pointer flex items-center gap-3'
+            >
+              {nextProject.title}
+              <ArrowLeftIcon className='w-4 h-4 rotate-180' />
+            </motion.span>
+          </Link>
+        ) : <div />}
+      </div>
     </motion.div>
   );
 }
@@ -39,98 +92,80 @@ export function Project({ data }: any) {
   const project = data[0];
 
   return (
-    <motion.section className='my-4'>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Head>
         <title>{project.title} | Benjamin Porchet</title>
       </Head>
 
+      {/* Back */}
       <motion.button
-        whileHover={{ scale: 1.05, x: -3 }}
-        whileTap={{ scale: 0.9 }}
-        className='mb-6 text-black/30 hover:text-black transition-colors cursor-pointer flex items-center gap-2 text-sm'
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        whileHover={{ x: -4 }}
+        whileTap={{ scale: 0.95 }}
+        className='mb-10 text-black/40 hover:text-black transition-colors cursor-pointer flex items-center gap-2 text-sm'
         onClick={() => Router.back()}
       >
         <ArrowLeftIcon className='w-4 h-4' />
         <span>Back</span>
       </motion.button>
 
-      <div className='mb-10'>
+      {/* Hero image — full bleed */}
+      <ParallaxImage
+        src={project.coverSrc}
+        alt={`Main image of ${project.title}`}
+        className='h-[18rem] md:h-[48rem] -mx-6 md:-mx-16 xl:-mx-24'
+        speed={0.2}
+      />
 
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'
-        >
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className='mt-10 md:mt-14 max-w-3xl'
+      >
+        <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>
           {project.subtitle}
-        </motion.span>
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='font-bold text-4xl md:text-6xl tracking-tight mt-2 mb-4'
-        >
+        </span>
+        <h1 className='font-bold text-3xl md:text-5xl tracking-tight mt-4'>
           {project.title}
-        </motion.h1>
-
-        <motion.ul
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className='flex flex-wrap gap-2'
-        >
+        </h1>
+        <div className='flex flex-wrap gap-2 mt-5'>
           {project.tech.map((tech: string, index: number) => (
-            <li className='pill pointer-events-none text-xs' key={index}>
+            <span className='pill pointer-events-none text-xs' key={index}>
               {tech}
-            </li>
+            </span>
           ))}
-        </motion.ul>
-      </div>
+        </div>
+      </motion.div>
 
-      <div className='grid grid-cols-4 gap-4'>
-        <ParallaxImage
-          src={project.coverSrc}
-          alt={`Main image of ${project.title}`}
-          delay={0.3}
-          className='col-span-4 h-[16rem] md:h-[42rem]'
-        />
-        <ParallaxImage
-          src={project.secSrc}
-          alt={`Second image of ${project.title}`}
-          delay={0.4}
-          className='col-span-4 lg:col-span-2 h-[14rem] md:h-[30rem]'
-        />
-        <ParallaxImage
-          src={project.thirdSrc}
-          alt={`Third image of ${project.title}`}
-          delay={0.5}
-          className='col-span-4 lg:col-span-2 h-[14rem] md:h-[30rem]'
-        />
-      </div>
-
-      {/* Content — no cards, just open layout */}
-      <div className='md:flex gap-16 mt-16'>
+      {/* Content */}
+      <div className='grid md:grid-cols-[1fr_1fr] gap-12 md:gap-20 mt-16 md:mt-20 max-w-4xl'>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='md:w-1/2 mb-10'
         >
           <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>Context</span>
-          <p className='text-black/60 text-lg leading-relaxed mt-4'>{project.context}</p>
+          <p className='text-black/60 text-base md:text-lg leading-relaxed mt-4'>{project.context}</p>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='md:w-1/2 mb-10'
+          transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>What I did</span>
-          <ul className='mt-4 space-y-3'>
+          <ul className='mt-4 space-y-2.5'>
             {project.tasks.map((task: string, index: number) => (
-              <li className='flex items-start gap-3 text-black/60 text-lg' key={index}>
+              <li className='flex items-start gap-3 text-black/60 text-base md:text-lg' key={index}>
                 <span className='mt-2.5 w-1 h-1 rounded-full bg-black/30 flex-shrink-0' />
                 {task}
               </li>
@@ -139,23 +174,58 @@ export function Project({ data }: any) {
         </motion.div>
       </div>
 
-      <div className='flex w-full items-center justify-center mt-8 mb-8'>
-        {project.url && (
+      {/* Secondary images */}
+      <div className='grid md:grid-cols-2 gap-6 mt-16 md:mt-24'>
+        <ParallaxImage
+          src={project.secSrc}
+          alt={`Second image of ${project.title}`}
+          className='h-[14rem] md:h-[32rem]'
+          speed={0.12}
+        />
+        <ParallaxImage
+          src={project.thirdSrc}
+          alt={`Third image of ${project.title}`}
+          className='h-[14rem] md:h-[32rem]'
+          speed={0.18}
+        />
+      </div>
+
+      {/* Info (if no URL) */}
+      {project.info && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className='text-center text-black/40 text-sm mt-10'
+        >
+          {project.info}
+        </motion.p>
+      )}
+
+      {/* Visit website CTA */}
+      {project.url && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className='flex justify-center mt-16 md:mt-20'
+        >
           <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className='glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full inline-block'
             href={project.url}
             target='_blank'
             rel='noreferrer'
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className='inline-block glass-card text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
           >
             Visit website
           </motion.a>
-        )}
-        {project.info && (
-          <span className='text-black/45 text-lg'>{project.info}</span>
-        )}
-      </div>
+        </motion.div>
+      )}
+
+      {/* Prev / Next navigation */}
+      <ProjectNav project={project} />
     </motion.section>
   );
 }

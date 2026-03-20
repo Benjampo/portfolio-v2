@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
@@ -8,7 +8,9 @@ import Projects from '../../data/projects';
 function WorkCard({ project, index, featured = false }: { project: any; index: number; featured?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [featured ? 80 : 50, featured ? -80 : -50]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [featured ? 120 : 80, featured ? -120 : -80]);
+  const imgY = useSpring(rawY, { stiffness: 100, damping: 25, mass: 0.6 });
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
 
   return (
     <motion.div
@@ -23,7 +25,7 @@ function WorkCard({ project, index, featured = false }: { project: any; index: n
             className='relative image-card overflow-hidden'
           >
             <figure className={`relative w-full overflow-hidden ${featured ? 'h-[20rem] md:h-[44rem]' : 'h-[14rem] md:h-[28rem]'}`}>
-              <motion.div className='absolute inset-[-20%]' style={{ y: imgY }}>
+              <motion.div className='absolute inset-[-20%]' style={{ y: imgY, scale: imgScale }}>
                 <div className='absolute inset-0 transition-transform duration-[1s] ease-out group-hover:scale-[1.03]'>
                     <Image
                       layout='fill'
