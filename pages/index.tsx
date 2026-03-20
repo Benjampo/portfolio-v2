@@ -62,12 +62,10 @@ function EditorialCard({
   project,
   index,
   height = 'h-[22rem] md:h-[38rem]',
-  showIndex = true,
 }: {
   project: any;
   index: number;
   height?: string;
-  showIndex?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -100,12 +98,6 @@ function EditorialCard({
         {/* Overlay */}
         <div className='card-overlay absolute inset-0 z-10' />
 
-        {/* Large index number */}
-        {showIndex && (
-          <span className='card-index absolute top-4 right-6 md:top-6 md:right-10 text-[5rem] md:text-[8rem] z-10'>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        )}
 
         {/* Content */}
         <div className='absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 flex flex-col gap-3'>
@@ -190,13 +182,7 @@ const Home: NextPage = () => {
           </motion.h2>
         </div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className='section-rule mb-12 origin-left'
-        />
+        <div className='mb-12' />
 
         {/* Row 1 — Featured hero card */}
         <EditorialCard
