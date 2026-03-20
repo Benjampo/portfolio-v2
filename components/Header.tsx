@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from '../lib/i18n';
 import { useTheme } from '../lib/theme';
 import logo from './../assets/images/logo.svg';
@@ -36,6 +36,8 @@ function MoonIcon() {
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isNavHovered, setIsNavHovered] = useState(false);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
   const handleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { t, locale, toggleLocale } = useTranslation();
@@ -44,17 +46,110 @@ function Header() {
   const isActive = (url: string) =>
     url === '/' ? router.asPath === '/' : router.asPath.startsWith(url);
 
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setIsNavHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => setIsNavHovered(false), 200);
+  };
+
   return (
     <>
       <header className='fixed z-50 top-5 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] md:w-auto'>
+        {/* Wrapper for hover zone — includes nav + bubble area */}
+        <div
+          className='relative hidden md:block'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15, ease: [0.42, 0, 0.58, 1] }}
+            className='glass-strong !rounded-full px-6 py-3'
+          >
+            <nav className='flex items-center gap-8'>
+              <Link href='/'>
+                <figure className='cursor-pointer'>
+                  <Image width={28} height={28} src={logo} alt='Logo' className='dark:invert' />
+                </figure>
+              </Link>
+              <ul className='flex items-center gap-1 mx-auto'>
+                {MenuItems.filter(
+                  (i: { labelKey: string }) => i.labelKey !== 'nav.home'
+                ).map((item: { labelKey: string; url: string }) => (
+                  <li key={item.labelKey}>
+                    <Link href={item.url}>
+                      <motion.span
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.92 }}
+                        className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
+                          isActive(item.url)
+                            ? 'bg-white/30 dark:bg-white/10 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),_0_2px_8px_rgba(100,160,220,0.15)] backdrop-blur-sm border border-white/30 dark:border-white/10'
+                            : 'text-foreground/50 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
+                        }`}
+                      >
+                        {t(item.labelKey as any)}
+                      </motion.span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </motion.div>
+
+          {/* Floating bubbles — split out from nav on hover */}
+          <AnimatePresence>
+            {isNavHovered && (
+              <div className='absolute right-0 top-0 bottom-0 flex items-center pointer-events-none' style={{ transform: 'translateX(100%)' }}>
+                <div className='flex items-center gap-2 pl-3 pointer-events-auto'>
+                  {/* Theme bubble */}
+                  <motion.button
+                    key='theme-bubble'
+                    initial={{ opacity: 0, scale: 0.3, x: -20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.3, x: -20 }}
+                    transition={{ duration: 0.35, ease, delay: 0 }}
+                    whileHover={{ scale: 1.12 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleTheme}
+                    className='glass-strong !rounded-full w-10 h-10 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
+                    aria-label='Toggle theme'
+                  >
+                    {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+                  </motion.button>
+
+                  {/* Language bubble */}
+                  <motion.button
+                    key='lang-bubble'
+                    initial={{ opacity: 0, scale: 0.3, x: -24 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.3, x: -24 }}
+                    transition={{ duration: 0.35, ease, delay: 0.05 }}
+                    whileHover={{ scale: 1.12 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleLocale}
+                    className='glass-strong !rounded-full w-10 h-10 flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
+                    aria-label='Toggle language'
+                  >
+                    {locale === 'en' ? 'FR' : 'EN'}
+                  </motion.button>
+                </div>
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Mobile nav — separate, no hover bubbles */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15, ease: [0.42, 0, 0.58, 1] }}
-          className='glass-strong !rounded-full px-6 py-3'
+          className='glass-strong !rounded-full px-6 py-3 md:hidden'
         >
-          {/* Mobile */}
-          <nav className='flex relative justify-between w-full md:hidden items-center'>
+          <nav className='flex relative justify-between w-full items-center'>
             <button
               onClick={handleMenu}
               className='w-7 h-7 flex flex-col justify-center items-center gap-[5px] cursor-pointer'
@@ -84,58 +179,6 @@ function Header() {
 
             {/* Spacer for centering */}
             <div className='w-7' />
-          </nav>
-
-          {/* Desktop */}
-          <nav className='hidden md:flex items-center gap-8'>
-            <Link href='/'>
-              <figure className='cursor-pointer'>
-                <Image width={28} height={28} src={logo} alt='Logo' className='dark:invert' />
-              </figure>
-            </Link>
-            <ul className='flex items-center gap-1 mx-auto'>
-              {MenuItems.filter(
-                (i: { labelKey: string }) => i.labelKey !== 'nav.home'
-              ).map((item: { labelKey: string; url: string }) => (
-                <li key={item.labelKey}>
-                  <Link href={item.url}>
-                    <motion.span
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.92 }}
-                      className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
-                        isActive(item.url)
-                          ? 'bg-white/30 dark:bg-white/10 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),_0_2px_8px_rgba(100,160,220,0.15)] backdrop-blur-sm border border-white/30 dark:border-white/10'
-                          : 'text-foreground/50 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
-                      }`}
-                    >
-                      {t(item.labelKey as any)}
-                    </motion.span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Toggle controls */}
-            <div className='flex items-center gap-2'>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleTheme}
-                className='w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground transition-colors cursor-pointer'
-                aria-label='Toggle theme'
-              >
-                {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleLocale}
-                className='w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-foreground/50 hover:text-foreground transition-colors cursor-pointer'
-                aria-label='Toggle language'
-              >
-                {locale === 'en' ? 'FR' : 'EN'}
-              </motion.button>
-            </div>
           </nav>
         </motion.div>
       </header>
