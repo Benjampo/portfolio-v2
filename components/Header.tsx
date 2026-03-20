@@ -68,7 +68,7 @@ function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: [0.42, 0, 0.58, 1] }}
-            className='glass-strong !rounded-full px-6 py-3'
+            className='glass-strong !rounded-full px-5 py-2'
           >
             <nav className='flex items-center gap-8'>
               <Link href='/'>
@@ -104,7 +104,7 @@ function Header() {
           <AnimatePresence>
             {isNavHovered && (
               <div className='absolute right-0 top-0 bottom-0 flex items-center pointer-events-none' style={{ transform: 'translateX(100%)' }}>
-                <div className='flex items-center gap-2 pl-3 pointer-events-auto'>
+                <div className='flex items-stretch gap-2 pl-3 pointer-events-auto h-full'>
                   {/* Theme bubble */}
                   <motion.button
                     key='theme-bubble'
@@ -112,10 +112,10 @@ function Header() {
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.3, x: -20 }}
                     transition={{ duration: 0.35, ease, delay: 0 }}
-                    whileHover={{ scale: 1.12 }}
+                    whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleTheme}
-                    className='glass-strong !rounded-full w-10 h-10 flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
+                    className='glass-strong !rounded-full aspect-square h-full flex items-center justify-center text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
                     aria-label='Toggle theme'
                   >
                     {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -128,10 +128,10 @@ function Header() {
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.3, x: -24 }}
                     transition={{ duration: 0.35, ease, delay: 0.05 }}
-                    whileHover={{ scale: 1.12 }}
+                    whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={toggleLocale}
-                    className='glass-strong !rounded-full w-10 h-10 flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
+                    className='glass-strong !rounded-full aspect-square h-full flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-foreground/60 hover:text-foreground transition-colors cursor-pointer'
                     aria-label='Toggle language'
                   >
                     {locale === 'en' ? 'FR' : 'EN'}
