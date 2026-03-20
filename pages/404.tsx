@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import Image from "next/legacy/image";
 import Link from 'next/link';
+import { useTranslation } from '../lib/i18n';
 import Oops from './../assets/icons/oops.png';
 
 function Custom404() {
+  const { t } = useTranslation();
+
   return (
     <section className='min-h-[80vh] flex items-center justify-center'>
       <div className='text-center'>
@@ -27,9 +30,9 @@ function Custom404() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
-          className='text-black/50 text-sm mb-10'
+          className='text-foreground/50 text-sm mb-10'
         >
-          This page doesn't exist.
+          {t('404.text')}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -40,9 +43,9 @@ function Custom404() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className='glass-btn text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full inline-block cursor-pointer'
+              className='glass-btn text-foreground text-sm font-medium px-8 py-4 rounded-full inline-block cursor-pointer'
             >
-              Go home
+              {t('404.goHome')}
             </motion.span>
           </Link>
         </motion.div>

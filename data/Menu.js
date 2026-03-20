@@ -1,21 +1,21 @@
 const MenuItems = [
   {
-    label: 'Home',
+    labelKey: 'nav.home',
     url: '/',
     active: true,
   },
   {
-    label: 'Work',
+    labelKey: 'nav.work',
     url: '/work',
     active: false,
   },
   {
-    label: 'About',
+    labelKey: 'nav.about',
     url: '/about',
     active: false,
   },
   {
-    label: 'Contact',
+    labelKey: 'nav.contact',
     url: '/contact',
     active: false,
   },

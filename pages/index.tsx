@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useRef } from 'react';
+import { useTranslation } from '../lib/i18n';
 import Projects from '../data/projects';
 import benjampo from './../assets/benjampo_gif.gif';
 
@@ -70,6 +71,10 @@ function EditorialCard({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const { t, locale } = useTranslation();
+
+  const context = locale === 'fr' && project.context_fr ? project.context_fr : project.context;
+  const subtitle = locale === 'fr' && project.subtitle_fr ? project.subtitle_fr : project.subtitle;
 
   return (
     <Link href={`/work/${project.id}`}>
@@ -102,7 +107,7 @@ function EditorialCard({
         {/* Content */}
         <div className='absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 flex flex-col gap-3'>
           <div className='flex items-center gap-2'>
-            <span className='editorial-tag'>{project.subtitle}</span>
+            <span className='editorial-tag'>{subtitle}</span>
             {project.tech?.slice(0, 2).map((t: string) => (
               <span key={t} className='editorial-tag hidden md:inline-block'>{t}</span>
             ))}
@@ -111,14 +116,14 @@ function EditorialCard({
             {project.title}
           </h3>
           <p className='text-white/50 text-sm md:text-base max-w-lg leading-relaxed line-clamp-2'>
-            {project.context}
+            {context}
           </p>
 
           {/* Hover arrow */}
           <motion.div
             className='flex items-center gap-2 text-white/0 group-hover:text-white/70 transition-colors duration-500 mt-1'
           >
-            <span className='text-xs uppercase tracking-widest font-medium'>View project</span>
+            <span className='text-xs uppercase tracking-widest font-medium'>{t('home.viewProject')}</span>
             <svg width='16' height='16' viewBox='0 0 16 16' fill='none' className='translate-x-0 group-hover:translate-x-1 transition-transform duration-500'>
               <path d='M3 8h10M9 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
             </svg>
@@ -130,6 +135,8 @@ function EditorialCard({
 }
 
 const Home: NextPage = () => {
+  const { t } = useTranslation();
+
   return (
     <motion.section className='flex flex-col'>
       <Head>
@@ -141,15 +148,15 @@ const Home: NextPage = () => {
         <HeroImage />
         <div className='text-center overflow-hidden'>
           <h1 className='font-bold text-6xl md:text-8xl tracking-tight'>
-            <SplitText text='Hello' delay={0.4} />
+            <SplitText text={t('home.hello')} delay={0.4} />
           </h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className='mt-4 text-lg md:text-xl text-[#1a1a2e]/60 font-light'
+            className='mt-4 text-lg md:text-xl text-foreground/60 font-light'
           >
-            I'm Benjamin, Full-Stack developer
+            {t('home.subtitle')}
           </motion.p>
         </div>
 
@@ -162,7 +169,7 @@ const Home: NextPage = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            className='w-[1px] h-12 bg-[#1a1a2e]/20 mx-auto'
+            className='w-[1px] h-12 bg-foreground/20 mx-auto'
           />
         </motion.div>
       </section>
@@ -178,7 +185,7 @@ const Home: NextPage = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className='text-4xl md:text-6xl tracking-tight font-bold'
           >
-            Selected Work
+            {t('home.selectedWork')}
           </motion.h2>
         </div>
 
@@ -230,9 +237,9 @@ const Home: NextPage = () => {
             <motion.span
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className='inline-flex items-center gap-3 glass-btn text-[#1a1a2e] text-sm font-medium px-10 py-4 rounded-full cursor-pointer'
+              className='inline-flex items-center gap-3 glass-btn text-foreground text-sm font-medium px-10 py-4 rounded-full cursor-pointer'
             >
-              View all projects
+              {t('home.viewAll')}
               <svg width='14' height='14' viewBox='0 0 16 16' fill='none'>
                 <path d='M3 8h10M9 4l4 4-4 4' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
               </svg>

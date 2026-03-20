@@ -7,6 +7,7 @@ import Techs from './../data/Techs';
 import Works from './../data/Works';
 
 import Head from 'next/head';
+import { useTranslation } from '../lib/i18n';
 import Profile from './../assets/icons/yes.png';
 
 function ProfileImage() {
@@ -50,23 +51,23 @@ function TimelineItem({ year, title, description, type, location, index }: {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] as const }}
-      className='group pb-12 border-l border-black/[0.06] pl-8 relative'
+      className='group pb-12 border-l border-foreground/[0.06] pl-8 relative'
     >
       {/* Dot */}
-      <div className='absolute left-0 top-1 -translate-x-1/2 w-2 h-2 rounded-full bg-black/10 group-hover:bg-black group-hover:scale-150 transition-all duration-500' />
+      <div className='absolute left-0 top-1 -translate-x-1/2 w-2 h-2 rounded-full bg-foreground/10 group-hover:bg-foreground group-hover:scale-150 transition-all duration-500' />
       <div className='flex items-center gap-3 flex-wrap'>
-        <span className='text-[11px] font-semibold text-black/40 tabular-nums tracking-wider'>{year}</span>
+        <span className='text-[11px] font-semibold text-foreground/40 tabular-nums tracking-wider'>{year}</span>
         {type && (
-          <span className='text-[10px] uppercase tracking-wider text-black/40 border border-black/[0.06] rounded-full px-2.5 py-0.5'>
+          <span className='text-[10px] uppercase tracking-wider text-foreground/40 border border-foreground/[0.06] rounded-full px-2.5 py-0.5'>
             {type}
           </span>
         )}
         {location && (
-          <span className='text-[10px] text-black/35'>{location}</span>
+          <span className='text-[10px] text-foreground/35'>{location}</span>
         )}
       </div>
       <h3 className='text-xl font-semibold mt-2'>{title}</h3>
-      <p className='text-sm text-black/50 mt-2 leading-relaxed max-w-lg'>{description}</p>
+      <p className='text-sm text-foreground/50 mt-2 leading-relaxed max-w-lg'>{description}</p>
     </motion.div>
   );
 }
@@ -75,6 +76,7 @@ function About() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: scrollRef, offset: ['start start', 'end end'] });
   const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
+  const { t, locale } = useTranslation();
 
   return (
     <motion.section
@@ -84,7 +86,7 @@ function About() {
       exit={{ opacity: 0 }}
     >
       <Head>
-        <title>Benjamin Porchet | About</title>
+        <title>Benjamin Porchet | {t('about.title')}</title>
       </Head>
 
       {/* ── Hero ── */}
@@ -101,11 +103,11 @@ function About() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className='flex items-center gap-2.5 text-sm text-black/50'
+              className='flex items-center gap-2.5 text-sm text-foreground/50'
             >
-              <span>Software Developer</span>
-              <span className='w-1 h-1 rounded-full bg-black/20' />
-              <span>Lausanne, Switzerland</span>
+              <span>{t('about.role')}</span>
+              <span className='w-1 h-1 rounded-full bg-foreground/20' />
+              <span>{t('about.location')}</span>
             </motion.div>
             <motion.a
               initial={{ opacity: 0 }}
@@ -115,9 +117,9 @@ function About() {
               whileTap={{ scale: 0.97 }}
               href='/static/BenjaminPorchet_CV_EN.pdf'
               download
-              className='inline-flex items-center gap-2 text-xs text-black/40 hover:text-black transition-colors duration-300 mt-2 cursor-pointer'
+              className='inline-flex items-center gap-2 text-xs text-foreground/40 hover:text-foreground transition-colors duration-300 mt-2 cursor-pointer'
             >
-              Download resume
+              {t('about.downloadResume')}
               <svg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
                 <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /><polyline points='7 10 12 15 17 10' /><line x1='12' y1='15' x2='12' y2='3' />
               </svg>
@@ -132,7 +134,7 @@ function About() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className='font-bold text-5xl md:text-7xl leading-none tracking-tight'
         >
-          About
+          {t('about.title')}
         </motion.h1>
       </div>
 
@@ -144,16 +146,12 @@ function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Background</span>
-          <p className='text-base md:text-lg text-black/65 leading-[1.8]'>
-            Graduated in Software Development from the Centre professionnel du Nord vaudois,
-            I am currently working as a software developer at Jobtrek, where I contribute to building
-            tools that support young people in their professional integration.
+          <span className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mb-6'>{t('about.background')}</span>
+          <p className='text-base md:text-lg text-foreground/65 leading-[1.8]'>
+            {t('about.bio1')}
           </p>
-          <p className='text-base md:text-lg text-black/65 leading-[1.8] mt-5'>
-            Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome,
-            I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French
-            and English, I am committed to creating innovative technological solutions tailored to users' needs.
+          <p className='text-base md:text-lg text-foreground/65 leading-[1.8] mt-5'>
+            {t('about.bio2')}
           </p>
         </motion.div>
 
@@ -163,7 +161,7 @@ function About() {
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Currently at</span>
+          <span className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mb-6'>{t('about.currentlyAt')}</span>
           <motion.a
             whileHover={{ opacity: 0.5 }}
             className='block font-bold text-3xl md:text-4xl tracking-tight cursor-pointer transition-opacity duration-300'
@@ -173,8 +171,8 @@ function About() {
           >
             jobtrek
           </motion.a>
-          <p className='text-sm text-black/50 mt-3 leading-relaxed'>
-            A foundation helping young people in difficulty find their path through professional integration.
+          <p className='text-sm text-foreground/50 mt-3 leading-relaxed'>
+            {t('about.jobtrekDesc')}
           </p>
         </motion.div>
       </div>
@@ -187,9 +185,9 @@ function About() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className='mb-24'
       >
-        <span className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-6'>Stack</span>
+        <span className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mb-6'>{t('about.stack')}</span>
         <ul className='flex flex-wrap gap-2.5'>
-          {Techs.map((tech, index) => (
+          {Techs.map((tech: any, index: number) => (
             <motion.li
               key={index}
               initial={{ opacity: 0, y: 15 }}
@@ -208,7 +206,7 @@ function About() {
       </motion.div>
 
       {/* ── Divider ── */}
-      <div className='w-12 h-[1px] bg-black/[0.08] mb-24' />
+      <div className='w-12 h-[1px] bg-foreground/[0.08] mb-24' />
 
       {/* ── Timeline ── */}
       <div className='grid md:grid-cols-2 gap-x-16 gap-y-0 mb-24'>
@@ -217,17 +215,17 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-8'
+            className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mb-8'
           >
-            Experience
+            {t('about.experience')}
           </motion.span>
-          {Works.map((work, i) => (
+          {Works.map((work: any, i: number) => (
             <TimelineItem
               key={work.id + work.year}
               year={work.year}
               title={work.title}
-              description={work.description}
-              type={work.type}
+              description={locale === 'fr' && work.description_fr ? work.description_fr : work.description}
+              type={locale === 'fr' && work.type_fr ? work.type_fr : work.type}
               location={work.location}
               index={i}
             />
@@ -239,16 +237,16 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mb-8'
+            className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mb-8'
           >
-            Education
+            {t('about.education')}
           </motion.span>
-          {Studies.map((study, i) => (
+          {Studies.map((study: any, i: number) => (
             <TimelineItem
               key={study.id}
               year={study.year}
               title={study.title}
-              description={study.description}
+              description={locale === 'fr' && study.description_fr ? study.description_fr : study.description}
               index={i}
             />
           ))}
@@ -257,25 +255,25 @@ function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className='text-[11px] uppercase tracking-[0.25em] text-black/45 font-semibold block mt-6 mb-6'
+            className='text-[11px] uppercase tracking-[0.25em] text-foreground/45 font-semibold block mt-6 mb-6'
           >
-            Languages
+            {t('about.languages')}
           </motion.span>
           <div className='flex gap-8'>
             {[
-              { lang: 'French', level: 'Native' },
-              { lang: 'English', level: 'Professional' },
-              { lang: 'German', level: 'Limited' },
+              { lang: t('about.lang.french'), level: t('about.level.native') },
+              { lang: t('about.lang.english'), level: t('about.level.professional') },
+              { lang: t('about.lang.german'), level: t('about.level.limited') },
             ].map((item, i) => (
               <motion.div
-                key={item.lang}
+                key={i}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className='text-sm font-semibold block'>{item.lang}</span>
-                <span className='text-[11px] text-black/40'>{item.level}</span>
+                <span className='text-[11px] text-foreground/40'>{item.level}</span>
               </motion.div>
             ))}
           </div>

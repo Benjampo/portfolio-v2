@@ -2,6 +2,7 @@ import { ArrowUpRightIcon } from '@heroicons/react/20/solid';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from "next/legacy/image";
 import { useRef, useState } from 'react';
+import { useTranslation } from '../lib/i18n';
 import Socials from './../data/Socials';
 
 import Head from 'next/head';
@@ -12,7 +13,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 function FloatingLabel({ children, active }: { children: string; active: boolean }) {
   return (
     <motion.span
-      className='absolute left-0 pointer-events-none origin-left'
+      className='absolute left-0 pointer-events-none origin-left text-foreground'
       animate={{
         y: active ? -28 : 0,
         scale: active ? 0.75 : 1,
@@ -23,7 +24,6 @@ function FloatingLabel({ children, active }: { children: string; active: boolean
         fontSize: '0.95rem',
         fontWeight: 500,
         letterSpacing: '0.03em',
-        color: '#1a1a2e',
       }}
     >
       {children}
@@ -41,7 +41,7 @@ function AnimatedLine({ active }: { active: boolean }) {
       style={{
         transformOrigin: 'left',
         width: '100%',
-        background: 'linear-gradient(90deg, #1a1a2e, rgba(100, 160, 240, 0.6))',
+        background: 'linear-gradient(90deg, var(--color-foreground), rgba(100, 160, 240, 0.6))',
       }}
     />
   );
@@ -83,11 +83,11 @@ function FormField({
         onChange={onChange}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        className='w-full bg-transparent border-none outline-none text-[#1a1a2e] text-[0.95rem] pb-3 resize-none'
+        className='w-full bg-transparent border-none outline-none text-foreground text-[0.95rem] pb-3 resize-none'
         style={{ minHeight: isTextarea ? '100px' : undefined }}
         rows={isTextarea ? 4 : undefined}
       />
-      <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-[#1a1a2e]/[0.06]' />
+      <div className='absolute bottom-0 left-0 right-0 h-[1px] bg-foreground/[0.06]' />
       <AnimatedLine active={active} />
     </motion.div>
   );
@@ -126,6 +126,7 @@ function GlassFormCard({ children }: { children: React.ReactNode }) {
 }
 
 function Contact() {
+  const { t } = useTranslation();
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -133,7 +134,7 @@ function Contact() {
   const [website, setWebsite] = useState('');
   const [formLoadTime] = useState(() => Date.now());
   const [errors, setErrors] = useState({});
-  const [buttonText, setButtonText] = useState('Send message');
+  const [buttonText, setButtonText] = useState<'send' | 'sending'>('send');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
 
@@ -152,7 +153,7 @@ function Contact() {
     e.preventDefault();
     let isValidForm = handleValidation();
     if (isValidForm) {
-      setButtonText('Sending...');
+      setButtonText('sending');
       const res = await fetch('/api/sendgrid', {
         body: JSON.stringify({ email, fullname, subject, message, website, formLoadTime }),
         headers: { 'Content-Type': 'application/json' },
@@ -163,12 +164,12 @@ function Contact() {
         console.log(error);
         setShowSuccessMessage(false);
         setShowFailureMessage(true);
-        setButtonText('Send message');
+        setButtonText('send');
         return;
       }
       setShowSuccessMessage(true);
       setShowFailureMessage(false);
-      setButtonText('Send message');
+      setButtonText('send');
     }
   };
 
@@ -193,8 +194,8 @@ function Contact() {
             transition={{ duration: 0.5 }}
             className='mb-6'
           >
-            <span className='text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/40'>
-              Get in touch
+            <span className='text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/40'>
+              {t('contact.getInTouch')}
             </span>
           </motion.div>
 
@@ -205,27 +206,29 @@ function Contact() {
               transition={{ duration: 0.9, ease }}
               className='font-bold text-6xl md:text-[5.5rem] leading-[0.9] tracking-tight'
             >
-              Let&apos;s
+              {t('contact.lets')}
             </motion.h1>
           </div>
-          <div className='overflow-hidden'>
-            <motion.h1
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, delay: 0.08, ease }}
-              className='font-bold text-6xl md:text-[5.5rem] leading-[0.9] tracking-tight'
-            >
-              work
-            </motion.h1>
-          </div>
+          {t('contact.work') && (
+            <div className='overflow-hidden'>
+              <motion.h1
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.9, delay: 0.08, ease }}
+                className='font-bold text-6xl md:text-[5.5rem] leading-[0.9] tracking-tight'
+              >
+                {t('contact.work')}
+              </motion.h1>
+            </div>
+          )}
           <div className='overflow-hidden pb-3'>
             <motion.h1
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.16, ease }}
-              className='font-bold text-6xl md:text-[5.5rem] leading-[0.9] tracking-tight text-[#1a1a2e]/20'
+              className='font-bold text-6xl md:text-[5.5rem] leading-[0.9] tracking-tight text-foreground/20'
             >
-              together.
+              {t('contact.together')}
             </motion.h1>
           </div>
 
@@ -233,9 +236,9 @@ function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7, ease }}
-            className='mt-10 text-[#1a1a2e]/45 text-[0.95rem] leading-relaxed max-w-xs'
+            className='mt-10 text-foreground/45 text-[0.95rem] leading-relaxed max-w-xs'
           >
-            Have a project in mind, a question, or just want to say hello? I&apos;d love to hear from you.
+            {t('contact.description')}
           </motion.p>
 
           {/* ── Direct contact ── */}
@@ -245,13 +248,13 @@ function Contact() {
             transition={{ delay: 0.8, duration: 0.7, ease }}
             className='mt-10'
           >
-            <span className='text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/25 block mb-4'>
-              Or reach out directly
+            <span className='text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/25 block mb-4'>
+              {t('contact.reachOut')}
             </span>
             <motion.a
               whileHover={{ x: 4 }}
               transition={{ duration: 0.3 }}
-              className='text-[#1a1a2e]/60 hover:text-[#1a1a2e] text-sm font-medium transition-colors duration-300 flex items-center gap-1.5 cursor-pointer'
+              className='text-foreground/60 hover:text-foreground text-sm font-medium transition-colors duration-300 flex items-center gap-1.5 cursor-pointer'
               href='mailto:contact@benjampo.ch'
             >
               contact@benjampo.ch
@@ -259,7 +262,7 @@ function Contact() {
             </motion.a>
 
             <ul className='flex gap-5 mt-6'>
-              {Socials.map((social, i) => (
+              {Socials.map((social: any, i: number) => (
                 <motion.li
                   key={social.label}
                   initial={{ opacity: 0, y: 10 }}
@@ -271,7 +274,7 @@ function Contact() {
                     target='_blank'
                     rel='noreferrer'
                     whileHover={{ y: -3 }}
-                    className='opacity-30 hover:opacity-100 transition-opacity duration-300 block invert'
+                    className='opacity-30 hover:opacity-100 transition-opacity duration-300 block invert dark:invert-0'
                   >
                     <Image src={social.icon} alt={social.label} height={32} width={32} />
                   </motion.a>
@@ -304,15 +307,15 @@ function Contact() {
                   transition={{ delay: 0.4, duration: 0.6, ease }}
                   className='font-bold text-2xl tracking-tight'
                 >
-                  Message sent
+                  {t('contact.sent')}
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
-                  className='text-[#1a1a2e]/35 text-sm mt-3'
+                  className='text-foreground/35 text-sm mt-3'
                 >
-                  Thanks! I&apos;ll get back to you soon.
+                  {t('contact.thanks')}
                 </motion.p>
               </motion.div>
             </GlassFormCard>
@@ -321,14 +324,14 @@ function Contact() {
               <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4'>
                   <FormField
-                    label='Name'
+                    label={t('contact.name')}
                     name='fullname'
                     value={fullname}
                     onChange={e => setFullname(e.target.value)}
                     delay={0.4}
                   />
                   <FormField
-                    label='Email'
+                    label={t('contact.email')}
                     type='email'
                     name='email'
                     value={email}
@@ -350,14 +353,14 @@ function Contact() {
                 />
 
                 <FormField
-                  label='Subject'
+                  label={t('contact.subject')}
                   name='subject'
                   value={subject}
                   onChange={e => setSubject(e.target.value)}
                   delay={0.6}
                 />
                 <FormField
-                  label='Message'
+                  label={t('contact.message')}
                   name='message'
                   value={message}
                   onChange={e => setMessage(e.target.value)}
@@ -376,9 +379,9 @@ function Contact() {
                       <motion.p
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className='text-[#1a1a2e]/40 text-xs'
+                        className='text-foreground/40 text-xs'
                       >
-                        Something went wrong. Please try again.
+                        {t('contact.error')}
                       </motion.p>
                     )}
                   </div>
@@ -386,9 +389,9 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    className='group glass-btn text-[#1a1a2e] text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer'
+                    className='group glass-btn text-foreground text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer'
                   >
-                    {buttonText}
+                    {t(buttonText === 'sending' ? 'contact.sending' : 'contact.send')}
                   </motion.button>
                 </motion.div>
               </form>

@@ -55,6 +55,20 @@ class MyDocument extends Document {
             href='https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap'
             rel='stylesheet'
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  try {
+                    var theme = localStorage.getItem('theme');
+                    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                      document.documentElement.classList.add('dark');
+                    }
+                  } catch(e) {}
+                })();
+              `,
+            }}
+          />
         </Head>
         <body>
           <Main />

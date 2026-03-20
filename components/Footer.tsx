@@ -2,10 +2,13 @@ import { motion } from 'framer-motion';
 import Image from "next/legacy/image";
 import mailIcon from '../assets/icons/mail.png';
 import Link from 'next/link';
+import { useTranslation } from '../lib/i18n';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className='relative mt-24'>
       {/* Gradient divider — fades out in center for button overlap */}
@@ -20,7 +23,7 @@ function Footer() {
             <motion.a
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer invert'
+              className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer invert dark:invert-0'
               href='mailto:contact@benjampo.ch'
             >
               <Image src={mailIcon} alt='Email' width={20} height={20} />
@@ -31,11 +34,11 @@ function Footer() {
           <div className='flex flex-col sm:flex-row items-center justify-between gap-6'>
             <nav>
               <ul className='flex items-center gap-6'>
-                {MenuItems.map(item => (
-                  <li key={item.label}>
+                {MenuItems.map((item: { labelKey: string; url: string }) => (
+                  <li key={item.labelKey}>
                     <Link href={item.url}>
-                      <span className='text-[11px] uppercase tracking-[0.2em] text-[#1a1a2e]/35 hover:text-[#1a1a2e]/70 transition-colors duration-300 cursor-pointer'>
-                        {item.label}
+                      <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/35 hover:text-foreground/70 transition-colors duration-300 cursor-pointer'>
+                        {t(item.labelKey as any)}
                       </span>
                     </Link>
                   </li>
@@ -44,14 +47,14 @@ function Footer() {
             </nav>
 
             <div className='flex items-center gap-5'>
-              {Socials.map((social, index) => (
+              {Socials.map((social: any, index: number) => (
                 <motion.a
                   whileHover={{ scale: 1.15, y: -2 }}
                   key={index}
                   href={social.url}
                   target='_blank'
                   rel='noreferrer'
-                  className='opacity-40 hover:opacity-70 transition-opacity duration-300 invert'
+                  className='opacity-40 hover:opacity-70 transition-opacity duration-300 invert dark:invert-0'
                 >
                   <Image alt={social.label} src={social.icon} width={32} height={32} />
                 </motion.a>
@@ -61,8 +64,8 @@ function Footer() {
 
           {/* Copyright */}
           <div className='mt-10'>
-            <p className='text-center text-[10px] text-[#1a1a2e]/30 tracking-[0.15em] uppercase'>
-              &copy; 2026 Benjamin Porchet &mdash; Designed & built by hand
+            <p className='text-center text-[10px] text-foreground/30 tracking-[0.15em] uppercase'>
+              {t('footer.copyright')}
             </p>
           </div>
         </div>

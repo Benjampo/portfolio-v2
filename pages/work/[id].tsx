@@ -5,6 +5,7 @@ import Image from "next/legacy/image";
 import Link from 'next/link';
 import Router from 'next/router';
 import { useRef } from 'react';
+import { useTranslation } from '../../lib/i18n';
 import Projects from '../../data/projects';
 
 function ParallaxImage({ src, alt, className, speed = 0.15 }: { src: any; alt: string; className?: string; speed?: number }) {
@@ -50,6 +51,7 @@ function ProjectNav({ project }: { project: any }) {
   const currentIndex = Projects.findIndex((p: any) => p.id === project.id);
   const prevProject = currentIndex > 0 ? Projects[currentIndex - 1] : null;
   const nextProject = currentIndex < Projects.length - 1 ? Projects[currentIndex + 1] : null;
+  const { t } = useTranslation();
 
   return (
     <motion.div
@@ -57,15 +59,15 @@ function ProjectNav({ project }: { project: any }) {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className='border-t border-black/[0.06] pt-12 mt-20'
+      className='border-t border-foreground/[0.06] pt-12 mt-20'
     >
-      <span className='text-[11px] uppercase tracking-[0.2em] text-black/40 font-semibold block mb-6'>More work</span>
+      <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/40 font-semibold block mb-6'>{t('work.moreWork')}</span>
       <div className='flex justify-between items-center'>
         {prevProject ? (
           <Link href={`/work/${prevProject.id}`}>
             <motion.span
               whileHover={{ x: -4 }}
-              className='text-lg font-semibold text-[#1a1a2e]/60 hover:text-[#1a1a2e] transition-colors duration-300 cursor-pointer flex items-center gap-3'
+              className='text-lg font-semibold text-foreground/60 hover:text-foreground transition-colors duration-300 cursor-pointer flex items-center gap-3'
             >
               <ArrowLeftIcon className='w-4 h-4' />
               {prevProject.title}
@@ -76,7 +78,7 @@ function ProjectNav({ project }: { project: any }) {
           <Link href={`/work/${nextProject.id}`}>
             <motion.span
               whileHover={{ x: 4 }}
-              className='text-lg font-semibold text-[#1a1a2e]/60 hover:text-[#1a1a2e] transition-colors duration-300 cursor-pointer flex items-center gap-3'
+              className='text-lg font-semibold text-foreground/60 hover:text-foreground transition-colors duration-300 cursor-pointer flex items-center gap-3'
             >
               {nextProject.title}
               <ArrowLeftIcon className='w-4 h-4 rotate-180' />
@@ -90,6 +92,12 @@ function ProjectNav({ project }: { project: any }) {
 
 export function Project({ data }: any) {
   const project = data[0];
+  const { t, locale } = useTranslation();
+
+  const context = locale === 'fr' && project.context_fr ? project.context_fr : project.context;
+  const subtitle = locale === 'fr' && project.subtitle_fr ? project.subtitle_fr : project.subtitle;
+  const tasks = locale === 'fr' && project.tasks_fr ? project.tasks_fr : project.tasks;
+  const info = locale === 'fr' && project.info_fr ? project.info_fr : project.info;
 
   return (
     <motion.section
@@ -108,11 +116,11 @@ export function Project({ data }: any) {
         transition={{ duration: 0.5 }}
         whileHover={{ x: -4 }}
         whileTap={{ scale: 0.95 }}
-        className='mb-10 text-black/40 hover:text-black transition-colors cursor-pointer flex items-center gap-2 text-sm'
+        className='mb-10 text-foreground/40 hover:text-foreground transition-colors cursor-pointer flex items-center gap-2 text-sm'
         onClick={() => Router.back()}
       >
         <ArrowLeftIcon className='w-4 h-4' />
-        <span>Back</span>
+        <span>{t('work.back')}</span>
       </motion.button>
 
       {/* Hero image — full bleed */}
@@ -130,8 +138,8 @@ export function Project({ data }: any) {
         transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className='mt-10 md:mt-14 max-w-3xl'
       >
-        <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>
-          {project.subtitle}
+        <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>
+          {subtitle}
         </span>
         <h1 className='font-bold text-3xl md:text-5xl tracking-tight mt-4'>
           {project.title}
@@ -153,8 +161,8 @@ export function Project({ data }: any) {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>Context</span>
-          <p className='text-black/60 text-base md:text-lg leading-relaxed mt-4'>{project.context}</p>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>{t('work.context')}</span>
+          <p className='text-foreground/60 text-base md:text-lg leading-relaxed mt-4'>{context}</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -162,11 +170,11 @@ export function Project({ data }: any) {
           viewport={{ once: true }}
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-black/45 font-semibold'>What I did</span>
+          <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>{t('work.whatIDid')}</span>
           <ul className='mt-4 space-y-2.5'>
-            {project.tasks.map((task: string, index: number) => (
-              <li className='flex items-start gap-3 text-black/60 text-base md:text-lg' key={index}>
-                <span className='mt-2.5 w-1 h-1 rounded-full bg-black/30 flex-shrink-0' />
+            {tasks.map((task: string, index: number) => (
+              <li className='flex items-start gap-3 text-foreground/60 text-base md:text-lg' key={index}>
+                <span className='mt-2.5 w-1 h-1 rounded-full bg-foreground/30 flex-shrink-0' />
                 {task}
               </li>
             ))}
@@ -191,14 +199,14 @@ export function Project({ data }: any) {
       </div>
 
       {/* Info (if no URL) */}
-      {project.info && (
+      {info && (
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className='text-center text-black/40 text-sm mt-10'
+          className='text-center text-foreground/40 text-sm mt-10'
         >
-          {project.info}
+          {info}
         </motion.p>
       )}
 
@@ -217,9 +225,9 @@ export function Project({ data }: any) {
             rel='noreferrer'
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className='inline-block glass-btn text-[#1a1a2e] text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
+            className='inline-block glass-btn text-foreground text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
           >
-            Visit website
+            {t('work.visitWebsite')}
           </motion.a>
         </motion.div>
       )}
@@ -231,12 +239,12 @@ export function Project({ data }: any) {
 }
 
 export async function getStaticPaths() {
-  const paths = Projects.map(item => ({ params: { id: item.id } }));
+  const paths = Projects.map((item: any) => ({ params: { id: item.id } }));
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: any) {
-  const data = Projects.filter(item => item.id === params.id);
+  const data = Projects.filter((item: any) => item.id === params.id);
   return { props: { data } };
 }
 

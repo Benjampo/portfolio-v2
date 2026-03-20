@@ -3,15 +3,43 @@ import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useTranslation } from '../lib/i18n';
+import { useTheme } from '../lib/theme';
 import logo from './../assets/images/logo.svg';
 import MenuItems from './../data/Menu';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+function SunIcon() {
+  return (
+    <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+      <circle cx='12' cy='12' r='5' />
+      <line x1='12' y1='1' x2='12' y2='3' />
+      <line x1='12' y1='21' x2='12' y2='23' />
+      <line x1='4.22' y1='4.22' x2='5.64' y2='5.64' />
+      <line x1='18.36' y1='18.36' x2='19.78' y2='19.78' />
+      <line x1='1' y1='12' x2='3' y2='12' />
+      <line x1='21' y1='12' x2='23' y2='12' />
+      <line x1='4.22' y1='19.78' x2='5.64' y2='18.36' />
+      <line x1='18.36' y1='5.64' x2='19.78' y2='4.22' />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+      <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' />
+    </svg>
+  );
+}
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const router = useRouter();
   const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const { t, locale, toggleLocale } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
   const isActive = (url: string) =>
     url === '/' ? router.asPath === '/' : router.asPath.startsWith(url);
@@ -37,20 +65,20 @@ function Header() {
                   isMenuOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }
                 }
                 transition={{ duration: 0.4, ease }}
-                className='block w-5 h-[1.5px] bg-[#1a1a2e] origin-center'
+                className='block w-5 h-[1.5px] bg-foreground origin-center'
               />
               <motion.span
                 animate={
                   isMenuOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }
                 }
                 transition={{ duration: 0.4, ease }}
-                className='block w-5 h-[1.5px] bg-[#1a1a2e] origin-center'
+                className='block w-5 h-[1.5px] bg-foreground origin-center'
               />
             </button>
 
             <Link href='/'>
               <figure className='cursor-pointer'>
-                <Image width={28} height={28} src={logo} alt='Logo' />
+                <Image width={28} height={28} src={logo} alt='Logo' className='dark:invert' />
               </figure>
             </Link>
 
@@ -62,30 +90,52 @@ function Header() {
           <nav className='hidden md:flex items-center gap-8'>
             <Link href='/'>
               <figure className='cursor-pointer'>
-                <Image width={28} height={28} src={logo} alt='Logo' />
+                <Image width={28} height={28} src={logo} alt='Logo' className='dark:invert' />
               </figure>
             </Link>
             <ul className='flex items-center gap-1 mx-auto'>
               {MenuItems.filter(
-                (i: { label: string }) => i.label !== 'Home'
-              ).map((item: { label: string; url: string }) => (
-                <li key={item.label}>
+                (i: { labelKey: string }) => i.labelKey !== 'nav.home'
+              ).map((item: { labelKey: string; url: string }) => (
+                <li key={item.labelKey}>
                   <Link href={item.url}>
                     <motion.span
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.92 }}
                       className={`py-2 px-5 rounded-full cursor-pointer block text-sm font-medium transition-all duration-300 ${
                         isActive(item.url)
-                          ? 'bg-white/30 text-[#1a1a2e] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] backdrop-blur-sm border border-white/30'
-                          : 'text-black/50 hover:text-black hover:bg-white/20 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
+                          ? 'bg-white/30 dark:bg-white/10 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),_0_2px_8px_rgba(100,160,220,0.08)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),_0_2px_8px_rgba(100,160,220,0.15)] backdrop-blur-sm border border-white/30 dark:border-white/10'
+                          : 'text-foreground/50 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
                       }`}
                     >
-                      {item.label}
+                      {t(item.labelKey as any)}
                     </motion.span>
                   </Link>
                 </li>
               ))}
             </ul>
+
+            {/* Toggle controls */}
+            <div className='flex items-center gap-2'>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleTheme}
+                className='w-8 h-8 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground transition-colors cursor-pointer'
+                aria-label='Toggle theme'
+              >
+                {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleLocale}
+                className='w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-foreground/50 hover:text-foreground transition-colors cursor-pointer'
+                aria-label='Toggle language'
+              >
+                {locale === 'en' ? 'FR' : 'EN'}
+              </motion.button>
+            </div>
           </nav>
         </motion.div>
       </header>
@@ -128,9 +178,9 @@ function Header() {
               {/* Navigation items */}
               <ul className='flex flex-col gap-1'>
                 {MenuItems.map(
-                  (item: { label: string; url: string }, i: number) => (
+                  (item: { labelKey: string; url: string }, i: number) => (
                     <motion.li
-                      key={item.label}
+                      key={item.labelKey}
                       initial={{ opacity: 0, x: -40 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
@@ -145,11 +195,11 @@ function Header() {
                           <span
                             className={`text-[2.5rem] leading-none tracking-tight transition-all duration-500 ${
                               isActive(item.url)
-                                ? 'font-semibold text-[#1a1a2e]'
-                                : 'font-light text-[#1a1a2e]/60 group-hover:text-[#1a1a2e] group-hover:translate-x-2'
+                                ? 'font-semibold text-foreground'
+                                : 'font-light text-foreground/60 group-hover:text-foreground group-hover:translate-x-2'
                             }`}
                           >
-                            {item.label}
+                            {t(item.labelKey as any)}
                           </span>
 
                           {isActive(item.url) && (
@@ -178,15 +228,33 @@ function Header() {
                 transition={{ delay: 0.4, duration: 0.5, ease }}
                 className='flex items-end justify-between'
               >
-                <p className='text-[10px] tracking-[0.2em] uppercase text-black/25 font-light'>
-                  Portfolio &mdash; 2026
-                </p>
+                <div className='flex items-center gap-4'>
+                  <p className='text-[10px] tracking-[0.2em] uppercase text-foreground/25 font-light'>
+                    {t('footer.portfolio')} &mdash; 2026
+                  </p>
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleTheme}
+                    className='w-8 h-8 rounded-full flex items-center justify-center text-foreground/40 hover:text-foreground transition-colors cursor-pointer'
+                    aria-label='Toggle theme'
+                  >
+                    {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+                  </motion.button>
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleLocale}
+                    className='w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-foreground/40 hover:text-foreground transition-colors cursor-pointer'
+                    aria-label='Toggle language'
+                  >
+                    {locale === 'en' ? 'FR' : 'EN'}
+                  </motion.button>
+                </div>
                 <div className='flex gap-4'>
                   <a
                     href='https://github.com/benjaminporchet'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-[10px] tracking-[0.15em] uppercase text-black/60 hover:text-black/90 transition-colors duration-300'
+                    className='text-[10px] tracking-[0.15em] uppercase text-foreground/60 hover:text-foreground/90 transition-colors duration-300'
                   >
                     Github
                   </a>
@@ -194,7 +262,7 @@ function Header() {
                     href='https://linkedin.com/in/benjaminporchet'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-[10px] tracking-[0.15em] uppercase text-black/60 hover:text-black/90 transition-colors duration-300'
+                    className='text-[10px] tracking-[0.15em] uppercase text-foreground/60 hover:text-foreground/90 transition-colors duration-300'
                   >
                     LinkedIn
                   </a>
