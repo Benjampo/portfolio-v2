@@ -80,14 +80,14 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
   return (
     <motion.li ref={ref} style={{ scale: containerScale }}>
       <Link href={`/work/${project.id}`}>
-        <article className='group flex flex-col md:flex-row gap-6 items-start'>
-          <div className='md:w-1/6 pt-2 flex flex-col gap-1'>
+        <article className='group flex flex-col gap-4'>
+          <div className='flex items-baseline gap-4'>
             <motion.span
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className='text-xs font-semibold uppercase tracking-wider text-black/30'
+              className='text-xs font-semibold uppercase tracking-wider text-[#1a1a2e]/30'
             >
               {project.title}
             </motion.span>
@@ -96,12 +96,12 @@ function ProjectItem({ project, index }: { project: any; index: number }) {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className='text-xs text-black/20 hidden md:block'
+              className='text-xs text-[#1a1a2e]/20'
             >
               {project.subtitle}
             </motion.span>
           </div>
-          <div className='perspective-container md:w-5/6'>
+          <div className='perspective-container w-full'>
             <motion.div
               ref={cardRef}
               onMouseMove={handleMouse}
@@ -142,7 +142,8 @@ const Home: NextPage = () => {
         <title>Benjamin Porchet | Full-stack Developer</title>
       </Head>
 
-      <section className='min-h-[75vh] flex flex-col justify-center items-center gap-8'>
+      {/* Hero */}
+      <section className='min-h-[65vh] flex flex-col justify-center items-center gap-8 mb-16'>
         <HeroImage />
         <div className='text-center overflow-hidden'>
           <h1 className='font-bold text-6xl md:text-8xl tracking-tight'>
@@ -152,7 +153,7 @@ const Home: NextPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className='mt-4 text-lg md:text-xl text-black/40 font-light'
+            className='mt-4 text-lg md:text-xl text-[#1a1a2e]/40 font-light'
           >
             I'm Benjamin, Full-Stack developer
           </motion.p>
@@ -167,18 +168,19 @@ const Home: NextPage = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            className='w-[1px] h-12 bg-black/20 mx-auto'
+            className='w-[1px] h-12 bg-[#1a1a2e]/20 mx-auto'
           />
         </motion.div>
       </section>
 
-      <section className='mt-16'>
+      {/* Projects Section */}
+      <section className='mt-8'>
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className='text-[11px] font-semibold uppercase tracking-[0.2em] text-black/25 block mb-16'
+          className='text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a2e]/25 block mb-16'
         >
           Selected Work
         </motion.span>
@@ -198,7 +200,7 @@ const Home: NextPage = () => {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className='inline-block bg-black text-white text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
+              className='inline-block bg-[#1a1a2e] text-white text-sm font-medium px-8 py-4 rounded-full cursor-pointer shadow-lg shadow-blue-200/20'
             >
               View all projects
             </motion.span>
