@@ -46,7 +46,38 @@ import qhAi from '../public/projects/quanthome-ai/qh-ai1.png';
 import qhAi2 from '../public/projects/quanthome-ai/qh-ai2.png';
 import qhAi3 from '../public/projects/quanthome-ai/qh-ai3.png';
 
+import esfSuisse from '../public/projects/esf-suisse/esf-home.webp';
+import esfSuisse2 from '../public/projects/esf-suisse/esf-join.webp';
+import esfSuisse3 from '../public/projects/esf-suisse/esf-stages.webp';
+
 const Projects = [
+  {
+    id: 'esf-suisse',
+    title: 'ESF Suisse',
+    coverSrc: esfSuisse,
+    secSrc: esfSuisse2,
+    thirdSrc: esfSuisse3,
+    url: 'https://www.esf-suisse.org/',
+    subtitle: 'Nonprofit Website',
+    subtitle_fr: 'Site associatif',
+    context:
+      'End-to-end website created for Enseignants Sans Frontières Suisse on a tight nonprofit budget. I guided the client from early ideation and content structure through visual design, development and launch, with a Kirby CMS that keeps day-to-day publishing simple.',
+    context_fr:
+      'Site conçu de A à Z pour Enseignants Sans Frontières Suisse avec un budget associatif serré. J\'ai accompagné le client de l\'idéation et de la structuration des contenus jusqu\'au design, au développement et à la mise en ligne, avec un CMS Kirby simple à administrer au quotidien.',
+    tasks: [
+      'Client workshops, ideation and content structure',
+      'UX/UI design and responsive frontend development',
+      'Kirby CMS architecture and implementation',
+      'Launch and client handover',
+    ],
+    tasks_fr: [
+      'Ateliers client, idéation et structuration des contenus',
+      'Design UX/UI et développement frontend responsive',
+      'Architecture et implémentation du CMS Kirby',
+      'Mise en ligne et accompagnement du client',
+    ],
+    tech: ['HTML', 'SCSS', 'JavaScript', 'PHP', 'Kirby CMS'],
+  },
   {
     id: 'quanthome-platform',
     title: 'Quanthome Platform',
