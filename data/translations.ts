@@ -7,8 +7,15 @@ const translations = {
     'nav.contact': 'Contact',
 
     // Home
-    'home.hello': 'Hello',
-    'home.subtitle': "I'm Benjamin, Full-Stack developer",
+    'home.heroLead': 'Full-stack engineer building',
+    'home.heroStatement.ai': 'AI-powered products',
+    'home.heroStatement.customer': 'solutions built for users',
+    'home.heroStatement.production': 'reliable production systems',
+    'home.heroAccessible':
+      'AI-powered products, solutions built for users, and reliable production systems.',
+    'home.heroSummary':
+      'From user discovery and rapid prototyping to APIs, deployment, and iteration.',
+    'home.scrollToWork': 'Scroll to selected work',
     'home.selectedWork': 'Selected Work',
     'home.viewProject': 'View project',
     'home.viewAll': 'View all projects',
@@ -88,8 +95,15 @@ const translations = {
     'nav.contact': 'Contact',
 
     // Home
-    'home.hello': 'Bonjour',
-    'home.subtitle': 'Je suis Benjamin, développeur Full-Stack',
+    'home.heroLead': 'Ingénieur full-stack créant',
+    'home.heroStatement.ai': 'des produits propulsés par l’IA',
+    'home.heroStatement.customer': 'des solutions sur mesure',
+    'home.heroStatement.production': 'des systèmes fiables',
+    'home.heroAccessible':
+      'des produits propulsés par l’IA, des solutions sur mesure et des systèmes fiables.',
+    'home.heroSummary':
+      'De la compréhension des besoins et du prototypage aux API, au déploiement et aux itérations.',
+    'home.scrollToWork': 'Faire défiler vers les projets sélectionnés',
     'home.selectedWork': 'Projets sélectionnés',
     'home.viewProject': 'Voir le projet',
     'home.viewAll': 'Voir tous les projets',
