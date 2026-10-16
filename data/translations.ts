@@ -22,7 +22,7 @@ const translations = {
     'about.bio1':
       'Graduated in Software Development from the Centre professionnel du Nord vaudois, I am currently working as a software developer at Jobtrek, where I contribute to building tools that support young people in their professional integration.',
     'about.bio2':
-      'Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome, I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French and English, I am committed to creating innovative technological solutions tailored to users\' needs.',
+      "Through additional training at Le Wagon and 3 years as a full-stack engineer at Quanthome, I have built strong skills in React, Node.js, Python, and cloud services. Bilingual in French and English, I am committed to creating innovative technological solutions tailored to users' needs.",
     'about.currentlyAt': 'Currently at',
     'about.jobtrekDesc':
       'A foundation helping young people in difficulty find their path through professional integration.',
@@ -54,6 +54,8 @@ const translations = {
     'contact.sent': 'Message sent',
     'contact.thanks': "Thanks! I'll get back to you soon.",
     'contact.error': 'Something went wrong. Please try again.',
+    'contact.verificationUnavailable':
+      'Spam verification is temporarily unavailable. Please email me directly.',
 
     // 404
     '404.text': "This page doesn't exist.",
@@ -99,12 +101,12 @@ const translations = {
     'about.downloadResume': 'Télécharger le CV',
     'about.background': 'Parcours',
     'about.bio1':
-      'Diplômé en développement logiciel du Centre professionnel du Nord vaudois, je travaille actuellement comme développeur logiciel chez Jobtrek, où je contribue à la création d\'outils qui soutiennent les jeunes dans leur intégration professionnelle.',
+      "Diplômé en développement logiciel du Centre professionnel du Nord vaudois, je travaille actuellement comme développeur logiciel chez Jobtrek, où je contribue à la création d'outils qui soutiennent les jeunes dans leur intégration professionnelle.",
     'about.bio2':
-      'Grâce à une formation complémentaire au Wagon et 3 ans en tant qu\'ingénieur full-stack chez Quanthome, j\'ai développé de solides compétences en React, Node.js, Python et services cloud. Bilingue français-anglais, je m\'engage à créer des solutions technologiques innovantes adaptées aux besoins des utilisateurs.',
+      "Grâce à une formation complémentaire au Wagon et 3 ans en tant qu'ingénieur full-stack chez Quanthome, j'ai développé de solides compétences en React, Node.js, Python et services cloud. Bilingue français-anglais, je m'engage à créer des solutions technologiques innovantes adaptées aux besoins des utilisateurs.",
     'about.currentlyAt': 'Actuellement chez',
     'about.jobtrekDesc':
-      'Une fondation qui aide les jeunes en difficulté à trouver leur voie grâce à l\'intégration professionnelle.',
+      "Une fondation qui aide les jeunes en difficulté à trouver leur voie grâce à l'intégration professionnelle.",
     'about.stack': 'Stack',
     'about.experience': 'Expérience',
     'about.education': 'Formation',
@@ -122,7 +124,7 @@ const translations = {
     'contact.work': '',
     'contact.together': 'ensemble.',
     'contact.description':
-      'Vous avez un projet en tête, une question, ou simplement envie de dire bonjour\u00A0? J\'aimerais beaucoup vous lire.',
+      "Vous avez un projet en tête, une question, ou simplement envie de dire bonjour\u00A0? J'aimerais beaucoup vous lire.",
     'contact.reachOut': 'Ou contactez-moi directement',
     'contact.name': 'Nom',
     'contact.email': 'Email',
@@ -133,6 +135,8 @@ const translations = {
     'contact.sent': 'Message envoyé',
     'contact.thanks': 'Merci\u00A0! Je vous répondrai bientôt.',
     'contact.error': 'Une erreur est survenue. Veuillez réessayer.',
+    'contact.verificationUnavailable':
+      'La vérification anti-spam est temporairement indisponible. Veuillez me contacter directement par email.',
 
     // 404
     '404.text': "Cette page n'existe pas.",
@@ -143,12 +147,13 @@ const translations = {
     'work.projects': 'projets',
     'work.back': 'Retour',
     'work.context': 'Contexte',
-    'work.whatIDid': 'Ce que j\'ai fait',
+    'work.whatIDid': "Ce que j'ai fait",
     'work.visitWebsite': 'Visiter le site',
     'work.moreWork': 'Autres projets',
 
     // Footer
-    'footer.copyright': '© 2026 Benjamin Porchet — Conçu et développé à la main',
+    'footer.copyright':
+      '© 2026 Benjamin Porchet — Conçu et développé à la main',
     'footer.portfolio': 'Portfolio',
 
     // Work types

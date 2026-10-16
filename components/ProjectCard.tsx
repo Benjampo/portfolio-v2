@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 
@@ -46,6 +46,7 @@ function ProjectCard({ project }: CardProps) {
         onMouseMove={handleMouse}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY, translateZ: z, transformStyle: 'preserve-3d' }}
+        className='relative'
       >
         <Link href={`/work/${project.id}`}>
           <article className='image-card cursor-pointer group'>
@@ -53,12 +54,13 @@ function ProjectCard({ project }: CardProps) {
               <motion.div className='absolute inset-[-20%]' style={{ y: imgY }}>
                 <div className='absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105'>
                   <Image
-                    layout='fill'
-                    objectFit='cover'
+                    fill
+                    sizes='(min-width: 768px) 50vw, 100vw'
+                    className='object-cover'
                     src={project.coverSrc}
                     alt={project.title}
                     placeholder='blur'
-                    priority={true}
+                    preload
                   />
                 </div>
               </motion.div>

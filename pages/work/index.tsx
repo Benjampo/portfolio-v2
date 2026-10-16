@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import Head from 'next/head';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useTranslation } from '../../lib/i18n';
@@ -25,7 +25,7 @@ function Index() {
   return (
     <motion.section>
       <Head>
-        <title>Benjamin Porchet | {t('work.title')}</title>
+        <title>{`Benjamin Porchet | ${t('work.title')}`}</title>
       </Head>
 
       <div className='flex items-baseline justify-between mb-12'>
@@ -57,8 +57,9 @@ function Index() {
         >
           {hoveredProject && (
             <Image
-              layout='fill'
-              objectFit='cover'
+              fill
+              sizes='360px'
+              className='object-cover'
               src={hoveredProject.coverSrc}
               alt={hoveredProject.title}
               placeholder='blur'

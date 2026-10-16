@@ -15,6 +15,12 @@ function MeshBackground() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    const supportsPointerMotion = window.matchMedia(
+      '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+    ).matches;
+
+    if (!supportsPointerMotion) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseRef.current.y = (e.clientY / window.innerHeight - 0.5) * 2;

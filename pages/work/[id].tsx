@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Head from 'next/head';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useRef } from 'react';
@@ -20,7 +20,7 @@ function ParallaxImage({ src, alt, className, speed = 0.15 }: { src: any; alt: s
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1, 1.12]);
 
   return (
-    <div ref={ref} className={`rounded-[22px] overflow-hidden ${className || ''}`}
+    <div ref={ref} className={`relative rounded-[22px] overflow-hidden ${className || ''}`}
       style={{ boxShadow: '0 8px 40px rgba(100,160,220,0.1), 0 0 0 1px rgba(255,255,255,0.5)' }}
     >
       <div className='relative w-full h-full overflow-hidden'>
@@ -34,10 +34,11 @@ function ParallaxImage({ src, alt, className, speed = 0.15 }: { src: any; alt: s
           }}
         >
           <Image
-            priority
-            layout='fill'
+            preload
+            fill
+            sizes='(min-width: 768px) 50vw, 100vw'
             src={src}
-            objectFit='cover'
+            className='object-cover'
             alt={alt}
             placeholder='blur'
           />
@@ -106,7 +107,7 @@ export function Project({ data }: any) {
       exit={{ opacity: 0 }}
     >
       <Head>
-        <title>{project.title} | Benjamin Porchet</title>
+        <title>{`${project.title} | Benjamin Porchet`}</title>
       </Head>
 
       {/* Back */}

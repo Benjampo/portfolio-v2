@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { useTranslation } from '../lib/i18n';
@@ -53,7 +53,7 @@ function HeroImage() {
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className='rounded-[22px] overflow-hidden inline-block'
       >
-        <Image src={benjampo} priority alt='Benjamin' />
+        <Image src={benjampo} preload unoptimized alt='Benjamin' />
       </motion.div>
     </div>
   );
@@ -90,10 +90,11 @@ function EditorialCard({
         <motion.div className='absolute inset-0' style={{ y: imgY }}>
           <div className='absolute inset-[-15%] card-image'>
             <Image
-              layout='fill'
-              objectFit='cover'
+              fill
+              sizes='(min-width: 768px) 50vw, 100vw'
+              className='object-cover'
               src={project.coverSrc}
-              priority={index === 0}
+              preload={index === 0}
               alt={project.title}
               placeholder='blur'
             />

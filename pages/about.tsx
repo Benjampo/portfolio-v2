@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import { useRef } from 'react';
 
 import Studies from './../data/Studies';
@@ -84,9 +84,10 @@ function About() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      className='relative'
     >
       <Head>
-        <title>Benjamin Porchet | {t('about.title')}</title>
+        <title>{`Benjamin Porchet | ${t('about.title')}`}</title>
       </Head>
 
       {/* ── Hero ── */}

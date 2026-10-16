@@ -1,7 +1,8 @@
 import { ArrowUpRightIcon } from '@heroicons/react/20/solid';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import Image from "next/legacy/image";
-import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from 'react';
+import Turnstile from '../components/Turnstile';
 import { useTranslation } from '../lib/i18n';
 import Socials from './../data/Socials';
 
@@ -10,7 +11,13 @@ import success from './../assets/icons/success.png';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-function FloatingLabel({ children, active }: { children: string; active: boolean }) {
+function FloatingLabel({
+  children,
+  active,
+}: {
+  children: string;
+  active: boolean;
+}) {
   return (
     <motion.span
       className='absolute left-0 pointer-events-none origin-left text-foreground'
@@ -41,7 +48,8 @@ function AnimatedLine({ active }: { active: boolean }) {
       style={{
         transformOrigin: 'left',
         width: '100%',
-        background: 'linear-gradient(90deg, var(--color-foreground), rgba(100, 160, 240, 0.6))',
+        background:
+          'linear-gradient(90deg, var(--color-foreground), rgba(100, 160, 240, 0.6))',
       }}
     />
   );
@@ -53,14 +61,18 @@ function FormField({
   value,
   onChange,
   name,
+  invalid = false,
   isTextarea = false,
   delay = 0,
 }: {
   label: string;
   type?: string;
   value: string;
-  onChange: (e: any) => void;
+  onChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   name: string;
+  invalid?: boolean;
   isTextarea?: boolean;
   delay?: number;
 }) {
@@ -79,6 +91,8 @@ function FormField({
       <Component
         type={type}
         name={name}
+        required
+        aria-invalid={invalid}
         value={value}
         onChange={onChange}
         onFocus={() => setFocused(true)}
@@ -97,8 +111,14 @@ function GlassFormCard({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [2, -2]), { stiffness: 200, damping: 30 });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-2, 2]), { stiffness: 200, damping: 30 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [2, -2]), {
+    stiffness: 200,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-2, 2]), {
+    stiffness: 200,
+    damping: 30,
+  });
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -112,7 +132,10 @@ function GlassFormCard({ children }: { children: React.ReactNode }) {
       <motion.div
         ref={ref}
         onMouseMove={handleMouse}
-        onMouseLeave={() => { mx.set(0); my.set(0); }}
+        onMouseLeave={() => {
+          mx.set(0);
+          my.set(0);
+        }}
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
         initial={{ opacity: 0, y: 60, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -132,43 +155,75 @@ function Contact() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState('');
-  const [formLoadTime] = useState(() => Date.now());
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [buttonText, setButtonText] = useState<'send' | 'sending'>('send');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+
+  const handleTurnstileToken = useCallback((token: string | null) => {
+    setTurnstileToken(token);
+  }, []);
 
   const handleValidation = () => {
-    let tempErrors: any = {};
+    const tempErrors: Record<string, boolean> = {};
     let isValid = true;
-    if (fullname.length <= 0) { tempErrors['fullname'] = true; isValid = false; }
-    if (email.length <= 0) { tempErrors['email'] = true; isValid = false; }
-    if (subject.length <= 0) { tempErrors['subject'] = true; isValid = false; }
-    if (message.length <= 0) { tempErrors['message'] = true; isValid = false; }
-    setErrors({ ...tempErrors });
+    if (fullname.trim().length === 0) {
+      tempErrors.fullname = true;
+      isValid = false;
+    }
+    if (email.trim().length === 0) {
+      tempErrors.email = true;
+      isValid = false;
+    }
+    if (subject.trim().length === 0) {
+      tempErrors.subject = true;
+      isValid = false;
+    }
+    if (message.trim().length === 0) {
+      tempErrors.message = true;
+      isValid = false;
+    }
+    setErrors(tempErrors);
     return isValid;
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    let isValidForm = handleValidation();
-    if (isValidForm) {
-      setButtonText('sending');
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!handleValidation() || !turnstileToken || buttonText === 'sending') {
+      return;
+    }
+
+    setButtonText('sending');
+    setShowFailureMessage(false);
+
+    try {
       const res = await fetch('/api/sendgrid', {
-        body: JSON.stringify({ email, fullname, subject, message, website, formLoadTime }),
+        body: JSON.stringify({
+          email,
+          fullname,
+          subject,
+          message,
+          website,
+          turnstileToken,
+        }),
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       });
-      const { error } = await res.json();
-      if (error) {
-        console.log(error);
-        setShowSuccessMessage(false);
-        setShowFailureMessage(true);
-        setButtonText('send');
-        return;
+      const result: { error?: string } = await res.json();
+
+      if (!res.ok || result.error) {
+        throw new Error(result.error || 'Contact form submission failed');
       }
+
       setShowSuccessMessage(true);
-      setShowFailureMessage(false);
+    } catch (error) {
+      console.error('Unable to submit contact form', error);
+      setShowSuccessMessage(false);
+      setShowFailureMessage(true);
+      setTurnstileResetKey(current => current + 1);
+    } finally {
       setButtonText('send');
     }
   };
@@ -276,7 +331,12 @@ function Contact() {
                     whileHover={{ y: -3 }}
                     className='opacity-30 hover:opacity-100 transition-opacity duration-300 block invert dark:invert-0'
                   >
-                    <Image src={social.icon} alt={social.label} height={32} width={32} />
+                    <Image
+                      src={social.icon}
+                      alt={social.label}
+                      height={32}
+                      width={32}
+                    />
                   </motion.a>
                 </motion.li>
               ))}
@@ -296,7 +356,12 @@ function Contact() {
                 <motion.div
                   initial={{ scale: 0, rotate: -30 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: 'spring', damping: 10, stiffness: 100, delay: 0.15 }}
+                  transition={{
+                    type: 'spring',
+                    damping: 10,
+                    stiffness: 100,
+                    delay: 0.15,
+                  }}
                   className='inline-block mb-8'
                 >
                   <Image src={success} width={80} height={80} alt='Success' />
@@ -326,6 +391,7 @@ function Contact() {
                   <FormField
                     label={t('contact.name')}
                     name='fullname'
+                    invalid={Boolean(errors.fullname)}
                     value={fullname}
                     onChange={e => setFullname(e.target.value)}
                     delay={0.4}
@@ -334,6 +400,7 @@ function Contact() {
                     label={t('contact.email')}
                     type='email'
                     name='email'
+                    invalid={Boolean(errors.email)}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     delay={0.5}
@@ -355,6 +422,7 @@ function Contact() {
                 <FormField
                   label={t('contact.subject')}
                   name='subject'
+                  invalid={Boolean(errors.subject)}
                   value={subject}
                   onChange={e => setSubject(e.target.value)}
                   delay={0.6}
@@ -362,10 +430,17 @@ function Contact() {
                 <FormField
                   label={t('contact.message')}
                   name='message'
+                  invalid={Boolean(errors.message)}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                   isTextarea
                   delay={0.7}
+                />
+
+                <Turnstile
+                  onTokenChange={handleTurnstileToken}
+                  resetKey={turnstileResetKey}
+                  unavailableMessage={t('contact.verificationUnavailable')}
                 />
 
                 <motion.div
@@ -389,9 +464,14 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    className='group glass-btn text-foreground text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer'
+                    disabled={!turnstileToken || buttonText === 'sending'}
+                    className='group glass-btn text-foreground text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40'
                   >
-                    {t(buttonText === 'sending' ? 'contact.sending' : 'contact.send')}
+                    {t(
+                      buttonText === 'sending'
+                        ? 'contact.sending'
+                        : 'contact.send'
+                    )}
                   </motion.button>
                 </motion.div>
               </form>

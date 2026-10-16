@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import mailIcon from '../assets/icons/mail.png';
 import Link from 'next/link';
+import type { TranslationKey } from '../data/translations';
 import { useTranslation } from '../lib/i18n';
 import MenuItems from '../data/Menu';
 import Socials from '../data/Socials';
@@ -38,7 +39,7 @@ function Footer() {
                   <li key={item.labelKey}>
                     <Link href={item.url}>
                       <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/35 hover:text-foreground/70 transition-colors duration-300 cursor-pointer'>
-                        {t(item.labelKey as any)}
+                        {t(item.labelKey as TranslationKey)}
                       </span>
                     </Link>
                   </li>

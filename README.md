@@ -12,6 +12,23 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contact form configuration
+
+The contact form uses Cloudflare Turnstile and verifies every challenge on the
+server before sending mail. Create a Turnstile widget for the production domain,
+then configure these environment variables in the deployment:
+
+```bash
+SENDGRID_API_KEY=your-sendgrid-api-key
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=your-public-turnstile-site-key
+TURNSTILE_SECRET_KEY=your-private-turnstile-secret-key
+```
+
+Copy `.env.example` to `.env.local` for local overrides. When Turnstile keys are
+not set during local development, Cloudflare's official always-pass test keys
+are used. Production fails closed when either production Turnstile key is
+missing.
+
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.

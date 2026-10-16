@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { TranslationKey } from '../data/translations';
 import { useTranslation } from '../lib/i18n';
 import { useTheme } from '../lib/theme';
 import logo from './../assets/images/logo.svg';
@@ -39,7 +40,7 @@ function Header() {
   const [isNavHovered, setIsNavHovered] = useState(false);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const router = useRouter();
-  const handleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleMenu = () => setIsMenuOpen((isOpen) => !isOpen);
   const { t, locale, toggleLocale } = useTranslation();
   const { theme, toggleTheme } = useTheme();
 
@@ -54,6 +55,23 @@ function Header() {
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => setIsNavHovered(false), 200);
   };
+
+  useEffect(() => {
+    const closeMenu = () => setIsMenuOpen(false);
+
+    router.events.on('routeChangeStart', closeMenu);
+    return () => router.events.off('routeChangeStart', closeMenu);
+  }, [router.events]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -91,7 +109,7 @@ function Header() {
                             : 'text-foreground/50 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] border border-transparent'
                         }`}
                       >
-                        {t(item.labelKey as any)}
+                        {t(item.labelKey as TranslationKey)}
                       </motion.span>
                     </Link>
                   </li>
@@ -153,7 +171,8 @@ function Header() {
             <button
               onClick={handleMenu}
               className='w-7 h-7 flex flex-col justify-center items-center gap-[5px] cursor-pointer'
-              aria-label='Open menu'
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               <motion.span
                 animate={
@@ -233,7 +252,7 @@ function Header() {
                         ease,
                       }}
                     >
-                      <Link href={item.url} onClick={handleMenu}>
+                      <Link href={item.url} onClick={() => setIsMenuOpen(false)}>
                         <div className='group flex items-center py-5 cursor-pointer'>
                           <span
                             className={`text-[2.5rem] leading-none tracking-tight transition-all duration-500 ${
@@ -242,7 +261,7 @@ function Header() {
                                 : 'font-light text-foreground/60 group-hover:text-foreground group-hover:translate-x-2'
                             }`}
                           >
-                            {t(item.labelKey as any)}
+                            {t(item.labelKey as TranslationKey)}
                           </span>
 
                           {isActive(item.url) && (
