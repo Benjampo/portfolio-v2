@@ -61,22 +61,22 @@ const Projects = [
     subtitle: 'Nonprofit Website',
     subtitle_fr: 'Site associatif',
     context:
-      'End-to-end website created for Enseignants Sans Frontières Suisse on a tight nonprofit budget. I guided the client from early ideation and content structure through visual design, development and launch, with a Kirby CMS that keeps day-to-day publishing simple.',
+      'End-to-end website created for Enseignants Sans Frontières Suisse on a tight nonprofit budget. I guided the client from early ideation and content structure through visual design, React development and launch, with a Kirby CMS that keeps day-to-day publishing simple.',
     context_fr:
-      'Site conçu de A à Z pour Enseignants Sans Frontières Suisse avec un budget associatif serré. J\'ai accompagné le client de l\'idéation et de la structuration des contenus jusqu\'au design, au développement et à la mise en ligne, avec un CMS Kirby simple à administrer au quotidien.',
+      'Site conçu de A à Z pour Enseignants Sans Frontières Suisse avec un budget associatif serré. J\'ai accompagné le client de l\'idéation et de la structuration des contenus jusqu\'au design, au développement React et à la mise en ligne, avec un CMS Kirby simple à administrer au quotidien.',
     tasks: [
       'Client workshops, ideation and content structure',
-      'UX/UI design and responsive frontend development',
+      'UX/UI design and responsive React development',
       'Kirby CMS architecture and implementation',
       'Launch and client handover',
     ],
     tasks_fr: [
       'Ateliers client, idéation et structuration des contenus',
-      'Design UX/UI et développement frontend responsive',
+      'Design UX/UI et développement React responsive',
       'Architecture et implémentation du CMS Kirby',
       'Mise en ligne et accompagnement du client',
     ],
-    tech: ['HTML', 'SCSS', 'JavaScript', 'PHP', 'Kirby CMS'],
+    tech: ['ReactJS', 'SCSS', 'PHP', 'Kirby CMS'],
   },
   {
     id: 'quanthome-platform',
