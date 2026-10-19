@@ -3,7 +3,6 @@ import {
   motion,
   useMotionValue,
   useReducedMotion,
-  useScroll,
   useSpring,
   useTransform,
 } from 'framer-motion';
@@ -12,6 +11,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import ScreenshotFrame from '../components/ScreenshotFrame';
 import type { TranslationKey } from '../data/translations';
 import { useTranslation } from '../lib/i18n';
 import Projects from '../data/projects';
@@ -172,21 +172,8 @@ function Hero() {
   );
 }
 
-function EditorialCard({
-  project,
-  index,
-  height = 'h-[22rem] md:h-[38rem]',
-}: {
-  project: any;
-  index: number;
-  height?: string;
-}) {
+function EditorialCard({ project, index }: { project: any; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const { t, renderLocale: locale } = useTranslation();
 
   const context =
@@ -200,7 +187,7 @@ function EditorialCard({
 
   return (
     <Link href={`/work/${project.id}`}>
-      <motion.div
+      <motion.article
         ref={ref}
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -210,29 +197,24 @@ function EditorialCard({
           ease: [0.16, 1, 0.3, 1],
         }}
         viewport={{ once: true, margin: '-80px' }}
-        className={`editorial-card group relative ${height} w-full`}
+        className='editorial-card group w-full'
       >
-        {/* Image */}
-        <motion.div className='absolute inset-0' style={{ y: imgY }}>
-          <div className='absolute inset-[-15%] card-image'>
-            <Image
-              fill
-              sizes='(min-width: 768px) 50vw, 100vw'
-              className='object-cover'
+        <div className='editorial-card__visual'>
+          <div className='card-image w-full'>
+            <ScreenshotFrame
+              alt={`${project.title} interface preview`}
+              className='screenshot-frame--card'
+              priority={index === 0}
+              sizes='(min-width: 768px) 44vw, 100vw'
               src={project.coverSrc}
-              preload={index === 0}
-              alt={project.title}
-              placeholder='blur'
+              trimBottom={project.screenshotTrimBottom}
+              uniform
             />
           </div>
-        </motion.div>
+        </div>
 
-        {/* Overlay */}
-        <div className='card-overlay absolute inset-0 z-10' />
-
-        {/* Content */}
-        <div className='absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 flex flex-col gap-3'>
-          <div className='flex items-center gap-2'>
+        <div className='editorial-card__content'>
+          <div className='flex flex-wrap items-center gap-2'>
             <span className='editorial-tag'>{subtitle}</span>
             {project.tech?.slice(0, 2).map((t: string) => (
               <span key={t} className='editorial-tag hidden md:inline-block'>
@@ -240,15 +222,14 @@ function EditorialCard({
               </span>
             ))}
           </div>
-          <h3 className='card-title text-white text-3xl md:text-5xl tracking-tight'>
+          <h3 className='card-title text-2xl tracking-tight md:text-4xl'>
             {project.title}
           </h3>
-          <p className='text-white/50 text-sm md:text-base max-w-lg leading-relaxed line-clamp-2'>
+          <p className='max-w-2xl text-sm leading-relaxed text-foreground/55 line-clamp-2 md:text-base'>
             {context}
           </p>
 
-          {/* Hover arrow */}
-          <motion.div className='flex items-center gap-2 text-white/0 group-hover:text-white/70 transition-colors duration-500 mt-1'>
+          <div className='mt-auto flex items-center gap-2 pt-1 text-foreground/40 transition-colors duration-500 group-hover:text-foreground'>
             <span className='text-xs uppercase tracking-widest font-medium'>
               {t('home.viewProject')}
             </span>
@@ -267,9 +248,9 @@ function EditorialCard({
                 strokeLinejoin='round'
               />
             </svg>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </motion.article>
     </Link>
   );
 }
@@ -304,38 +285,10 @@ const Home: NextPage = () => {
 
         <div className='mb-12' />
 
-        {/* Row 1 — Featured hero card */}
-        <EditorialCard
-          project={Projects[0]}
-          index={0}
-          height='h-[24rem] md:h-[44rem]'
-        />
-
-        {/* Row 2 — Asymmetric duo */}
-        <div className='grid md:grid-cols-5 gap-4 mt-4'>
-          <div className='md:col-span-3'>
-            <EditorialCard
-              project={Projects[1]}
-              index={1}
-              height='h-[20rem] md:h-[34rem]'
-            />
-          </div>
-          <div className='md:col-span-2'>
-            <EditorialCard
-              project={Projects[2]}
-              index={2}
-              height='h-[20rem] md:h-[34rem]'
-            />
-          </div>
-        </div>
-
-        {/* Row 3 — Wide card */}
-        <div className='mt-4'>
-          <EditorialCard
-            project={Projects[3]}
-            index={3}
-            height='h-[20rem] md:h-[30rem]'
-          />
+        <div className='grid gap-x-8 gap-y-14 md:grid-cols-2'>
+          {Projects.slice(0, 4).map((project: any, index: number) => (
+            <EditorialCard project={project} index={index} key={project.id} />
+          ))}
         </div>
 
         {/* CTA */}

@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document';
+import Script from 'next/script';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -18,7 +19,7 @@ class MyDocument extends Document {
         <Head>
           <meta
             name='description'
-            content="Full-stack Developer specialized in front-end. Passionate about creating and implementing solutions that make users lives easier."
+            content='Full-stack Developer specialized in front-end. Passionate about creating and implementing solutions that make users lives easier.'
           />
           <link
             rel='apple-touch-icon'
@@ -55,20 +56,7 @@ class MyDocument extends Document {
             href='https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap'
             rel='stylesheet'
           />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function() {
-                  try {
-                    var theme = localStorage.getItem('theme');
-                    if (theme === 'dark') {
-                      document.documentElement.classList.add('dark');
-                    }
-                  } catch(e) {}
-                })();
-              `,
-            }}
-          />
+          <Script src='/theme-init.js' strategy='beforeInteractive' />
         </Head>
         <body>
           <Main />

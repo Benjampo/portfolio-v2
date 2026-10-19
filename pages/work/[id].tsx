@@ -1,93 +1,123 @@
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Head from 'next/head';
-import Image from 'next/image';
+import type { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import Router from 'next/router';
-import { useRef } from 'react';
-import { useTranslation } from '../../lib/i18n';
+import type { ReactNode } from 'react';
+import ScreenshotFrame from '../../components/ScreenshotFrame';
 import Projects from '../../data/projects';
+import { useTranslation } from '../../lib/i18n';
 
-function ParallaxImage({ src, alt, className, speed = 0.15 }: { src: any; alt: string; className?: string; speed?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
+const revealTransition = {
+  duration: 0.75,
+  ease: [0.16, 1, 0.3, 1] as const,
+};
 
-  const rawY = useTransform(scrollYProgress, [0, 1], [speed * -200, speed * 200]);
-  const y = useSpring(rawY, { stiffness: 100, damping: 25, mass: 0.6 });
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1, 1.12]);
-
+function ProjectVisual({
+  alt,
+  caption,
+  priority = false,
+  src,
+  trimBottom,
+}: {
+  alt: string;
+  caption: string;
+  priority?: boolean;
+  src: StaticImageData;
+  trimBottom?: number;
+}) {
   return (
-    <div ref={ref} className={`relative rounded-[22px] overflow-hidden ${className || ''}`}
-      style={{ boxShadow: '0 8px 40px rgba(100,160,220,0.1), 0 0 0 1px rgba(255,255,255,0.5)' }}
+    <motion.figure
+      initial={{ opacity: 0, y: 45 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={revealTransition}
+      className='case-study-visual'
     >
-      <div className='relative w-full h-full overflow-hidden'>
-        <motion.div
-          className='absolute'
-          style={{
-            top: '-20%', left: '-5%', right: '-5%', bottom: '-20%',
-            y,
-            scale,
-            willChange: 'transform',
-          }}
-        >
-          <Image
-            preload
-            fill
-            sizes='(min-width: 768px) 50vw, 100vw'
-            src={src}
-            className='object-cover'
-            alt={alt}
-            placeholder='blur'
-          />
-        </motion.div>
-      </div>
-    </div>
+      <ScreenshotFrame
+        alt={alt}
+        className='relative z-10'
+        priority={priority}
+        sizes='(min-width: 1400px) 1280px, 94vw'
+        src={src}
+        trimBottom={trimBottom}
+        uniform
+      />
+      <figcaption className='case-study-caption'>{caption}</figcaption>
+    </motion.figure>
+  );
+}
+
+function ChapterCopy({
+  children,
+  eyebrow,
+  title,
+}: {
+  children: ReactNode;
+  eyebrow: string;
+  title: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={revealTransition}
+      className='case-study-chapter__copy'
+    >
+      <span className='case-study-eyebrow'>{eyebrow}</span>
+      <h2>{title}</h2>
+      {children}
+    </motion.div>
   );
 }
 
 function ProjectNav({ project }: { project: any }) {
-  const currentIndex = Projects.findIndex((p: any) => p.id === project.id);
-  const prevProject = currentIndex > 0 ? Projects[currentIndex - 1] : null;
-  const nextProject = currentIndex < Projects.length - 1 ? Projects[currentIndex + 1] : null;
+  const currentIndex = Projects.findIndex(
+    (item: any) => item.id === project.id
+  );
+  const previousProject = currentIndex > 0 ? Projects[currentIndex - 1] : null;
+  const nextProject =
+    currentIndex < Projects.length - 1 ? Projects[currentIndex + 1] : null;
   const { t } = useTranslation();
 
   return (
-    <motion.div
+    <motion.nav
+      aria-label={t('work.moreWork')}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className='border-t border-foreground/[0.06] pt-12 mt-20'
+      className='mt-24 border-t border-foreground/[0.08] pt-10'
     >
-      <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/40 font-semibold block mb-6'>{t('work.moreWork')}</span>
-      <div className='flex justify-between items-center'>
-        {prevProject ? (
-          <Link href={`/work/${prevProject.id}`}>
-            <motion.span
-              whileHover={{ x: -4 }}
-              className='text-lg font-semibold text-foreground/60 hover:text-foreground transition-colors duration-300 cursor-pointer flex items-center gap-3'
-            >
-              <ArrowLeftIcon className='w-4 h-4' />
-              {prevProject.title}
-            </motion.span>
+      <span className='mb-6 block text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/40'>
+        {t('work.moreWork')}
+      </span>
+      <div className='grid grid-cols-2 gap-4'>
+        {previousProject ? (
+          <Link
+            href={`/work/${previousProject.id}`}
+            className='group flex min-w-0 items-center gap-3 text-sm font-semibold text-foreground/55 transition-colors hover:text-foreground md:text-lg'
+          >
+            <ArrowLeftIcon className='h-4 w-4 shrink-0 transition-transform group-hover:-translate-x-1' />
+            <span className='truncate'>{previousProject.title}</span>
           </Link>
-        ) : <div />}
+        ) : (
+          <span />
+        )}
         {nextProject ? (
-          <Link href={`/work/${nextProject.id}`}>
-            <motion.span
-              whileHover={{ x: 4 }}
-              className='text-lg font-semibold text-foreground/60 hover:text-foreground transition-colors duration-300 cursor-pointer flex items-center gap-3'
-            >
-              {nextProject.title}
-              <ArrowLeftIcon className='w-4 h-4 rotate-180' />
-            </motion.span>
+          <Link
+            href={`/work/${nextProject.id}`}
+            className='group flex min-w-0 items-center justify-end gap-3 text-right text-sm font-semibold text-foreground/55 transition-colors hover:text-foreground md:text-lg'
+          >
+            <span className='truncate'>{nextProject.title}</span>
+            <ArrowLeftIcon className='h-4 w-4 shrink-0 rotate-180 transition-transform group-hover:translate-x-1' />
           </Link>
-        ) : <div />}
+        ) : (
+          <span />
+        )}
       </div>
-    </motion.div>
+    </motion.nav>
   );
 }
 
@@ -95,156 +125,167 @@ export function Project({ data }: any) {
   const project = data[0];
   const { t, renderLocale: locale } = useTranslation();
 
-  const context = locale === 'fr' && project.context_fr ? project.context_fr : project.context;
-  const subtitle = locale === 'fr' && project.subtitle_fr ? project.subtitle_fr : project.subtitle;
-  const tasks = locale === 'fr' && project.tasks_fr ? project.tasks_fr : project.tasks;
-  const info = locale === 'fr' && project.info_fr ? project.info_fr : project.info;
+  const context =
+    locale === 'fr' && project.context_fr
+      ? project.context_fr
+      : project.context;
+  const subtitle =
+    locale === 'fr' && project.subtitle_fr
+      ? project.subtitle_fr
+      : project.subtitle;
+  const tasks =
+    locale === 'fr' && project.tasks_fr ? project.tasks_fr : project.tasks;
+  const info =
+    locale === 'fr' && project.info_fr ? project.info_fr : project.info;
+  const caseStudy = project.caseStudy[locale];
 
   return (
-    <motion.section
+    <motion.article
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <Head>
         <title>{`${project.title} | Benjamin Porchet`}</title>
+        <meta name='description' content={context} />
       </Head>
 
-      {/* Back */}
-      <motion.button
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        whileHover={{ x: -4 }}
-        whileTap={{ scale: 0.95 }}
-        className='mb-10 text-foreground/40 hover:text-foreground transition-colors cursor-pointer flex items-center gap-2 text-sm'
-        onClick={() => Router.back()}
+      <Link
+        href='/work'
+        className='mb-12 inline-flex items-center gap-2 text-sm text-foreground/45 transition-colors hover:text-foreground'
       >
-        <ArrowLeftIcon className='w-4 h-4' />
+        <ArrowLeftIcon className='h-4 w-4' />
         <span>{t('work.back')}</span>
-      </motion.button>
+      </Link>
 
-      {/* Hero image — full bleed */}
-      <ParallaxImage
-        src={project.coverSrc}
-        alt={`Main image of ${project.title}`}
-        className='h-[18rem] md:h-[48rem] -mx-6 md:-mx-16 xl:-mx-24'
-        speed={0.2}
-      />
-
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className='mt-10 md:mt-14 max-w-3xl'
-      >
-        <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>
-          {subtitle}
-        </span>
-        <h1 className='font-bold text-3xl md:text-5xl tracking-tight mt-4'>
-          {project.title}
-        </h1>
-        <div className='flex flex-wrap gap-2 mt-5'>
-          {project.tech.map((tech: string, index: number) => (
-            <span className='pill pointer-events-none text-xs' key={index}>
-              {tech}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Content */}
-      <div className='grid md:grid-cols-[1fr_1fr] gap-12 md:gap-20 mt-16 md:mt-20 max-w-4xl'>
+      <header className='case-study-header'>
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={revealTransition}
         >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>{t('work.context')}</span>
-          <p className='text-foreground/60 text-base md:text-lg leading-relaxed mt-4'>{context}</p>
+          <span className='case-study-eyebrow'>{subtitle}</span>
+          <h1 className='mt-4 max-w-5xl text-balance text-5xl font-bold leading-[0.96] tracking-[-0.055em] md:text-7xl lg:text-8xl'>
+            {project.title}
+          </h1>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className='text-[11px] uppercase tracking-[0.2em] text-foreground/45 font-semibold'>{t('work.whatIDid')}</span>
-          <ul className='mt-4 space-y-2.5'>
-            {tasks.map((task: string, index: number) => (
-              <li className='flex items-start gap-3 text-foreground/60 text-base md:text-lg' key={index}>
-                <span className='mt-2.5 w-1 h-1 rounded-full bg-foreground/30 flex-shrink-0' />
-                {task}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
 
-      {/* Secondary images */}
-      <div className='grid md:grid-cols-2 gap-6 mt-16 md:mt-24'>
-        <ParallaxImage
-          src={project.secSrc}
-          alt={`Second image of ${project.title}`}
-          className='h-[14rem] md:h-[32rem]'
-          speed={0.12}
-        />
-        <ParallaxImage
-          src={project.thirdSrc}
-          alt={`Third image of ${project.title}`}
-          className='h-[14rem] md:h-[32rem]'
-          speed={0.18}
-        />
-      </div>
-
-      {/* Info (if no URL) */}
-      {info && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className='text-center text-foreground/40 text-sm mt-10'
-        >
-          {info}
-        </motion.p>
-      )}
-
-      {/* Visit website CTA */}
-      {project.url && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className='flex justify-center mt-16 md:mt-20'
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...revealTransition, delay: 0.12 }}
+          className='case-study-header__meta'
         >
+          <p>{context}</p>
+          <div>
+            <span className='case-study-eyebrow'>{t('work.builtWith')}</span>
+            <div className='mt-3 flex flex-wrap gap-2'>
+              {project.tech.map((technology: string, index: number) => (
+                <span
+                  className='pill pointer-events-none text-xs'
+                  key={`${technology}-${index}`}
+                >
+                  {technology}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </header>
+
+      <ProjectVisual
+        alt={`${project.title} — ${t('work.overview')}`}
+        caption={t('work.overview')}
+        priority
+        src={project.coverSrc}
+        trimBottom={project.screenshotTrimBottom}
+      />
+
+      <section className='case-study-chapter'>
+        <ChapterCopy eyebrow={t('work.theBrief')} title={caseStudy.briefTitle}>
+          <p>{context}</p>
+        </ChapterCopy>
+      </section>
+
+      <ProjectVisual
+        alt={`${project.title} — ${t('work.experienceDetail')}`}
+        caption={t('work.experienceDetail')}
+        src={project.secSrc}
+        trimBottom={project.screenshotTrimBottom}
+      />
+
+      <section className='case-study-chapter case-study-chapter--work'>
+        <ChapterCopy
+          eyebrow={t('work.myContribution')}
+          title={caseStudy.contributionTitle}
+        >
+          <p>{caseStudy.contributionIntro}</p>
+        </ChapterCopy>
+
+        <div className='case-study-workstreams'>
+          {tasks.map((task: string, index: number) => (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ ...revealTransition, delay: index * 0.06 }}
+              className='case-study-workstream'
+              key={task}
+            >
+              <h3>{task}</h3>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <ProjectVisual
+        alt={`${project.title} — ${t('work.finalView')}`}
+        caption={t('work.finalView')}
+        src={project.thirdSrc}
+        trimBottom={project.screenshotTrimBottom}
+      />
+
+      <section className='case-study-outcome'>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={revealTransition}
+        >
+          <span className='case-study-eyebrow'>{t('work.theResult')}</span>
+          <h2>{caseStudy.resultTitle}</h2>
+          <p>{caseStudy.resultText}</p>
+          {info ? (
+            <small className='case-study-availability'>{info}</small>
+          ) : null}
+        </motion.div>
+
+        {project.url ? (
           <motion.a
             href={project.url}
             target='_blank'
             rel='noreferrer'
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className='inline-block glass-btn text-foreground text-sm font-medium px-8 py-4 rounded-full cursor-pointer'
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className='glass-btn inline-flex items-center gap-3 rounded-full px-8 py-4 text-sm font-medium text-foreground'
           >
             {t('work.visitWebsite')}
+            <span aria-hidden='true'>↗</span>
           </motion.a>
-        </motion.div>
-      )}
+        ) : null}
+      </section>
 
-      {/* Prev / Next navigation */}
       <ProjectNav project={project} />
-    </motion.section>
+    </motion.article>
   );
 }
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const paths = Projects.map((item: any) => ({ params: { id: item.id } }));
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }: any) {
+export function getStaticProps({ params }: any) {
   const data = Projects.filter((item: any) => item.id === params.id);
   return { props: { data } };
 }
