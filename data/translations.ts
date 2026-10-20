@@ -13,8 +13,6 @@ const translations = {
     'home.heroStatement.production': 'reliable production systems',
     'home.heroAccessible':
       'AI-powered products, solutions built for users, and reliable production systems.',
-    'home.heroSummary':
-      'From user discovery and rapid prototyping to APIs, deployment, and iteration.',
     'home.scrollToWork': 'Scroll to selected work',
     'home.selectedWork': 'Selected Work',
     'home.viewProject': 'View project',
@@ -78,9 +76,6 @@ const translations = {
     'work.overview': 'Interface overview',
     'work.experienceDetail': 'The experience in detail',
     'work.finalView': 'The final experience',
-    'work.theBrief': 'The brief',
-    'work.myContribution': 'My contribution',
-    'work.theResult': 'The result',
     'work.visitWebsite': 'Visit website',
     'work.moreWork': 'More work',
 
@@ -108,8 +103,6 @@ const translations = {
     'home.heroStatement.production': 'des systèmes fiables',
     'home.heroAccessible':
       'des produits propulsés par l’IA, des solutions sur mesure et des systèmes fiables.',
-    'home.heroSummary':
-      'De la compréhension des besoins et du prototypage aux API, au déploiement et aux itérations.',
     'home.scrollToWork': 'Faire défiler vers les projets sélectionnés',
     'home.selectedWork': 'Projets sélectionnés',
     'home.viewProject': 'Voir le projet',
@@ -173,9 +166,6 @@ const translations = {
     'work.overview': "Vue d'ensemble de l'interface",
     'work.experienceDetail': "L'expérience en détail",
     'work.finalView': "L'expérience finale",
-    'work.theBrief': 'Le brief',
-    'work.myContribution': 'Ma contribution',
-    'work.theResult': 'Le résultat',
     'work.visitWebsite': 'Visiter le site',
     'work.moreWork': 'Autres projets',
 

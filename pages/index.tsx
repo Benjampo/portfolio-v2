@@ -139,15 +139,6 @@ function Hero() {
           <RotatingStatement />
         </motion.h1>
 
-        <motion.p
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.28, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className='mx-auto mt-4 max-w-xl text-pretty text-xs leading-relaxed text-foreground/50 sm:text-sm md:text-base'
-        >
-          {t('home.heroSummary')}
-        </motion.p>
-
         <motion.a
           initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
