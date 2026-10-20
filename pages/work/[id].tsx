@@ -50,11 +50,9 @@ function ProjectVisual({
 
 function ChapterCopy({
   children,
-  eyebrow,
   title,
 }: {
   children: ReactNode;
-  eyebrow: string;
   title: string;
 }) {
   return (
@@ -65,7 +63,6 @@ function ChapterCopy({
       transition={revealTransition}
       className='case-study-chapter__copy'
     >
-      <span className='case-study-eyebrow'>{eyebrow}</span>
       <h2>{title}</h2>
       {children}
     </motion.div>
@@ -202,7 +199,7 @@ export function Project({ data }: any) {
       />
 
       <section className='case-study-chapter'>
-        <ChapterCopy eyebrow={t('work.theBrief')} title={caseStudy.briefTitle}>
+        <ChapterCopy title={caseStudy.briefTitle}>
           <p>{context}</p>
         </ChapterCopy>
       </section>
@@ -215,10 +212,7 @@ export function Project({ data }: any) {
       />
 
       <section className='case-study-chapter case-study-chapter--work'>
-        <ChapterCopy
-          eyebrow={t('work.myContribution')}
-          title={caseStudy.contributionTitle}
-        >
+        <ChapterCopy title={caseStudy.contributionTitle}>
           <p>{caseStudy.contributionIntro}</p>
         </ChapterCopy>
 
@@ -252,7 +246,6 @@ export function Project({ data }: any) {
           viewport={{ once: true, margin: '-80px' }}
           transition={revealTransition}
         >
-          <span className='case-study-eyebrow'>{t('work.theResult')}</span>
           <h2>{caseStudy.resultTitle}</h2>
           <p>{caseStudy.resultText}</p>
           {info ? (
