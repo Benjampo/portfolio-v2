@@ -60,7 +60,7 @@ const translations = {
     'contact.thanks': "Thanks! I'll get back to you soon.",
     'contact.error': 'Something went wrong. Please try again.',
     'contact.verificationUnavailable':
-      'Spam verification is temporarily unavailable. Please email me directly.',
+      'Spam verification is temporarily unavailable. You can still send your message.',
 
     // 404
     '404.text': "This page doesn't exist.",
@@ -150,7 +150,7 @@ const translations = {
     'contact.thanks': 'Merci\u00A0! Je vous répondrai bientôt.',
     'contact.error': 'Une erreur est survenue. Veuillez réessayer.',
     'contact.verificationUnavailable':
-      'La vérification anti-spam est temporairement indisponible. Veuillez me contacter directement par email.',
+      'La vérification anti-spam est temporairement indisponible. Vous pouvez tout de même envoyer votre message.',
 
     // 404
     '404.text': "Cette page n'existe pas.",

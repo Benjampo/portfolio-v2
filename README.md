@@ -14,9 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Contact form configuration
 
-The contact form uses Cloudflare Turnstile and verifies every challenge on the
-server before sending mail. Create a Turnstile widget for the production domain,
-then configure these environment variables in the deployment:
+The contact form sends mail with SendGrid. It can also use Cloudflare Turnstile
+as an additional anti-spam layer. Configure SendGrid in every deployment and,
+optionally, create a Turnstile widget for the production domain:
 
 ```bash
 SENDGRID_API_KEY=your-sendgrid-api-key
@@ -26,8 +26,8 @@ TURNSTILE_SECRET_KEY=your-private-turnstile-secret-key
 
 Copy `.env.example` to `.env.local` for local overrides. When Turnstile keys are
 not set during local development, Cloudflare's official always-pass test keys
-are used. Production fails closed when either production Turnstile key is
-missing.
+are used. When Turnstile is unavailable, the form remains usable and falls back
+to its server-side validation, honeypot, timing, and spam-content checks.
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 

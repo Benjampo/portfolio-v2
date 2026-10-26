@@ -155,15 +155,21 @@ function Contact() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState('');
+  const [formStartedAt] = useState(() => Date.now());
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [buttonText, setButtonText] = useState<'send' | 'sending'>('send');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileUnavailable, setTurnstileUnavailable] = useState(false);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   const handleTurnstileToken = useCallback((token: string | null) => {
     setTurnstileToken(token);
+  }, []);
+
+  const handleTurnstileUnavailable = useCallback(() => {
+    setTurnstileUnavailable(true);
   }, []);
 
   const handleValidation = () => {
@@ -191,7 +197,11 @@ function Contact() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!handleValidation() || !turnstileToken || buttonText === 'sending') {
+    if (
+      !handleValidation() ||
+      (!turnstileToken && !turnstileUnavailable) ||
+      buttonText === 'sending'
+    ) {
       return;
     }
 
@@ -206,6 +216,7 @@ function Contact() {
           subject,
           message,
           website,
+          formStartedAt,
           turnstileToken,
         }),
         headers: { 'Content-Type': 'application/json' },
@@ -439,6 +450,7 @@ function Contact() {
 
                 <Turnstile
                   onTokenChange={handleTurnstileToken}
+                  onUnavailable={handleTurnstileUnavailable}
                   resetKey={turnstileResetKey}
                   unavailableMessage={t('contact.verificationUnavailable')}
                 />
@@ -464,7 +476,10 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    disabled={!turnstileToken || buttonText === 'sending'}
+                    disabled={
+                      (!turnstileToken && !turnstileUnavailable) ||
+                      buttonText === 'sending'
+                    }
                     className='group glass-btn text-foreground text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40'
                   >
                     {t(

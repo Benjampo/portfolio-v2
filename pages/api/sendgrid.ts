@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const DEVELOPMENT_SECRET_KEY = '1x0000000000000000000000000000000AA';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_FORM_TIME_MS = 2000;
 const TURNSTILE_VERIFY_URL =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const SPAM_KEYWORDS = [
@@ -24,6 +25,7 @@ type ContactPayload = {
   message: string;
   website: string;
   turnstileToken: string;
+  formStartedAt: number;
 };
 
 type TurnstileResponse = {
@@ -39,7 +41,7 @@ function readPayload(body: unknown): ContactPayload | null {
   }
 
   const values = body as Record<string, unknown>;
-  const fields = [
+  const stringFields = [
     'subject',
     'fullname',
     'email',
@@ -48,17 +50,23 @@ function readPayload(body: unknown): ContactPayload | null {
     'turnstileToken',
   ] as const;
 
-  if (fields.some(field => typeof values[field] !== 'string')) {
+  if (
+    stringFields.some(field => typeof values[field] !== 'string') ||
+    typeof values.formStartedAt !== 'number'
+  ) {
     return null;
   }
 
-  return Object.fromEntries(
-    fields.map(field => [field, values[field]])
-  ) as ContactPayload;
+  return {
+    ...Object.fromEntries(stringFields.map(field => [field, values[field]])),
+    formStartedAt: values.formStartedAt,
+  } as ContactPayload;
 }
 
 function isPayloadValid(payload: ContactPayload) {
-  const { subject, fullname, email, message, turnstileToken } = payload;
+  const { subject, fullname, email, message, formStartedAt, turnstileToken } =
+    payload;
+  const elapsedTime = Date.now() - formStartedAt;
 
   return (
     fullname.trim().length > 0 &&
@@ -69,7 +77,8 @@ function isPayloadValid(payload: ContactPayload) {
     message.length <= 5000 &&
     email.length <= 320 &&
     EMAIL_REGEX.test(email) &&
-    turnstileToken.length > 0 &&
+    elapsedTime >= MIN_FORM_TIME_MS &&
+    elapsedTime <= 24 * 60 * 60 * 1000 &&
     turnstileToken.length <= 2048
   );
 }
@@ -94,8 +103,8 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
       : DEVELOPMENT_SECRET_KEY);
 
   if (!secret) {
-    console.error('TURNSTILE_SECRET_KEY is not configured');
-    return { ok: false, status: 503 } as const;
+    console.warn('TURNSTILE_SECRET_KEY is not configured; using form checks');
+    return { ok: true } as const;
   }
 
   const verificationBody = new URLSearchParams({
@@ -116,7 +125,7 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
 
     if (!response.ok) {
       console.error('Turnstile verification request failed', response.status);
-      return { ok: false, status: 503 } as const;
+      return { ok: true } as const;
     }
 
     const result = (await response.json()) as TurnstileResponse;
@@ -138,7 +147,7 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
     return { ok: true } as const;
   } catch (error) {
     console.error('Turnstile verification was unavailable', error);
-    return { ok: false, status: 503 } as const;
+    return { ok: true } as const;
   }
 }
 
@@ -200,11 +209,13 @@ export default async function contactHandler(
     return res.status(400).json({ error: 'Message flagged as spam' });
   }
 
-  const verification = await verifyTurnstile(req, payload);
-  if (!verification.ok) {
-    return res
-      .status(verification.status)
-      .json({ error: 'Spam verification failed' });
+  if (payload.turnstileToken) {
+    const verification = await verifyTurnstile(req, payload);
+    if (!verification.ok) {
+      return res
+        .status(verification.status)
+        .json({ error: 'Spam verification failed' });
+    }
   }
 
   try {
