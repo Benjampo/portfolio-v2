@@ -25,7 +25,8 @@ function Footer() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className='w-14 h-14 glass-btn rounded-2xl flex items-center justify-center cursor-pointer invert dark:invert-0'
-              href='mailto:contact@benjampo.ch'
+              href='/contact#contact-form'
+              aria-label={t('contact.getInTouch')}
             >
               <Image src={mailIcon} alt='Email' width={20} height={20} />
             </motion.a>

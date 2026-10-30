@@ -14,20 +14,42 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Contact form configuration
 
-The contact form sends mail with SendGrid. It can also use Cloudflare Turnstile
-as an additional anti-spam layer. Configure SendGrid in every deployment and,
-optionally, create a Turnstile widget for the production domain:
+The contact form uses the official `resend` package. Its historical endpoint
+`/api/sendgrid` is kept to preserve existing callers; it now sends through Resend.
+Configure these variables in Vercel for each deployment environment:
 
 ```bash
-SENDGRID_API_KEY=your-sendgrid-api-key
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=your-public-turnstile-site-key
-TURNSTILE_SECRET_KEY=your-private-turnstile-secret-key
+RESEND_API_KEY=
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=
 ```
 
-Copy `.env.example` to `.env.local` for local overrides. When Turnstile keys are
-not set during local development, Cloudflare's official always-pass test keys
-are used. When Turnstile is unavailable, the form remains usable and falls back
-to its server-side validation, honeypot, timing, and spam-content checks.
+`RESEND_API_KEY` is a server-only Resend API key with email sending permission.
+Verify the `benjampo.ch` sending domain in Resend so that `hello@benjampo.ch`
+can send to `benjaminporchet.pro@gmail.com`. Never prefix the API key with
+`NEXT_PUBLIC_`. Copy `.env.example` to `.env.local` for local overrides.
+
+Turnstile is required in production. If its widget cannot load, submission stays
+blocked and the existing verification-unavailable message is shown. Missing
+server configuration or unavailable verification returns HTTP 503; rejected or
+missing tokens are refused. There is no fallback that bypasses verification.
+This prioritizes spam protection over form availability during Cloudflare outages.
+Successful verification must include action `contact` and a hostname matching the
+request Host and an allowed deployment: `benjampo.ch`, `www.benjampo.ch`, `www.benjampo.com`,
+`www.benjaminporchet.ch`,
+`VERCEL_URL`, or `VERCEL_BRANCH_URL` (plus localhost/127.0.0.1 outside production).
+Keep the widget's Cloudflare hostname allowlist restricted to your deployments.
+Honeypot, client timing, and keyword checks are secondary spam heuristics, not
+security guarantees. Header fields reject control characters; reply-to accepts a
+single address. Field limits and a 32 KB request-body limit bound input size.
+There is no shared rate limiter. If abuse occurs, configure a Vercel Firewall
+rate-limit rule for POST `/api/sendgrid`, or use a shared persistent limiter;
+an in-memory counter cannot enforce a quota across serverless instances.
+Public email links are replaced by links to the contact form so the public address
+is absent from page HTML and client JavaScript. Downloadable CV PDFs still contain
+contact details and remain publicly accessible.
+During local development only, missing Turnstile keys use Cloudflare's official
+always-pass test keys; email sending still uses Resend if the form is submitted.
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 

@@ -64,6 +64,7 @@ function FormField({
   invalid = false,
   isTextarea = false,
   delay = 0,
+  maxLength,
 }: {
   label: string;
   type?: string;
@@ -75,6 +76,7 @@ function FormField({
   invalid?: boolean;
   isTextarea?: boolean;
   delay?: number;
+  maxLength: number;
 }) {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
@@ -92,6 +94,7 @@ function FormField({
         type={type}
         name={name}
         required
+        maxLength={maxLength}
         aria-invalid={invalid}
         value={value}
         onChange={onChange}
@@ -161,7 +164,6 @@ function Contact() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailureMessage, setShowFailureMessage] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileUnavailable, setTurnstileUnavailable] = useState(false);
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   const handleTurnstileToken = useCallback((token: string | null) => {
@@ -169,7 +171,7 @@ function Contact() {
   }, []);
 
   const handleTurnstileUnavailable = useCallback(() => {
-    setTurnstileUnavailable(true);
+    setTurnstileToken(null);
   }, []);
 
   const handleValidation = () => {
@@ -197,11 +199,7 @@ function Contact() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (
-      !handleValidation() ||
-      (!turnstileToken && !turnstileUnavailable) ||
-      buttonText === 'sending'
-    ) {
+    if (!handleValidation() || !turnstileToken || buttonText === 'sending') {
       return;
     }
 
@@ -321,9 +319,9 @@ function Contact() {
               whileHover={{ x: 4 }}
               transition={{ duration: 0.3 }}
               className='text-foreground/60 hover:text-foreground text-sm font-medium transition-colors duration-300 flex items-center gap-1.5 cursor-pointer'
-              href='mailto:contact@benjampo.ch'
+              href='#contact-form'
             >
-              contact@benjampo.ch
+              {t('contact.formLink')}
               <ArrowUpRightIcon className='h-3.5 w-3.5' />
             </motion.a>
 
@@ -397,11 +395,16 @@ function Contact() {
             </GlassFormCard>
           ) : (
             <GlassFormCard>
-              <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+              <form
+                id='contact-form'
+                onSubmit={handleSubmit}
+                className='flex flex-col gap-4'
+              >
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4'>
                   <FormField
                     label={t('contact.name')}
                     name='fullname'
+                    maxLength={100}
                     invalid={Boolean(errors.fullname)}
                     value={fullname}
                     onChange={e => setFullname(e.target.value)}
@@ -411,6 +414,7 @@ function Contact() {
                     label={t('contact.email')}
                     type='email'
                     name='email'
+                    maxLength={254}
                     invalid={Boolean(errors.email)}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -433,6 +437,7 @@ function Contact() {
                 <FormField
                   label={t('contact.subject')}
                   name='subject'
+                  maxLength={200}
                   invalid={Boolean(errors.subject)}
                   value={subject}
                   onChange={e => setSubject(e.target.value)}
@@ -441,6 +446,7 @@ function Contact() {
                 <FormField
                   label={t('contact.message')}
                   name='message'
+                  maxLength={5000}
                   invalid={Boolean(errors.message)}
                   value={message}
                   onChange={e => setMessage(e.target.value)}
@@ -476,10 +482,7 @@ function Contact() {
                     whileHover={{ scale: 1.03, x: 2 }}
                     whileTap={{ scale: 0.96 }}
                     type='submit'
-                    disabled={
-                      (!turnstileToken && !turnstileUnavailable) ||
-                      buttonText === 'sending'
-                    }
+                    disabled={!turnstileToken || buttonText === 'sending'}
                     className='group glass-btn text-foreground text-sm font-medium px-7 py-3.5 rounded-full flex items-center gap-2.5 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40'
                   >
                     {t(

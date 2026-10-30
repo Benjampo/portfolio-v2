@@ -49,7 +49,8 @@ const translations = {
     'contact.together': 'together.',
     'contact.description':
       "Have a project in mind, a question, or just want to say hello? I'd love to hear from you.",
-    'contact.reachOut': 'Or reach out directly',
+    'contact.reachOut': 'Get in touch',
+    'contact.formLink': 'Write me a message',
     'contact.name': 'Name',
     'contact.email': 'Email',
     'contact.subject': 'Subject',
@@ -60,7 +61,7 @@ const translations = {
     'contact.thanks': "Thanks! I'll get back to you soon.",
     'contact.error': 'Something went wrong. Please try again.',
     'contact.verificationUnavailable':
-      'Spam verification is temporarily unavailable. You can still send your message.',
+      'Spam verification is temporarily unavailable. Please reload the page or try again later.',
 
     // 404
     '404.text': "This page doesn't exist.",
@@ -139,7 +140,8 @@ const translations = {
     'contact.together': 'ensemble.',
     'contact.description':
       "Vous avez un projet en tête, une question, ou simplement envie de dire bonjour\u00A0? J'aimerais beaucoup vous lire.",
-    'contact.reachOut': 'Ou contactez-moi directement',
+    'contact.reachOut': 'Me contacter',
+    'contact.formLink': 'Écrivez-moi un message',
     'contact.name': 'Nom',
     'contact.email': 'Email',
     'contact.subject': 'Objet',
@@ -150,7 +152,7 @@ const translations = {
     'contact.thanks': 'Merci\u00A0! Je vous répondrai bientôt.',
     'contact.error': 'Une erreur est survenue. Veuillez réessayer.',
     'contact.verificationUnavailable':
-      'La vérification anti-spam est temporairement indisponible. Vous pouvez tout de même envoyer votre message.',
+      'La vérification anti-spam est temporairement indisponible. Veuillez recharger la page ou réessayer plus tard.',
 
     // 404
     '404.text': "Cette page n'existe pas.",
