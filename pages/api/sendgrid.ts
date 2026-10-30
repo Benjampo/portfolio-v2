@@ -2,7 +2,9 @@ import { Resend } from 'resend';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const DEVELOPMENT_SECRET_KEY = '1x0000000000000000000000000000000AA';
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX =
+  /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/;
+const HEADER_CONTROL_REGEX = /[\x00-\x1f\x7f]/;
 const MIN_FORM_TIME_MS = 2000;
 const TURNSTILE_VERIFY_URL =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -71,12 +73,16 @@ function isPayloadValid(payload: ContactPayload) {
   return (
     fullname.trim().length > 0 &&
     fullname.length <= 100 &&
+    !HEADER_CONTROL_REGEX.test(fullname) &&
     subject.trim().length > 0 &&
     subject.length <= 200 &&
+    !HEADER_CONTROL_REGEX.test(subject) &&
     message.trim().length > 0 &&
     message.length <= 5000 &&
-    email.length <= 320 &&
+    email.length <= 254 &&
+    !HEADER_CONTROL_REGEX.test(email) &&
     EMAIL_REGEX.test(email) &&
+    Number.isFinite(formStartedAt) &&
     elapsedTime >= MIN_FORM_TIME_MS &&
     elapsedTime <= 24 * 60 * 60 * 1000 &&
     turnstileToken.length <= 2048
@@ -90,9 +96,24 @@ function getRequestIp(req: NextApiRequest) {
 }
 
 function getRequestHostname(req: NextApiRequest) {
-  const host = req.headers['x-forwarded-host'] ?? req.headers.host;
-  const value = Array.isArray(host) ? host[0] : host;
-  return value?.split(',')[0]?.trim().split(':')[0]?.toLowerCase();
+  // Use Host, not a client-supplied forwarded host, and require an allowed deployment.
+  const host = req.headers.host;
+  if (!host || !/^[a-z0-9.-]+(?::[0-9]+)?$/i.test(host)) {
+    return undefined;
+  }
+  const hostname = host.split(':')[0].toLowerCase();
+  const allowedHostnames = [
+    'benjampo.ch',
+    'www.benjampo.ch',
+    'www.benjampo.com',
+    'www.benjaminporchet.ch',
+    process.env.VERCEL_URL,
+    process.env.VERCEL_BRANCH_URL,
+    ...(process.env.NODE_ENV !== 'production'
+      ? ['localhost', '127.0.0.1']
+      : []),
+  ];
+  return allowedHostnames.includes(hostname) ? hostname : undefined;
 }
 
 async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
@@ -134,11 +155,13 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
     const result = (await response.json()) as TurnstileResponse;
     const requestHostname = getRequestHostname(req);
     const hostnameMatches =
-      !requestHostname ||
-      !result.hostname ||
-      result.hostname === requestHostname;
+      Boolean(requestHostname) && result.hostname === requestHostname;
 
-    if (!result.success || result.action !== 'contact' || !hostnameMatches) {
+    if (
+      result.success !== true ||
+      result.action !== 'contact' ||
+      !hostnameMatches
+    ) {
       console.warn('Turnstile rejected a contact submission', {
         errors: result['error-codes'],
         action: result.action,
@@ -181,7 +204,7 @@ async function sendEmail(payload: ContactPayload) {
 
   const { error } = await resend.emails.send({
     to: 'benjaminporchet.pro@gmail.com',
-    from: 'contact@benjampo.ch',
+    from: 'hello@benjampo.ch',
     replyTo: payload.email.trim(),
     subject: `[Contact from website] ${safeSubject}`,
     html: `<h3>New message from ${safeName} (${safeEmail})</h3><p>${safeMessage}</p>`,
@@ -196,6 +219,10 @@ async function sendEmail(payload: ContactPayload) {
     throw new Error('Resend email delivery failed');
   }
 }
+
+export const config = {
+  api: { bodyParser: { sizeLimit: '32kb' } },
+};
 
 export default async function contactHandler(
   req: NextApiRequest,

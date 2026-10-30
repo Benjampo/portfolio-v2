@@ -25,7 +25,7 @@ TURNSTILE_SECRET_KEY=
 ```
 
 `RESEND_API_KEY` is a server-only Resend API key with email sending permission.
-Verify the `benjampo.ch` sending domain in Resend so that `contact@benjampo.ch`
+Verify the `benjampo.ch` sending domain in Resend so that `hello@benjampo.ch`
 can send to `benjaminporchet.pro@gmail.com`. Never prefix the API key with
 `NEXT_PUBLIC_`. Copy `.env.example` to `.env.local` for local overrides.
 
@@ -34,7 +34,20 @@ blocked and the existing verification-unavailable message is shown. Missing
 server configuration or unavailable verification returns HTTP 503; rejected or
 missing tokens are refused. There is no fallback that bypasses verification.
 This prioritizes spam protection over form availability during Cloudflare outages.
-Honeypot, timing, validation, and spam-content checks remain in place.
+Successful verification must include action `contact` and a hostname matching the
+request Host and an allowed deployment: `benjampo.ch`, `www.benjampo.ch`, `www.benjampo.com`,
+`www.benjaminporchet.ch`,
+`VERCEL_URL`, or `VERCEL_BRANCH_URL` (plus localhost/127.0.0.1 outside production).
+Keep the widget's Cloudflare hostname allowlist restricted to your deployments.
+Honeypot, client timing, and keyword checks are secondary spam heuristics, not
+security guarantees. Header fields reject control characters; reply-to accepts a
+single address. Field limits and a 32 KB request-body limit bound input size.
+There is no shared rate limiter. If abuse occurs, configure a Vercel Firewall
+rate-limit rule for POST `/api/sendgrid`, or use a shared persistent limiter;
+an in-memory counter cannot enforce a quota across serverless instances.
+Public email links are replaced by links to the contact form so the public address
+is absent from page HTML and client JavaScript. Downloadable CV PDFs still contain
+contact details and remain publicly accessible.
 During local development only, missing Turnstile keys use Cloudflare's official
 always-pass test keys; email sending still uses Resend if the form is submitted.
 

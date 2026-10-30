@@ -49,7 +49,8 @@ const translations = {
     'contact.together': 'together.',
     'contact.description':
       "Have a project in mind, a question, or just want to say hello? I'd love to hear from you.",
-    'contact.reachOut': 'Or reach out directly',
+    'contact.reachOut': 'Get in touch',
+    'contact.formLink': 'Write me a message',
     'contact.name': 'Name',
     'contact.email': 'Email',
     'contact.subject': 'Subject',
@@ -139,7 +140,8 @@ const translations = {
     'contact.together': 'ensemble.',
     'contact.description':
       "Vous avez un projet en tête, une question, ou simplement envie de dire bonjour\u00A0? J'aimerais beaucoup vous lire.",
-    'contact.reachOut': 'Ou contactez-moi directement',
+    'contact.reachOut': 'Me contacter',
+    'contact.formLink': 'Écrivez-moi un message',
     'contact.name': 'Nom',
     'contact.email': 'Email',
     'contact.subject': 'Objet',
