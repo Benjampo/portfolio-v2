@@ -1,4 +1,4 @@
-import sendgrid from '@sendgrid/mail';
+import { Resend } from 'resend';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const DEVELOPMENT_SECRET_KEY = '1x0000000000000000000000000000000AA';
@@ -103,8 +103,11 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
       : DEVELOPMENT_SECRET_KEY);
 
   if (!secret) {
-    console.warn('TURNSTILE_SECRET_KEY is not configured; using form checks');
-    return { ok: true } as const;
+    console.error('Turnstile configuration error', {
+      code: 'missing_secret',
+      message: 'TURNSTILE_SECRET_KEY is not configured',
+    });
+    return { ok: false, status: 503 } as const;
   }
 
   const verificationBody = new URLSearchParams({
@@ -125,7 +128,7 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
 
     if (!response.ok) {
       console.error('Turnstile verification request failed', response.status);
-      return { ok: true } as const;
+      return { ok: false, status: 503 } as const;
     }
 
     const result = (await response.json()) as TurnstileResponse;
@@ -146,8 +149,12 @@ async function verifyTurnstile(req: NextApiRequest, payload: ContactPayload) {
 
     return { ok: true } as const;
   } catch (error) {
-    console.error('Turnstile verification was unavailable', error);
-    return { ok: true } as const;
+    console.error('Turnstile verification was unavailable', {
+      code: 'verification_unavailable',
+      message:
+        error instanceof Error ? error.message : 'Unknown verification error',
+    });
+    return { ok: false, status: 503 } as const;
   }
 }
 
@@ -161,24 +168,33 @@ function escapeHtml(value: string) {
 }
 
 async function sendEmail(payload: ContactPayload) {
-  const apiKey = process.env.SENDGRID_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    throw new Error('SENDGRID_API_KEY is not configured');
+    throw new Error('RESEND_API_KEY is not configured');
   }
 
-  sendgrid.setApiKey(apiKey);
+  const resend = new Resend(apiKey);
   const safeName = escapeHtml(payload.fullname.trim());
   const safeEmail = escapeHtml(payload.email.trim());
   const safeMessage = escapeHtml(payload.message.trim()).replace(/\n/g, '<br>');
   const safeSubject = payload.subject.trim().replace(/[\r\n]+/g, ' ');
 
-  await sendgrid.send({
+  const { error } = await resend.emails.send({
     to: 'benjaminporchet.pro@gmail.com',
     from: 'contact@benjampo.ch',
     replyTo: payload.email.trim(),
     subject: `[Contact from website] ${safeSubject}`,
     html: `<h3>New message from ${safeName} (${safeEmail})</h3><p>${safeMessage}</p>`,
   });
+
+  if (error) {
+    console.error('Resend rejected contact email', {
+      code: error.name,
+      message: error.message.replaceAll(apiKey, '[redacted]'),
+      status: error.statusCode,
+    });
+    throw new Error('Resend email delivery failed');
+  }
 }
 
 export default async function contactHandler(
@@ -209,20 +225,28 @@ export default async function contactHandler(
     return res.status(400).json({ error: 'Message flagged as spam' });
   }
 
-  if (payload.turnstileToken) {
-    const verification = await verifyTurnstile(req, payload);
-    if (!verification.ok) {
-      return res
-        .status(verification.status)
-        .json({ error: 'Spam verification failed' });
-    }
+  if (!payload.turnstileToken.trim()) {
+    return res.status(400).json({ error: 'Spam verification failed' });
+  }
+
+  const verification = await verifyTurnstile(req, payload);
+  if (!verification.ok) {
+    return res
+      .status(verification.status)
+      .json({ error: 'Spam verification failed' });
   }
 
   try {
     await sendEmail(payload);
     return res.status(200).json({ error: '' });
   } catch (error) {
-    console.error('Unable to send contact email', error);
+    const apiKey = process.env.RESEND_API_KEY;
+    const message =
+      error instanceof Error ? error.message : 'Unknown delivery error';
+    console.error('Unable to send contact email', {
+      code: error instanceof Error ? error.name : 'unknown_error',
+      message: apiKey ? message.replaceAll(apiKey, '[redacted]') : message,
+    });
     return res.status(502).json({ error: 'Unable to send message' });
   }
 }
